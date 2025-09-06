@@ -94,7 +94,7 @@ if(isset($btn))
         <option selected disabled>Adicione uma Categoria</option>
         <?php 
 
-        $datas_categoria = ProdutoController::categorias();
+        $datas_categoria = ProdutoController::categorias("");
 
         foreach($datas_categoria as $data)
         {
@@ -107,7 +107,7 @@ if(isset($btn))
         <select name="fornecedor" required>
         <option selected disabled>Adicione um Fornecedor</option>
         <?php 
-            $datas_fornecedores = ProdutoController::fornecedores();
+            $datas_fornecedores = ProdutoController::fornecedores("");
 
             foreach($datas_fornecedores as $data)
             {
