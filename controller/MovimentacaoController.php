@@ -7,12 +7,11 @@ require_once __DIR__.'/../model/Movimentacao.php';
 
 class MovimentacaoController
 {
-    public static function insercao($produto, $quantidade,$user_id)
+    public static function insercao($produto, $quantidade,$id_produto,$user_id)
     {
         $tipo = "Inserção do Produto: $produto";
         $data = date("d/m/Y");
-        $produto_id = 2;
-        Movimentacao::movimentacao_de_estoque($tipo,$data, $produto_id, $quantidade,$user_id);
+        Movimentacao::movimentacao_de_estoque($tipo,$data, $id_produto, $quantidade,$user_id);
     }
 
     public static function insercao_fornecedor($fornecedor)

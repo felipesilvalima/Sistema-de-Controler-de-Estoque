@@ -189,6 +189,7 @@ class Produto
 
     public static function categoria_get($categoria)
     {
+
      try 
      {
         $sql = "SELECT id,categoria FROM categoria WHERE id != :categoria";
@@ -216,6 +217,7 @@ class Produto
 
     public static function fornecedor_get($fornecedor)
     {
+
      try 
      {
         $sql = "SELECT id,fornecedor FROM fornecedor WHERE id != :fornecedor";
@@ -232,6 +234,33 @@ class Produto
             else
             {
                 throw new Exception("Error: na consultar no metodo (fornecedor_get) ");
+            }
+
+     }
+      catch (PDOException $error) 
+      {
+         throw new Exception("Error:". $error->getMessage());
+      } 
+    }
+
+    public static function last_product_fornec_categor()
+    {
+
+     try 
+     {
+        $sql = "SELECT produtos.id,fornecedor.id,categoria.id FROM produtos ORDER BY DESC produtos.id JOIN fornecedor ORDER BY DESC fornecedor.id JOIN categoria ORDER BY DESC categoria.id ";
+        $stm = DB::connect()->prepare($sql);
+        $stm->execute();
+        
+        $data = $stm->fetch(PDO::FETCH_OBJ);
+
+        if(!empty($data))
+        {
+            return $data;
+        }
+            else
+            {
+                throw new Exception("Error: na consultar no metodo (last_product) ");
             }
 
      }

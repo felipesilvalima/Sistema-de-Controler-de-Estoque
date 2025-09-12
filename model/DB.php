@@ -13,7 +13,7 @@ class DB
     {
         //PARÂMETROS DE CONEXÃO COM BANCO
          $localhost = "localhost";
-         $db = "crud_novo";
+         $db = "controler_de_estoque";
          $user = "root";
          $password = "";
          $charset = "UTF8";

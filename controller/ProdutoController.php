@@ -104,7 +104,11 @@ class ProdutoController
             if($inserir)
             {
                 ProdutoController::feedback_systm('inserido',"Inserido com sucesso");
-                MovimentacaoController::insercao($produto_name, $quant_pd,$user);
+                $data = Produto::last_product_fornec_categor();
+                $id_produto = $data->produtos;
+                var_dump($data);
+                die;
+                MovimentacaoController::insercao($produto_name, $quant_pd,$id_produto,$user);
                 return true;  
                 http_response_code(201);//recurso criado com sucesso
             }
