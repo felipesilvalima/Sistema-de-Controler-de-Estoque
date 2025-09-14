@@ -43,8 +43,7 @@ class Produto
     {
         try
         {
-            $sql = "SELECT produtos.id,produtos.produto,produtos.descricao,produtos.preco,produtos.quantidade_max,produtos.quantidade_min,produtos.unidade_medida,produtos.categoria_id,produtos.fornecedor_id,produtos.usuario_id, categoria.categoria,fornecedor.fornecedor
-             FROM produtos INNER JOIN categoria ON produtos.categoria_id = categoria.id INNER JOIN fornecedor ON produtos.fornecedor_id = fornecedor.id WHERE produtos.id = :id";
+            $sql = "SELECT * FROM produtos JOIN categoria,fornecedor WHERE produtos.id = :id AND categoria.id = produtos.categoria_id AND produtos.fornecedor_id = fornecedor.id";
             $stm = DB::connect()->prepare($sql);
             $stm->bindParam(':id', $id, PDO::PARAM_STR);
             $stm->execute();
@@ -68,22 +67,22 @@ class Produto
             }
     }
 
-    public static function update_date($id,$produto,$preco,$quantidade,$quantidade_min,$descricao,$unidade_medida, $categoria,$fornecedor)
+    public static function update_date($id,$pd,$pc,$qt,$qt_min,$des,$um,$cat,$for)
     {
         try 
         {
 
-            $sql = "UPDATE produtos SET produto=:produto, preco=:preco, quantidade_max = :quantidade, quantidade_min=:quantidade_min, descricao=:descricao, unidade_medida=:unidade_medida, categoria_id=:categoria_id, fornecedor_id=:fornecedor_id WHERE id = :id";
+            $sql = "UPDATE produtos SET produto=:pd, preco=:pc, quantidade_max=:qt, quantidade_min=:qt_min, descricao=:desc, unidade_medida=:um, categoria_id=:cat, fornecedor_id=:forn WHERE id = :id";
             $stm = DB::connect()->prepare($sql);
             $stm->bindParam(':id',$id, PDO::PARAM_INT);
-            $stm->bindParam(':produto',$produto, PDO::PARAM_STR);
-            $stm->bindParam(':preco',$preco, PDO::PARAM_STR);
-            $stm->bindParam(':quantidade',$quantidade, PDO::PARAM_INT);
-            $stm->bindParam(':quantidade_min',$quantidade_min, PDO::PARAM_INT);
-            $stm->bindParam(':descricao',$descricao, PDO::PARAM_STR);
-            $stm->bindParam(':unidade_medida',$unidade_medida, PDO::PARAM_STR);
-            $stm->bindParam(':categoria_id',$categoria, PDO::PARAM_INT);
-            $stm->bindParam(':fornecedor_id',$fornecedor, PDO::PARAM_INT);
+            $stm->bindParam(':pd',$pd, PDO::PARAM_STR);
+            $stm->bindParam(':pc',$pc, PDO::PARAM_STR);
+            $stm->bindParam(':qt',$qt, PDO::PARAM_INT);
+            $stm->bindParam(':desc',$des, PDO::PARAM_STR);
+            $stm->bindParam(':um',$um, PDO::PARAM_STR);
+            $stm->bindParam(':cat',$cat, PDO::PARAM_INT);
+            $stm->bindParam(':forn',$for, PDO::PARAM_INT);
+            $stm->bindParam(':qt_min',$qt_min, PDO::PARAM_INT);
             $stm->execute();
              
             if($stm)
@@ -187,12 +186,66 @@ class Produto
       } 
     }
 
-    public static function last_product()
+    public static function categoria_get()
     {
 
      try 
      {
-        $sql = "SELECT id FROM produtos ORDER BY id DESC";
+        $sql = "SELECT id,categoria FROM categoria";
+        $stm = DB::connect()->prepare($sql);
+        $stm->execute();
+        
+        $data = $stm->fetchAll(PDO::FETCH_OBJ);
+
+        if(!empty($data))
+        {
+            return $data;
+        }
+            else
+            {
+                throw new Exception("Error: na consultar no metodo (categoria_get) ");
+            }
+
+     }
+      catch (PDOException $error) 
+      {
+         throw new Exception("Error:". $error->getMessage());
+      } 
+    }
+
+    public static function fornecedor_get()
+    {
+
+     try 
+     {
+        $sql = "SELECT id,fornecedor FROM fornecedor";
+        $stm = DB::connect()->prepare($sql);
+        $stm->execute();
+        
+        $data = $stm->fetchAll(PDO::FETCH_OBJ);
+
+        if(!empty($data))
+        {
+            return $data;
+        }
+            else
+            {
+                throw new Exception("Error: na consultar no metodo (fornecedor_get) ");
+            }
+
+     }
+      catch (PDOException $error) 
+      {
+         throw new Exception("Error:". $error->getMessage());
+      } 
+    }
+
+    public static function last_product_fornec_categor()
+    {
+
+     try 
+     {
+        $sql = "SELECT produtos.id,fornecedor.id,categoria.id FROM produtos ORDER BY DESC produtos.id JOIN fornecedor ORDER BY DESC fornecedor.id JOIN categoria ORDER BY DESC categoria.id ";
         $stm = DB::connect()->prepare($sql);
         $stm->execute();
         

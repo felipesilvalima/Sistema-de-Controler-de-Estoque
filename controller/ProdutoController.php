@@ -43,7 +43,7 @@ class ProdutoController
         try
         {
             $line = Produto::get_id($id); 
-            
+
             while(!isset($line->id) || empty($id)) 
             {
                  http_response_code(404);//O recurso solicitado não existe
@@ -62,12 +62,12 @@ class ProdutoController
     }
 
 
-    public static function Atulaizar($id,$produto,$preco,$quantidade,$quantidade_min,$descricao,$unidade_medida, $categoria,$fornecedor)
+    public static function Atulaizar($id,$produto,$preco,$quantidade,$quantidade_min,$descricao,$unidade_medida,$categoria,$fornecedor)
     {
         try 
         {
            
-            $update = Produto::update_date($id,$produto,$preco,$quantidade,$quantidade_min,$descricao,$unidade_medida, $categoria,$fornecedor); 
+            $update = Produto::update_date($id,$produto,$preco, $quantidade, $quantidade_min,$descricao,$unidade_medida,1,1); 
 
                 if($update)
                 {
@@ -104,8 +104,10 @@ class ProdutoController
             if($inserir)
             {
                 ProdutoController::feedback_systm('inserido',"Inserido com sucesso");
-                $data = Produto::last_product();
-                $id_produto = $data->id;
+                $data = Produto::last_product_fornec_categor();
+                $id_produto = $data->produtos;
+                var_dump($data);
+                die;
                 MovimentacaoController::insercao($produto_name, $quant_pd,$id_produto,$user);
                 return true;  
                 http_response_code(201);//recurso criado com sucesso
@@ -131,6 +133,45 @@ class ProdutoController
             return true; 
         }
     }
+
+    public static function categorias()
+    {
+        try 
+        {  
+            $data = Produto::categoria_get(); 
+            
+            if($data) 
+            {
+                http_response_code(200);//requisição foi processada com sucesso
+                return $data; 
+            }
+
+        } 
+            catch (PDOException $error) 
+            {
+                throw new Exception("Error:".$error->getMessage());
+            }
+    }
+
+    public static function fornecedores()
+    {
+        try 
+        {  
+            $data = Produto::fornecedor_get(); 
+            
+            if($data) 
+            {
+                http_response_code(200);//requisição foi processada com sucesso
+                return $data; 
+            }
+
+        } 
+            catch (PDOException $error) 
+            {
+                throw new Exception("Error:".$error->getMessage());
+            }
+    }
+
 
     public static function feedback_systm(string $name_session, string $messagem): void
     {

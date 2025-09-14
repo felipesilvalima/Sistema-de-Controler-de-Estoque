@@ -3,9 +3,7 @@
 
 session_start();
 
-use controller\CategoriaController;
 use controller\Feedbacks;
-use controller\FornecedorController;
 use controller\MovimentacaoController;
 use controller\ProdutoController;
 use model\Produto;
@@ -16,8 +14,6 @@ require_once __DIR__.'/../../controller/ProdutoController.php';
 require_once __DIR__.'/../../controller/Feedbacks.php';
 require_once __DIR__.'/../../validation/Produto/ValidationProduto.php';
 require_once __DIR__.'/../../controller/MovimentacaoController.php';
-require_once __DIR__.'/../../controller/CategoriaController.php';
-require_once __DIR__.'/../../controller/FornecedorController.php';
 
 if(!isset($_SESSION['user']))
 {
@@ -98,7 +94,7 @@ if(isset($btn))
         <option selected disabled>Adicione uma Categoria</option>
         <?php 
 
-        $datas_categoria = CategoriaController::categorias("");
+        $datas_categoria = ProdutoController::categorias();
 
         foreach($datas_categoria as $data)
         {
@@ -111,7 +107,7 @@ if(isset($btn))
         <select name="fornecedor" required>
         <option selected disabled>Adicione um Fornecedor</option>
         <?php 
-            $datas_fornecedores = FornecedorController::fornecedores("");
+            $datas_fornecedores = ProdutoController::fornecedores();
 
             foreach($datas_fornecedores as $data)
             {
