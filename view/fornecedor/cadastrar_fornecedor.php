@@ -22,6 +22,7 @@ $fornecedor = $_REQUEST['fornec'] ?? null;
 $cpf = $_REQUEST['cpf'] ?? null;
 $telefone = $_REQUEST['tel'] ?? null;
 $endereco = $_REQUEST['ender'] ?? null;
+$user_id = $_SESSION['user'] ?? null;
 
 if(isset($_REQUEST['btn']))
 {
@@ -47,7 +48,7 @@ if(isset($_REQUEST['btn']))
                 else
                 {
     
-                    $inserir = FornecedorController::Inserir_fornecedor($fornecedor,$cpf,$telefone,$endereco);
+                    $inserir = FornecedorController::Inserir_fornecedor($fornecedor,$cpf,$telefone,$endereco,$user_id);
                     
                     if($inserir)
                     {

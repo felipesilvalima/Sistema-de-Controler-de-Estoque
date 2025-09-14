@@ -8,7 +8,7 @@ use PDOException;
 
 class Categoria
 {
-  public static function categoria_get($categoria)
+    public static function categoria_get($categoria)
     {
 
      try 
@@ -34,5 +34,5 @@ class Categoria
       {
          throw new Exception("Error:". $error->getMessage());
       } 
-    }  
+    }
 }

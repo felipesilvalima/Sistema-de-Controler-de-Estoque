@@ -187,4 +187,60 @@ class Fornecedor
          throw new Exception("Error:". $error->getMessage());
       } 
     }
+
+    public static function fornecedor_get($fornecedor)
+    {
+
+     try 
+     {
+        $sql = "SELECT id,fornecedor FROM fornecedor WHERE id != :fornecedor";
+        $stm = DB::connect()->prepare($sql);
+        $stm->bindParam(':fornecedor', $fornecedor, PDO::PARAM_INT);
+        $stm->execute();
+        
+        $data = $stm->fetchAll(PDO::FETCH_OBJ);
+
+        if(!empty($data))
+        {
+            return $data;
+        }
+            else
+            {
+                throw new Exception("Error: na consultar no metodo (fornecedor_get) ");
+            }
+
+     }
+      catch (PDOException $error) 
+      {
+         throw new Exception("Error:". $error->getMessage());
+      } 
+    }
+
+    
+    public static function last_fornec()
+    {
+
+     try 
+     {
+        $sql = "SELECT id FROM fornecedor ORDER BY id DESC";
+        $stm = DB::connect()->prepare($sql);
+        $stm->execute();
+        
+        $data = $stm->fetch(PDO::FETCH_OBJ);
+
+        if(!empty($data))
+        {
+            return $data;
+        }
+            else
+            {
+                throw new Exception("Error: na consultar no metodo (last_fornec) ");
+            }
+
+     }
+      catch (PDOException $error) 
+      {
+         throw new Exception("Error:". $error->getMessage());
+      } 
+    }
 }

@@ -8,6 +8,8 @@ use PDOException;
 
 class CategoriaController
 {
+
+    
     public static function categorias($categoria)
     {
         try 

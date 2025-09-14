@@ -12,7 +12,7 @@ require_once __DIR__.'/../controller/ProdutoController.php';
 
 class FornecedorController
 {
-    public static function Inserir_fornecedor($fornecedor,$cpf,$tel,$endereco)
+    public static function Inserir_fornecedor($fornecedor,$cpf,$tel,$endereco,$user_id)
     {
         try 
         {
@@ -22,7 +22,9 @@ class FornecedorController
             {
                  http_response_code(201);//recurso inserido com sucesso
                 ProdutoController::feedback_systm('forne',"Fornecedor inserido com sucesso");
-                MovimentacaoController::insercao_fornecedor($fornecedor);
+                $data = Fornecedor::last_fornec();
+                $produto_id = $data->id;
+                MovimentacaoController::insercao_fornecedor($fornecedor,$produto_id,$user_id);
                 return true;
             }
                 else
@@ -164,4 +166,25 @@ class FornecedorController
             return true; 
         }
     }
+
+    public static function fornecedores($fornecedor)
+    {
+        try 
+        {  
+            $data = Fornecedor::fornecedor_get($fornecedor); 
+            
+            if($data) 
+            {
+                http_response_code(200);//requisição foi processada com sucesso
+                return $data; 
+            }
+
+        } 
+            catch (PDOException $error) 
+            {
+                throw new Exception("Error:".$error->getMessage());
+            }
+    }
+
+    
 }
