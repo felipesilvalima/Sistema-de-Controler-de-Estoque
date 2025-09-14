@@ -2,10 +2,15 @@
 
 session_start();
 
+use controller\CategoriaController;
 use controller\Feedbacks;
+use controller\FornecedorController;
 use controller\ProdutoController;
+
 require_once __DIR__.'/../../controller/ProdutoController.php';
 require_once __DIR__.'/../../controller/Feedbacks.php';
+require_once __DIR__.'/../../controller/CategoriaController.php';
+require_once __DIR__.'/../../controller/FornecedorController.php';
 
 if(!isset($_SESSION['user']))
 {
@@ -91,7 +96,7 @@ if(isset($_REQUEST['btn']))
         <select name="categoria">
         <?php 
 
-            $datas_categoria = ProdutoController::categorias($details->categoria_id); //todas as categorias
+            $datas_categoria = CategoriaController::categorias($details->categoria_id); //todas as categorias
 
             echo "<option selected disabled value='$details->categoria_id'>$details->categoria</option>";
         
@@ -106,7 +111,7 @@ if(isset($_REQUEST['btn']))
         <select name="fornecedor">
         <?php 
 
-            $datas_fornecedores = ProdutoController::fornecedores($details->fornecedor_id);  //todas as fornecedores
+            $datas_fornecedores = FornecedorController::fornecedores($details->fornecedor_id);  //todas as fornecedores
 
             echo "<option selected disabled value='$details->fornecedor_id'>$details->fornecedor</option>";
         

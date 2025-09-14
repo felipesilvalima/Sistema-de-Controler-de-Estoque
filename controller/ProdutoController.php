@@ -104,10 +104,8 @@ class ProdutoController
             if($inserir)
             {
                 ProdutoController::feedback_systm('inserido',"Inserido com sucesso");
-                $data = Produto::last_product_fornec_categor();
-                $id_produto = $data->produtos;
-                var_dump($data);
-                die;
+                $data = Produto::last_product();
+                $id_produto = $data->id;
                 MovimentacaoController::insercao($produto_name, $quant_pd,$id_produto,$user);
                 return true;  
                 http_response_code(201);//recurso criado com sucesso
@@ -134,45 +132,6 @@ class ProdutoController
         }
     }
 
-    public static function categorias($categoria)
-    {
-        try 
-        {  
-            $data = Produto::categoria_get($categoria); 
-            
-            if($data) 
-            {
-                http_response_code(200);//requisição foi processada com sucesso
-                return $data; 
-            }
-
-        } 
-            catch (PDOException $error) 
-            {
-                throw new Exception("Error:".$error->getMessage());
-            }
-    }
-
-   
-    public static function fornecedores($fornecedor)
-    {
-        try 
-        {  
-            $data = Produto::fornecedor_get($fornecedor); 
-            
-            if($data) 
-            {
-                http_response_code(200);//requisição foi processada com sucesso
-                return $data; 
-            }
-
-        } 
-            catch (PDOException $error) 
-            {
-                throw new Exception("Error:".$error->getMessage());
-            }
-    }
-   
     public static function feedback_systm(string $name_session, string $messagem): void
     {
          session_start(); 

@@ -18,8 +18,8 @@ class Movimentacao
             $stm->bindParam(':tipo', $tipo, PDO::PARAM_STR);
             $stm->bindParam(':data', $data, PDO::PARAM_STR);
             $stm->bindParam(':quantidade', $quantidade, PDO::PARAM_INT);
-            $stm->bindParam(':produto', $produto_id, PDO::PARAM_STR);
-            $stm->bindParam(':usuario', $user_id, PDO::PARAM_STR);
+            $stm->bindParam(':produto', $produto_id, PDO::PARAM_INT);
+            $stm->bindParam(':usuario', $user_id, PDO::PARAM_INT);
             $stm->execute();
     
             if($stm)
