@@ -17,21 +17,22 @@ session_write_close();
 (int)$id = $_REQUEST['id'] ?? 0;
 $details =  ProdutoController::detalhes($id);
 
-if (!$details) 
+
+if (empty($details))
 {
      header("Location: /controler_de_estoque/view/Produtos/index.php");
      die;
 }
 
-$btn = $_REQUEST['btn'] ?? null;
+
 (string)$produto = $_REQUEST['pd']  ?? $details->produto;
 (float)$preco = $_REQUEST['pc']  ?? $details->preco;
 (int)$quantidade = $_REQUEST['qt']  ?? $details->quantidade_max;
 (int)$quantidade_min = $_REQUEST['qt_min']  ?? $details->quantidade_min;
 (string)$descricao = $_REQUEST['descricao']  ?? $details->descricao;
 (string)$unidade_medida = $_REQUEST['unidade_med']  ?? $details->unidade_medida;
-(int)$categoria = $_REQUEST['categoria']  ?? $details->categoria_id;
-(int)$fornecedor = $_REQUEST['fornecedor']  ?? $details->fornecedor_id;
+$categoria = $_REQUEST['categoria'] ?? $details->categoria_id;
+$fornecedor = $_REQUEST['fornecedor'] ?? $details->fornecedor_id;
 
 
  if(isset($_SESSION['update_false']))
@@ -40,28 +41,27 @@ $btn = $_REQUEST['btn'] ?? null;
     unset($_SESSION['update_false']);
  }
 
-
-if(isset($btn))
+if(isset($_REQUEST['btn']))
 {
-
     if($_SERVER['REQUEST_METHOD'] == 'POST')
     {
-        $update_date = ProdutoController::Atulaizar($id,$produto,$preco,$quantidade,$quantidade_min,$descricao,$unidade_medida,$categoria,$fornecedor);
-        
+
+        $update_date = ProdutoController::Atulaizar($id,$produto,$preco,$quantidade,$quantidade_min,$descricao,$unidade_medida, (int)$categoria,(int)$fornecedor);
+
         if(!$update_date)
         {
               Feedbacks::feedback_atualizar(); 
         }
 
         if(isset($update_date) && $update_date  == true)
-        {
+        {       
             header("Location: index.php");
             die;  
         }
     }
     
 }
-
+ 
 ?>
 <link rel="stylesheet" href="../css/styles.css">
 <div class="form-update">
@@ -89,15 +89,36 @@ if(isset($btn))
 
         <label for="categoria">Categoria:</label>
         <select name="categoria">
-        <option value="<?=$details->categoria_id?>"><?=$details->categoria_id?></option>
+        <?php 
+
+            $datas_categoria = ProdutoController::categorias($details->categoria_id); //todas as categorias
+
+            echo "<option selected disabled value='$details->categoria_id'>$details->categoria</option>";
+        
+            foreach($datas_categoria as $data)
+            {
+                echo" <option value='$data->id'>$data->categoria</option> ";
+            }
+        ?>
         </select>
 
         <label for="fornecedor">Fornecedor:</label>
         <select name="fornecedor">
-        <option value="<?=$details->fornecedor_id?>"><?=$details->fornecedor_id?></option>
+        <?php 
+
+            $datas_fornecedores = ProdutoController::fornecedores($details->fornecedor_id);  //todas as fornecedores
+
+            echo "<option selected disabled value='$details->fornecedor_id'>$details->fornecedor</option>";
+        
+
+            foreach($datas_fornecedores as $data)
+            {
+                echo" <option value='$data->id'>$data->fornecedor</option> ";
+            }
+        ?>
         </select>
 
-        <input type="submit" value="Atualizar" name="btn" class="btn atualizar">
+        <input type="submit" value="Atualizar" name="btn">
     </form>
     <a href="index.php" class="btn voltar">Voltar</a>
 </div>

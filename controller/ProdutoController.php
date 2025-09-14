@@ -43,7 +43,7 @@ class ProdutoController
         try
         {
             $line = Produto::get_id($id); 
-
+            
             while(!isset($line->id) || empty($id)) 
             {
                  http_response_code(404);//O recurso solicitado não existe
@@ -62,12 +62,12 @@ class ProdutoController
     }
 
 
-    public static function Atulaizar($id,$produto,$preco,$quantidade,$quantidade_min,$descricao,$unidade_medida,$categoria,$fornecedor)
+    public static function Atulaizar($id,$produto,$preco,$quantidade,$quantidade_min,$descricao,$unidade_medida, $categoria,$fornecedor)
     {
         try 
         {
            
-            $update = Produto::update_date($id,$produto,$preco, $quantidade, $quantidade_min,$descricao,$unidade_medida,1,1); 
+            $update = Produto::update_date($id,$produto,$preco,$quantidade,$quantidade_min,$descricao,$unidade_medida, $categoria,$fornecedor); 
 
                 if($update)
                 {
@@ -134,11 +134,11 @@ class ProdutoController
         }
     }
 
-    public static function categorias()
+    public static function categorias($categoria)
     {
         try 
         {  
-            $data = Produto::categoria_get(); 
+            $data = Produto::categoria_get($categoria); 
             
             if($data) 
             {
@@ -153,11 +153,12 @@ class ProdutoController
             }
     }
 
-    public static function fornecedores()
+   
+    public static function fornecedores($fornecedor)
     {
         try 
         {  
-            $data = Produto::fornecedor_get(); 
+            $data = Produto::fornecedor_get($fornecedor); 
             
             if($data) 
             {
@@ -171,8 +172,7 @@ class ProdutoController
                 throw new Exception("Error:".$error->getMessage());
             }
     }
-
-
+   
     public static function feedback_systm(string $name_session, string $messagem): void
     {
          session_start(); 
