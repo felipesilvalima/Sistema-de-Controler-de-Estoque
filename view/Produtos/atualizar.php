@@ -37,7 +37,7 @@ if (empty($details))
 (string)$unidade_medida = $_REQUEST['unidade_med']  ?? $details->unidade_medida;
 $categoria = $_REQUEST['categoria'] ?? $details->categoria_id;
 $fornecedor = $_REQUEST['fornecedor'] ?? $details->fornecedor_id;
-
+$user_id = $_SESSION['user'] ?? 0;
 
  if(isset($_SESSION['update_false']))
  {
@@ -50,7 +50,7 @@ if(isset($_REQUEST['btn']))
     if($_SERVER['REQUEST_METHOD'] == 'POST')
     {
 
-        $update_date = ProdutoController::Atulaizar($id,$produto,$preco,$quantidade,$quantidade_min,$descricao,$unidade_medida, (int)$categoria,(int)$fornecedor);
+        $update_date = ProdutoController::Atulaizar($id,$produto,$preco,$quantidade,$quantidade_min,$descricao,$unidade_medida, (int)$categoria,(int)$fornecedor,$user_id);
 
         if(!$update_date)
         {

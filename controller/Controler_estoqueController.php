@@ -55,7 +55,7 @@ class Controler_estoqueController
    }
 
 
-    public static function Entrada_estoque($id,$produto,$preco,$quantidade,$quantidade_min,$descricao,$unidade_medida,$categoria,$fornecedor)
+    public static function Entrada_estoque($id,$produto,$preco,$quantidade,$quantidade_min,$descricao,$unidade_medida,$categoria,$fornecedor, $user_id)
     {
         try 
         {
@@ -68,9 +68,9 @@ class Controler_estoqueController
 
                 if($entrada)
                 {
-                     http_response_code(201);//recurso criado com sucesso
                     ProdutoController::feedback_systm('update_true',"Quantidade Inserida com sucesso");
-                    MovimentacaoController::entrada($produto,$quantidade_entrada);  
+                    $produto_id = $id;
+                    MovimentacaoController::entrada($produto,$quantidade_entrada,$produto_id, $user_id);  
                     return true; 
                 }
                 
@@ -82,7 +82,7 @@ class Controler_estoqueController
             }
     }
 
-    public static function Saida_estoque($id,$produto,$preco,$quantidade,$quantidade_min,$descricao,$unidade_medida,$categoria,$fornecedor)
+    public static function Saida_estoque($id,$produto,$preco,$quantidade,$quantidade_min,$descricao,$unidade_medida,$categoria,$fornecedor, $user_id)
     {
         try 
         {
@@ -103,7 +103,8 @@ class Controler_estoqueController
                 {
                      http_response_code(200);//requisição foi processada com sucesso
                     ProdutoController::feedback_systm('update_true',"Quantidade removida com sucesso");
-                    MovimentacaoController::saida($produto,$quantidade_saida); 
+                    $produto_id = $id;
+                    MovimentacaoController::saida($produto,$quantidade_saida,$produto_id,$user_id); 
                     return true; 
                 }
                 

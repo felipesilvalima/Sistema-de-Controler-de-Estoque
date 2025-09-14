@@ -21,30 +21,24 @@ class MovimentacaoController
         Movimentacao::movimentacao_de_estoque($tipo,$data, $produto_id, 1,$user_id);
     }
 
-    public static function entrada($produto,$quantidade) // falta
+    public static function entrada($produto,$quantidade,$produto_id, $user_id)
     {
         $tipo = "Entrada do Produto: $produto";
         $data = date("d/m/Y");
-        $produto_id = 2;
-        $user_id = 2;
         Movimentacao::movimentacao_de_estoque($tipo,$data, $produto_id, $quantidade,$user_id);
     }
 
-    public static function saida($produto,$quantidade) // falta
+    public static function saida($produto,$quantidade,$produto_id, $user_id)
     {
         $tipo = "Baixa no Produto: $produto";
         $data = date("d/m/Y");
-        $produto_id = 2;
-        $user_id = 2;
         Movimentacao::movimentacao_de_estoque($tipo,$data, $produto_id, $quantidade,$user_id);
     }
 
-    public static function update_product($produto,$quantidade) //falta
+    public static function update_product($produto,$quantidade,$produto_id,$user_id)
     {
         $tipo = "Alteração no Produto: $produto";
         $data = date("d/m/Y");
-        $produto_id = 2;
-        $user_id = 2;
         Movimentacao::movimentacao_de_estoque($tipo,$data, $produto_id, $quantidade,$user_id);
     }
  

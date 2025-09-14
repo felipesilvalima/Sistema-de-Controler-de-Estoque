@@ -62,7 +62,7 @@ class ProdutoController
     }
 
 
-    public static function Atulaizar($id,$produto,$preco,$quantidade,$quantidade_min,$descricao,$unidade_medida, $categoria,$fornecedor)
+    public static function Atulaizar($id,$produto,$preco,$quantidade,$quantidade_min,$descricao,$unidade_medida, $categoria,$fornecedor,$user_id)
     {
         try 
         {
@@ -73,7 +73,8 @@ class ProdutoController
                 {
                     http_response_code(204);//Recurso alterado com sucesso.
                     ProdutoController::feedback_systm('update_true',"Atulizado com sucesso");
-                    MovimentacaoController::update_product($produto,$quantidade); 
+                    $produto_id = $id;
+                    MovimentacaoController::update_product($produto,$quantidade,$produto_id,$user_id); 
                     return true; 
                 }
                 

@@ -30,6 +30,7 @@ $btn = $_REQUEST['btn'] ?? null;
 (string)$unidade_medida = $_REQUEST['unidade_med']  ?? $details->unidade_medida;
 (int)$categoria = $_REQUEST['categoria']  ?? $details->categoria_id;
 (int)$fornecedor = $_REQUEST['fornecedor']  ?? $details->fornecedor_id;
+$user_id = $_SESSION['user'] ?? 0;
 
 if (!$details) 
 {
@@ -49,7 +50,7 @@ if(isset($btn))
 
     if($_SERVER['REQUEST_METHOD'] == 'POST')
     {
-        $update_date = Controler_estoqueController::Saida_estoque($id,$produto,$preco,(int)$quantidade,$quantidade_min,$descricao,$unidade_medida,$categoria,$fornecedor);
+        $update_date = Controler_estoqueController::Saida_estoque($id,$produto,$preco,(int)$quantidade,$quantidade_min,$descricao,$unidade_medida,$categoria,$fornecedor, $user_id);
         
         if(!$update_date)
         {
