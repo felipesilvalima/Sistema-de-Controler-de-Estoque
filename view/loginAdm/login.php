@@ -44,7 +44,7 @@ if(isset($btn))
 
 
 <div class="form-login">
-    <h1>Login</h1>
+    <h1>Login Administração</h1>
     <form action="login.php" method="post">
         <label for="cpf">Cpf:</label>
         <input type="number" name="cpf" placeholder="Digite seu cpf"> <br><br>
@@ -54,4 +54,5 @@ if(isset($btn))
 
         <input type="submit" value="Entrar" name="btn" class="btn entrar">
     </form>
+    <a href="/controler_de_estoque/view/produtos/index.php">Voltar para Controler de Produtos</a>
 </div>

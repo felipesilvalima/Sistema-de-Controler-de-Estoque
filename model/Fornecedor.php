@@ -5,8 +5,8 @@ namespace model;
 use Exception;
 use PDO;
 use PDOException;
-require_once __DIR__.'/DB.php';
 
+require_once __DIR__.'/DB.php';
 class Fornecedor
 {
     public static function register_fornec($fornecedor,$cpf,$tel,$endereco)
@@ -216,31 +216,4 @@ class Fornecedor
       } 
     }
 
-    
-    public static function last_fornec()
-    {
-
-     try 
-     {
-        $sql = "SELECT id FROM fornecedor ORDER BY id DESC";
-        $stm = DB::connect()->prepare($sql);
-        $stm->execute();
-        
-        $data = $stm->fetch(PDO::FETCH_OBJ);
-
-        if(!empty($data))
-        {
-            return $data;
-        }
-            else
-            {
-                throw new Exception("Error: na consultar no metodo (last_fornec) ");
-            }
-
-     }
-      catch (PDOException $error) 
-      {
-         throw new Exception("Error:". $error->getMessage());
-      } 
-    }
 }

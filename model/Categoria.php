@@ -6,6 +6,7 @@ use Exception;
 use PDO;
 use PDOException;
 
+require_once __DIR__.'/DB.php';
 class Categoria
 {
     public static function categoria_get($categoria)

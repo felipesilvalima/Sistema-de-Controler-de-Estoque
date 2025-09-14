@@ -10,7 +10,7 @@ require_once __DIR__.'/../../controller/ProdutoController.php';
 require_once __DIR__.'/../../controller/AdmController.php';
 require_once __DIR__.'/../../controller/Feedbacks.php';
 
-if(!isset($_SESSION['user']))
+if(!isset($_SESSION['user_adm']))
 {
     header("Location: /controler_de_estoque/view/loginadm/logout.php");
     die;

@@ -6,6 +6,7 @@ use Exception;
 use model\Categoria;
 use PDOException;
 
+require_once __DIR__.'/../model/Categoria.php';
 class CategoriaController
 {
 

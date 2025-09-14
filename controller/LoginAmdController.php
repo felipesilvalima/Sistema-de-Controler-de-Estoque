@@ -33,7 +33,7 @@ class LoginAmdController
             {
                 http_response_code(200); //requisição foi processada com sucesso
                 ProdutoController::feedback_systm('autenticado',"Usuário logado com sucesso"); 
-                $_SESSION['user'] = $user_id; 
+                $_SESSION['user_adm'] = $user_id; 
                 return true;  
             }
                 else 

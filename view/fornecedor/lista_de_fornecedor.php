@@ -9,8 +9,8 @@ require_once __DIR__ . '/../../controller/FornecedorController.php';
 require_once __DIR__ . '/../../controller/Feedbacks.php';
 session_start();
 
-if (!isset($_SESSION['user'])) {
-    header("Location: /controler_de_estoque/view/login/login.php");
+if (!isset($_SESSION['user_adm'])) {
+    header("Location: /controler_de_estoque/view/loginAdm/login.php");
     die;
 }
 
@@ -55,4 +55,4 @@ if (!$dados) {
 ?>
 </table>
 <a href="/controler_de_estoque/view/fornecedor/cadastrar_fornecedor.php">Cadastrar fornecedor</a> <br><br>
-<a href="/controler_de_estoque/view/Produtos/index.php">Voltar</a>
+<a href="/controler_de_estoque/view/adm/index.php">Voltar</a>

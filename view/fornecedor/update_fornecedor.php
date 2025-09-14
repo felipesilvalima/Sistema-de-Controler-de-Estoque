@@ -7,9 +7,9 @@ require_once __DIR__.'/../../controller/Feedbacks.php';
 
 session_start();
 
-if(!isset($_SESSION['user']))
+if(!isset($_SESSION['user_adm']))
 {
-    header("Location: /controler_de_estoque/view/login/login.php");
+    header("Location: /controler_de_estoque/view/loginAdm/login.php");
     die;
 }
 

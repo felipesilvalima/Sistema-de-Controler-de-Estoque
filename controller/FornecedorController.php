@@ -7,7 +7,6 @@ use model\Fornecedor;
 use PDOException;
 
 require_once __DIR__.'/../model/Fornecedor.php';
-require_once __DIR__.'/../controller/MovimentacaoController.php';
 require_once __DIR__.'/../controller/ProdutoController.php';
 
 class FornecedorController
@@ -22,9 +21,6 @@ class FornecedorController
             {
                  http_response_code(201);//recurso inserido com sucesso
                 ProdutoController::feedback_systm('forne',"Fornecedor inserido com sucesso");
-                $data = Fornecedor::last_fornec();
-                $produto_id = $data->id;
-                MovimentacaoController::insercao_fornecedor($fornecedor,$produto_id,$user_id);
                 return true;
             }
                 else
@@ -144,7 +140,6 @@ class FornecedorController
             {
                 http_response_code(204);//Recurso alterado com sucesso
                 ProdutoController::feedback_systm('update_true',"Atulizado com sucesso");
-                MovimentacaoController::update_fornec($fornecedor);
                 return true;
             }       
         } 
@@ -162,7 +157,6 @@ class FornecedorController
         {
             http_response_code(204);//Recurso alterado com sucesso.
             ProdutoController::feedback_systm('remover',"Removido com sucesso");
-            MovimentacaoController::remocao_fornecedor($fornecedor);
             return true; 
         }
     }

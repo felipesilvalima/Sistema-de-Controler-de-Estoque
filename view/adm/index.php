@@ -10,7 +10,7 @@ require_once __DIR__.'/../../controller/ProdutoController.php';
 require_once __DIR__.'/../../controller/AdmController.php';
 require_once __DIR__.'/../../controller/Feedbacks.php';
 
-if(!isset($_SESSION['user']))
+if(!isset($_SESSION['user_adm']))
 {
     header("Location: /controler_de_estoque/view/loginadm/logout.php");
     die;
@@ -82,9 +82,11 @@ if(!isset($_SESSION['user']))
                             </details></td>";
                             echo "<td>
                             <div class='buttons'>
-                            <a href=adicionar.php class='btn add'>Inserir novo Usuário</a>
-                            <a href='atualizar.php?id=$date->id' class='btn atualizar'>Editar Usuário</a>
-                            <a href='movimentacao.php' class='btn add'>Movimentação do sistema</a>
+                            <a href=adicionar.php class='btn add'>Inserir novo Usuário</a> |
+                            <a href='atualizar.php?id=$date->id' class='btn atualizar'>Editar Usuário</a> |
+                            <a href='movimentacao.php' class='btn add'>Movimentação do sistema</a> |
+                             <a href=/controler_de_estoque/view/fornecedor/lista_de_fornecedor.php class='btn add'>Fornecedores</a> |
+                             <a href=/controler_de_estoque/view/Categoria/lista_de_categoria.php class='btn add'>Categorias</a> |
                             <a href='remover.php?id=$date->id&pd=$date->name' class='btn remover'>Remover Usuário</a>
                             </div></td>";
 

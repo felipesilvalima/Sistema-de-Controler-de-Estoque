@@ -37,9 +37,8 @@ if (!isset($_SESSION['user'])) {
             <input type="search" name="pesquisar" placeholder="Buscar produto...">
             <button type="submit" class="btn search">Procurar</button>
             <button type="submit" class="btn all">Ver todos os produtos</button>
-            <a href=adicionar.php class='btn add'>Inserir novo produto</a>
-            <a href=/controler_de_estoque/view/fornecedor/lista_de_fornecedor.php class='btn add'>Fornecedores</a>
-            <a href=/controler_de_estoque/view/estoque_controle/alerta.php class='btn all'>Alerta de Estoque Baixo</a>
+            <a href=adicionar.php class='btn add'>Inserir novo produto</a> <code><?php  echo "|";?></code>
+            <a href=/controler_de_estoque/view/estoque_controle/alerta.php class='btn all'>Alerta de Estoque Baixo</a> <code><?php  echo "|";?></code>
             <a href=/controler_de_estoque/view/loginadm/login.php class='btn all'>Administração</a>
         </form>
     </div><br>
@@ -79,10 +78,10 @@ if (!isset($_SESSION['user'])) {
             echo "<td>" . (int)$date->quantidade_max . "</td>";
             echo "<td>
                             <div class='buttons'>
-                            <a href='ver.php?id=$date->id' class='btn ver'>Relatório</a>
-                            <a href='/controler_de_estoque/view/estoque_controle/entrada_estoque.php?id=$date->id' class='btn add'>Entrada de Estoque</a>
-                            <a href='/controler_de_estoque/view/estoque_controle/saida_estoque.php?id=$date->id' class='btn add'>Saida de Estoque</a>
-                            <a href='atualizar.php?id=$date->id' class='btn atualizar'>Editar Produto</a>
+                            <a href='ver.php?id=$date->id' class='btn ver'>Relatório</a> |
+                            <a href='/controler_de_estoque/view/estoque_controle/entrada_estoque.php?id=$date->id' class='btn add'>Entrada de Estoque</a> |
+                            <a href='/controler_de_estoque/view/estoque_controle/saida_estoque.php?id=$date->id' class='btn add'>Saida de Estoque</a> |
+                            <a href='atualizar.php?id=$date->id' class='btn atualizar'>Editar Produto</a> |
                             <a href='remover.php?id=$date->id&pd=$date->produto' class='btn remover'>Remover Produto</a>
                             </div></td>";
 

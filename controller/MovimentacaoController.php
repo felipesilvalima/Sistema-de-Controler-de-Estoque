@@ -14,13 +14,6 @@ class MovimentacaoController
         Movimentacao::movimentacao_de_estoque($tipo,$data, $id_produto, $quantidade,$user_id);
     }
 
-    public static function insercao_fornecedor($fornecedor,$produto_id,$user_id)
-    {
-        $tipo = "Inserção do Fornecedor: $fornecedor";
-        $data = date("d/m/Y");
-        Movimentacao::movimentacao_de_estoque($tipo,$data, $produto_id, 1,$user_id);
-    }
-
     public static function remocao($produto_id,$produto,$user_id)
     {
         $tipo = "Remoção do Produto: $produto";
@@ -54,22 +47,5 @@ class MovimentacaoController
         $user_id = 2;
         Movimentacao::movimentacao_de_estoque($tipo,$data, $produto_id, $quantidade,$user_id);
     }
-
-    public static function update_fornec($fornecedor) //falta
-    {
-        $tipo = "Alteração no Fornecedor: $fornecedor";
-        $data = date("d/m/Y");
-        $produto_id = 2;
-        $user_id = 2;
-        Movimentacao::movimentacao_de_estoque($tipo,$data, $produto_id, 1,$user_id);
-    }
-
-     public static function remocao_fornecedor($fornecedor) //falta
-    {
-        $tipo = "Remoção do Fornecedor: $fornecedor";
-        $data = date("d/m/Y");
-        $produto_id = 2;
-        $user_id = 2;
-        Movimentacao::movimentacao_de_estoque($tipo,$data, $produto_id, 1,$user_id);
-    }
+ 
 }
