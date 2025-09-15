@@ -9,6 +9,12 @@ require_once __DIR__.'/../../controller/LoginAmdController.php';
 require_once __DIR__.'/../../controller/Feedbacks.php';
 require_once __DIR__.'/../../validation/Login/ValidationLogin.php';
 
+if(!isset($_SESSION['user']))
+{
+    header("Location:  /controler_de_estoque/view/login/login.php");
+    die;
+}
+
 (int)$cpf = $_REQUEST['cpf'] ?? 0;
 (string)$password = $_REQUEST['password'] ?? null;
 $btn =  $_REQUEST['btn'] ?? null;

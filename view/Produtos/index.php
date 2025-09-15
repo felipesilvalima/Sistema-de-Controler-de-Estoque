@@ -16,6 +16,8 @@ if (!isset($_SESSION['user'])) {
 }
 
 ?>
+
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 
@@ -37,11 +39,12 @@ if (!isset($_SESSION['user'])) {
             <input type="search" name="pesquisar" placeholder="Buscar produto...">
             <button type="submit" class="btn search">Procurar</button>
             <button type="submit" class="btn all">Ver todos os produtos</button>
-            <a href=adicionar.php class='btn add'>Inserir novo produto</a> <code><?php  echo "|";?></code>
-            <a href=/controler_de_estoque/view/estoque_controle/alerta.php class='btn all'>Alerta de Estoque Baixo</a> <code><?php  echo "|";?></code>
+            <a href=adicionar.php class='btn add'>Inserir novo produto</a> <code><?php echo "|"; ?></code>
+            <a href=/controler_de_estoque/view/estoque_controle/alerta.php class='btn all'>Alerta de Estoque Baixo</a> <code><?php echo "|"; ?></code>
             <a href=/controler_de_estoque/view/loginadm/login.php class='btn all'>Administração</a>
         </form>
     </div><br>
+
 
     <?php
 
@@ -89,6 +92,7 @@ if (!isset($_SESSION['user'])) {
         }
     }
     ?>
+
 
     </table>
     </div>
