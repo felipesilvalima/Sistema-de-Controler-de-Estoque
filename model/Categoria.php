@@ -7,7 +7,7 @@ use PDO;
 use PDOException;
 
 require_once __DIR__.'/DB.php';
-class Categoria
+class Categoria extends DB
 {
     public static function categoria_get($categoria)
     {

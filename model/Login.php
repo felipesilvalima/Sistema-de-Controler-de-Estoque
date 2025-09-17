@@ -7,7 +7,7 @@ use PDO;
 use PDOException;
 require_once __DIR__.'/./DB.php';
 
-class Login
+class Login extends DB
 {
    public static function login($user)
    {

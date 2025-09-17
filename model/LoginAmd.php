@@ -6,7 +6,7 @@ use Exception;
 use PDO;
 use PDOException;
 
-class LoginAmd
+class LoginAmd extends DB
 {
      public static function login($cpf)
    {

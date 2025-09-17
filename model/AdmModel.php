@@ -8,7 +8,7 @@ use PDOException;
 
 require_once __DIR__.'/DB.php';
 
-class AdmModel
+class AdmModel extends DB
 {
    public static function get_date_user($seach)
     {

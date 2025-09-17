@@ -6,7 +6,7 @@ use Exception;
 use PDO;
 use PDOException;
 
-class Movimentacao
+class Movimentacao extends DB
 {
     public static function movimentacao_de_estoque($tipo,$data, $produto_id, $quantidade,$user_id)
     {

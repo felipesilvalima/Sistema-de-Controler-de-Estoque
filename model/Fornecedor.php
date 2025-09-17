@@ -7,7 +7,7 @@ use PDO;
 use PDOException;
 
 require_once __DIR__.'/DB.php';
-class Fornecedor
+class Fornecedor extends DB
 {
     public static function register_fornec($fornecedor,$cpf,$tel,$endereco)
     {

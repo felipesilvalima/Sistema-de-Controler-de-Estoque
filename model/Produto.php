@@ -8,7 +8,7 @@ use Exception;
 use PDO;
 use PDOException;
 
-class Produto
+class Produto extends DB
 {
     public static function get_date($seach)
     {

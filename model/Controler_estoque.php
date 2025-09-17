@@ -8,7 +8,7 @@ use PDOException;
 
 require_once __DIR__.'/DB.php';
 
-class Controler_estoque
+class Controler_estoque extends DB
 {
     
     public static function get_quant_min_max()
