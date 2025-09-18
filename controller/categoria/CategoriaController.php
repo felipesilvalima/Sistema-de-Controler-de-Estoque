@@ -3,11 +3,11 @@
 namespace controller;
 
 use Exception;
-use model\Categoria;
+use model\Categoria as Categoria;
 use PDOException;
 
-require_once __DIR__.'/../model/Categoria.php';
-class CategoriaController
+require_once __DIR__.'/../../model/categoria/Categoria.php';
+class CategoriaController extends Categoria
 {
 
     

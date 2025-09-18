@@ -3,15 +3,15 @@
 namespace controller;
 
 use Exception;
-use model\Controler_estoque;
+use model\Controler_estoque as Controler_estoque;
 use model\Produto;
 use PDOException;
 
-require_once __DIR__.'/../model/Controler_estoque.php';
-require_once __DIR__.'/../controller/ProdutoController.php';
-require_once __DIR__.'/../controller/MovimentacaoController.php';
+require_once __DIR__.'/../../model/controle_estoque/Controler_estoque.php';
+require_once __DIR__.'/../../controller/produto/ProdutoController.php';
+require_once __DIR__.'/../../controller/movimentacao/MovimentacaoController.php';
 
-class Controler_estoqueController
+class Controler_estoqueController extends Controler_estoque
 {
     private int $id;
     private string $produto_name;

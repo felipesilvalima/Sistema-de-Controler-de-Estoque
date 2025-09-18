@@ -5,10 +5,10 @@ namespace model;
 use Exception;
 use PDO;
 use PDOException;
-
-class LoginAmd extends DB
+require_once __DIR__.'/../conexao/DB.php';
+class LoginAdm extends DB
 {
-     public static function login($cpf)
+     protected static function login($cpf)
    {
         try 
         {       

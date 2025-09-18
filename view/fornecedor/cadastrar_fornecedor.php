@@ -4,9 +4,9 @@ use controller\Feedbacks;
 use controller\FornecedorController;
 use fornecedor\validation\ValidationFornecedor;
 
-require_once __DIR__.'/../../controller/FornecedorController.php';
+require_once __DIR__.'/../../controller/fornecedor/FornecedorController.php';
 require_once __DIR__.'/../../validation/fornecedor/ValidationFornecedor.php';
-require_once __DIR__.'/../../controller/Feedbacks.php';
+require_once __DIR__.'/../../controller/feedbacks/Feedbacks.php';
 
 session_start();
 

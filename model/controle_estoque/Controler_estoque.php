@@ -6,12 +6,12 @@ use Exception;
 use PDO;
 use PDOException;
 
-require_once __DIR__.'/DB.php';
+require_once __DIR__.'/../conexao/DB.php';
 
 class Controler_estoque extends DB
 {
     
-    public static function get_quant_min_max()
+    protected static function get_quant_min_max()
     {
         try 
         {
@@ -38,7 +38,7 @@ class Controler_estoque extends DB
     }
 
 
-     public static function update_date_estoque($id,$pd,$pc,$qt,$qt_min,$des,$um,$cat,$for)
+     protected static function update_date_estoque($id,$pd,$pc,$qt,$qt_min,$des,$um,$cat,$for)
     {
         try 
         {

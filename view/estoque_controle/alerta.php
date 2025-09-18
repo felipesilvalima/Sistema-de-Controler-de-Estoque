@@ -5,8 +5,8 @@ use controller\Feedbacks;
 
 session_start();
 
-require_once __DIR__.'/../../controller/Controler_estoqueController.php';
-require_once __DIR__.'/../../controller/Feedbacks.php';
+require_once __DIR__.'/../../controller/controle_estoque/Controler_estoqueController.php';
+require_once __DIR__.'/../../controller/feedbacks/Feedbacks.php';
 
 if(!isset($_SESSION['user']))
 {

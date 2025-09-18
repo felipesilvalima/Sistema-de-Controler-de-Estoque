@@ -4,7 +4,7 @@ use controller\FornecedorController;
 
 session_start();
 
-require_once __DIR__.'/../../controller/FornecedorController.php';
+require_once __DIR__.'/../../controller/fornecedor/FornecedorController.php';
 
 if(!isset($_SESSION['user_adm']))
 {

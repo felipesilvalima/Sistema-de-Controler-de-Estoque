@@ -12,12 +12,12 @@ use model\Produto;
 use validation\Produto\ValidationProduto;
 
 
-require_once __DIR__.'/../../controller/ProdutoController.php';
-require_once __DIR__.'/../../controller/Feedbacks.php';
+require_once __DIR__.'/../../controller/produto/ProdutoController.php';
+require_once __DIR__.'/../../controller/feedbacks/Feedbacks.php';
 require_once __DIR__.'/../../validation/Produto/ValidationProduto.php';
-require_once __DIR__.'/../../controller/MovimentacaoController.php';
-require_once __DIR__.'/../../controller/CategoriaController.php';
-require_once __DIR__.'/../../controller/FornecedorController.php';
+require_once __DIR__.'/../../controller/movimentacao/MovimentacaoController.php';
+require_once __DIR__.'/../../controller/categoria/CategoriaController.php';
+require_once __DIR__.'/../../controller/fornecedor/FornecedorController.php';
 
 if(!isset($_SESSION['user']))
 {

@@ -3,12 +3,12 @@
 namespace controller;
 
 use Exception;
-use model\AdmModel;
+use model\AdmModel as AdmModel;
 use PDOException;
 
-require_once __DIR__.'/../model/AdmModel.php';
+require_once __DIR__.'/../../model/ADM/AdmModel.php';
 
-class AdmController
+class AdmController extends AdmModel
 {
      public static function index($search)
     {

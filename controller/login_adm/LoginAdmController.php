@@ -3,19 +3,19 @@
 namespace controller;
 
 use Exception;
-use model\LoginAmd;
+use model\LoginAdm as LoginAdm;
 use PDOException;
 
-require_once __DIR__.'/../model/LoginAmd.php';
+require_once __DIR__.'/../../model/login_adm/LoginAdm.php';
 
-class LoginAmdController
+class LoginAdmController extends LoginAdm
 {
      public static function User_login($cpf, $password)
    {     
         try 
         {
 
-           $line = LoginAmd::login($cpf); 
+           $line = LoginAdm::login($cpf); 
 
            while($line == null)
            {   

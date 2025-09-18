@@ -6,9 +6,9 @@ use controller\AdmController;
 use controller\Feedbacks;
 use controller\ProdutoController;
 
-require_once __DIR__.'/../../controller/ProdutoController.php';
-require_once __DIR__.'/../../controller/AdmController.php';
-require_once __DIR__.'/../../controller/Feedbacks.php';
+require_once __DIR__.'/../../controller/produto/ProdutoController.php';
+require_once __DIR__.'/../../controller/ADM/AdmController.php';
+require_once __DIR__.'/../../controller/feedbacks/Feedbacks.php';
 
 if(!isset($_SESSION['user_adm']))
 {

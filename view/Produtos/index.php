@@ -7,8 +7,8 @@ session_start();
 use controller\Feedbacks;
 use controller\ProdutoController;
 
-require_once __DIR__ . '/../../controller/ProdutoController.php';
-require_once __DIR__ . '/../../controller/Feedbacks.php';
+require_once __DIR__ . '/../../controller/produto/ProdutoController.php';
+require_once __DIR__ . '/../../controller/feedbacks/Feedbacks.php';
 
 if (!isset($_SESSION['user'])) {
     header("Location: /controler_de_estoque/view/login/login.php");

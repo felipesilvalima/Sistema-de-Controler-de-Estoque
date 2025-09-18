@@ -1,12 +1,12 @@
 <?php declare(strict_types=1);
 
 use controller\Feedbacks;
-use controller\LoginAmdController;
+use controller\LoginAdmController;
 use controller\LoginController;
 use Login\validation\ValidationLogin;
-
-require_once __DIR__.'/../../controller/LoginAmdController.php';
-require_once __DIR__.'/../../controller/Feedbacks.php';
+session_start();
+require_once __DIR__.'/../../controller/login_adm/LoginAdmController.php';
+require_once __DIR__.'/../../controller/feedbacks/Feedbacks.php';
 require_once __DIR__.'/../../validation/Login/ValidationLogin.php';
 
 if(!isset($_SESSION['user']))
@@ -30,7 +30,7 @@ if(isset($btn))
     
     elseif($_SERVER['REQUEST_METHOD'] == 'POST')
     {
-        $logar = LoginAmdController::User_login($cpf, $password);
+        $logar = LoginAdmController::User_login($cpf, $password);
 
         if($logar)
         {

@@ -2,10 +2,11 @@
 
 namespace controller;
 
-use model\Movimentacao;
-require_once __DIR__.'/../model/Movimentacao.php';
+use model\Movimentacao as Movimentacao;
 
-class MovimentacaoController
+require_once __DIR__.'/../../model/movimentacao/Movimentacao.php';
+
+class MovimentacaoController extends Movimentacao
 {
     public static function insercao($produto, $quantidade,$id_produto,$user_id)
     {

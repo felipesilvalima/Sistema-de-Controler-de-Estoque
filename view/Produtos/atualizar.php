@@ -6,10 +6,10 @@ use controller\CategoriaController;
 use controller\Feedbacks;
 use controller\FornecedorController;
 use controller\ProdutoController;
-require_once __DIR__.'/../../controller/ProdutoController.php';
-require_once __DIR__.'/../../controller/Feedbacks.php';
-require_once __DIR__.'/../../controller/CategoriaController.php';
-require_once __DIR__.'/../../controller/FornecedorController.php';
+require_once __DIR__.'/../../controller/produto/ProdutoController.php';
+require_once __DIR__.'/../../controller/feedbacks/Feedbacks.php';
+require_once __DIR__.'/../../controller/categoria/CategoriaController.php';
+require_once __DIR__.'/../../controller/fornecedor/FornecedorController.php';
 
 if(!isset($_SESSION['user']))
 {
@@ -60,7 +60,7 @@ if(isset($_REQUEST['btn']))
 
         if(isset($update_date) && $update_date  == true)
         {       
-            header("Location: index.php");
+            header("Location:  index.php");
             die;  
         }
     }

@@ -3,13 +3,13 @@
 namespace controller;
 
 use Exception;
-use model\Fornecedor;
+use model\Fornecedor as Fornecedor;
 use PDOException;
 
-require_once __DIR__.'/../model/Fornecedor.php';
-require_once __DIR__.'/../controller/ProdutoController.php';
+require_once __DIR__.'/../../model/fornecedor/Fornecedor.php';
+require_once __DIR__.'/../../controller/produto/ProdutoController.php';
 
-class FornecedorController
+class FornecedorController extends Fornecedor
 {
     public static function Inserir_fornecedor($fornecedor,$cpf,$tel,$endereco,$user_id)
     {

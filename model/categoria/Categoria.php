@@ -6,10 +6,10 @@ use Exception;
 use PDO;
 use PDOException;
 
-require_once __DIR__.'/DB.php';
+require_once __DIR__.'/../conexao/DB.php';
 class Categoria extends DB
 {
-    public static function categoria_get($categoria)
+    protected static function categoria_get($categoria)
     {
 
      try 

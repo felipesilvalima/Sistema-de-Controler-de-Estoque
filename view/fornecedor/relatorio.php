@@ -1,7 +1,7 @@
 <?php declare(strict_types=1);
 session_start();
 use controller\FornecedorController;
-require_once __DIR__.'/../../controller/FornecedorController.php';
+require_once __DIR__.'/../../controller/fornecedor/FornecedorController.php';
 
 if(!isset($_SESSION['user_adm']))
 {

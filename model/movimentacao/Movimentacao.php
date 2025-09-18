@@ -6,9 +6,11 @@ use Exception;
 use PDO;
 use PDOException;
 
+require_once __DIR__.'/../conexao/DB.php';
+
 class Movimentacao extends DB
 {
-    public static function movimentacao_de_estoque($tipo,$data, $produto_id, $quantidade,$user_id)
+    protected static function movimentacao_de_estoque($tipo,$data, $produto_id, $quantidade,$user_id)
     {
          try 
         {

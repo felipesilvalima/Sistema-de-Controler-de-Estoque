@@ -4,7 +4,7 @@ namespace fornecedor\validation;
 
 use controller\ProdutoController;
 
-require_once __DIR__.'/../../controller/ProdutoController.php';
+require_once __DIR__.'/../../controller/produto/ProdutoController.php';
 
 class ValidationFornecedor
 {

@@ -5,8 +5,8 @@ declare(strict_types=1);
 use controller\Feedbacks;
 use controller\FornecedorController;
 
-require_once __DIR__ . '/../../controller/FornecedorController.php';
-require_once __DIR__ . '/../../controller/Feedbacks.php';
+require_once __DIR__ . '/../../controller/fornecedor/FornecedorController.php';
+require_once __DIR__ . '/../../controller/feedbacks/Feedbacks.php';
 session_start();
 
 if (!isset($_SESSION['user_adm'])) {

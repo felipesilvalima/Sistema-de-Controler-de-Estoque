@@ -6,10 +6,11 @@ use Exception;
 use PDO;
 use PDOException;
 
-require_once __DIR__.'/DB.php';
+require_once __DIR__.'/../conexao/DB.php';
+
 class Fornecedor extends DB
 {
-    public static function register_fornec($fornecedor,$cpf,$tel,$endereco)
+    protected static function register_fornec($fornecedor,$cpf,$tel,$endereco)
     {
         try 
         {
@@ -37,7 +38,7 @@ class Fornecedor extends DB
             }
     }
 
-    public static function verify_fornecedor($fornecedor)
+    protected static function verify_fornecedor($fornecedor)
     {
         try 
         {
@@ -62,7 +63,7 @@ class Fornecedor extends DB
             }
     }
 
-    public static function verify_cpf($cpf)
+    protected static function verify_cpf($cpf)
     {
         try 
         {
@@ -83,7 +84,7 @@ class Fornecedor extends DB
             }
     }
 
-    public static function list_fornec()
+    protected static function list_fornec()
     {
         try 
         {
@@ -108,7 +109,7 @@ class Fornecedor extends DB
             }
     }
 
-    public static function get_fornec($id)
+    protected static function get_fornec($id)
     {
         try 
         {
@@ -134,7 +135,7 @@ class Fornecedor extends DB
             }
     }
 
-    public static function update_fornecedor($id,$fornecedor,$cpf,$telefone,$edereco)
+    protected static function update_fornecedor($id,$fornecedor,$cpf,$telefone,$edereco)
     {
         try 
         {
@@ -163,7 +164,7 @@ class Fornecedor extends DB
             }
     }
 
-     public static function remover_idFornercedor($id)
+     protected static function remover_idFornercedor($id)
     {
      try 
      {
@@ -188,7 +189,7 @@ class Fornecedor extends DB
       } 
     }
 
-    public static function fornecedor_get($fornecedor)
+    protected static function fornecedor_get($fornecedor)
     {
 
      try 

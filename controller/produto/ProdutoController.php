@@ -3,9 +3,11 @@
 namespace controller;
 
 use Exception;
-use model\Produto;
-require_once __DIR__.'/../model/Produto.php';
-require_once __DIR__.'/../controller/MovimentacaoController.php';
+use model\Produto as Produto;
+use model\Movimentacao as Movimentacao;
+
+require_once __DIR__.'/../../model/produto/Produto.php';
+require_once __DIR__.'/../../controller/movimentacao/MovimentacaoController.php';
 use PDOException;
 
 class ProdutoController extends Produto
@@ -104,7 +106,7 @@ class ProdutoController extends Produto
 
                 if($update)
                 {
-                    http_response_code(204);//Recurso alterado com sucesso.
+            
                     ProdutoController::feedback_systm('update_true',"Atulizado com sucesso");
                     MovimentacaoController::update_product(
                      $this->produto_name,
@@ -191,7 +193,7 @@ class ProdutoController extends Produto
 
         if($remover) 
         {
-             http_response_code(204);//Recurso alterado com sucesso
+            
             ProdutoController::feedback_systm('remover',"Removido com sucesso");
             MovimentacaoController::remocao(
             $this->id,

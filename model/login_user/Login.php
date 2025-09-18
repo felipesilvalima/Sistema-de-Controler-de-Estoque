@@ -5,11 +5,11 @@ namespace model;
 use Exception;
 use PDO;
 use PDOException;
-require_once __DIR__.'/./DB.php';
+require_once __DIR__.'/../conexao/DB.php';
 
 class Login extends DB
 {
-   public static function login($user)
+   protected static function login($user)
    {
         try 
         {       

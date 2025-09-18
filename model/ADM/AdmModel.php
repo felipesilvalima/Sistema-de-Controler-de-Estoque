@@ -6,11 +6,11 @@ use Exception;
 use PDO;
 use PDOException;
 
-require_once __DIR__.'/DB.php';
+require_once __DIR__.'/../conexao/DB.php';
 
 class AdmModel extends DB
 {
-   public static function get_date_user($seach)
+   protected static function get_date_user($seach)
     {
         try
         {
@@ -38,7 +38,7 @@ class AdmModel extends DB
             }
     }
 
-   public static function get_date_movimentacao($seach)
+   protected static function get_date_movimentacao($seach)
     {
         try
         {

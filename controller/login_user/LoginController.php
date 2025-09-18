@@ -3,13 +3,13 @@
 namespace controller;
 
 use Exception;
-use model\Login;
+use model\Login as Login;
 use PDOException;
 
-require_once __DIR__.'/../model/Login.php';
-require_once __DIR__.'/../controller/ProdutoController.php';
+require_once __DIR__.'/../../model/login_user/Login.php';
+require_once __DIR__.'/../../controller/login_user/LoginController.php';
 
-class LoginController
+class LoginController extends Login
 {
    public static function User_login($user, $password)
    {     

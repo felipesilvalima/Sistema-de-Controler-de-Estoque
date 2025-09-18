@@ -4,8 +4,8 @@ use controller\Feedbacks;
 use controller\LoginController;
 use Login\validation\ValidationLogin;
 
-require_once __DIR__.'/../../controller/LoginController.php';
-require_once __DIR__.'/../../controller/Feedbacks.php';
+require_once __DIR__.'/../../controller/login_user/LoginController.php';
+require_once __DIR__.'/../../controller/feedbacks/Feedbacks.php';
 require_once __DIR__.'/../../validation/Login/ValidationLogin.php';
 
 (string)$user = $_REQUEST['user'] ?? null;
