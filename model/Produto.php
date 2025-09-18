@@ -10,7 +10,7 @@ use PDOException;
 
 class Produto extends DB
 {
-    public static function get_date($seach)
+    protected static function get_date($seach)
     {
         try
         {
@@ -39,7 +39,7 @@ class Produto extends DB
     }
 
 
-    public static function get_id($id)
+    protected static function get_id($id)
     {
         try
         {
@@ -68,7 +68,7 @@ class Produto extends DB
             }
     }
 
-    public static function update_date($id,$produto,$preco,$quantidade,$quantidade_min,$descricao,$unidade_medida, $categoria,$fornecedor)
+    protected static function update_date($id,$produto,$preco,$quantidade,$quantidade_min,$descricao,$unidade_medida, $categoria,$fornecedor)
     {
         try 
         {
@@ -102,7 +102,7 @@ class Produto extends DB
             }
     }
 
-    public static function inserir_produto($produto_name, $preco_pd, $quant_pd,$quantidade_min,$descrição,$unidade_medida,$categoria,$fornecedor,$user)
+    protected static function inserir_produto($produto_name, $preco_pd, $quant_pd,$quantidade_min,$descricao,$unidade_medida,$categoria,$fornecedor,$user)
     {
         try 
         {
@@ -113,7 +113,7 @@ class Produto extends DB
             $stm->bindParam(':pc', $preco_pd, PDO::PARAM_STR);
             $stm->bindParam(':qt', $quant_pd, PDO::PARAM_INT);
             $stm->bindParam(':qt_min', $quantidade_min, PDO::PARAM_INT);
-            $stm->bindParam(':descr', $descrição, PDO::PARAM_STR);
+            $stm->bindParam(':descr', $descricao, PDO::PARAM_STR);
             $stm->bindParam(':um', $unidade_medida, PDO::PARAM_STR);
             $stm->bindParam(':ct', $categoria, PDO::PARAM_INT);
             $stm->bindParam(':fc', $fornecedor, PDO::PARAM_INT);
@@ -137,7 +137,7 @@ class Produto extends DB
 
     }
 
-    public static function verificarProduto($produto_name)
+    protected static function verificarProduto($produto_name)
     {
         try 
         {
@@ -162,7 +162,7 @@ class Produto extends DB
          }
     }
 
-    public static function remover($id)
+    protected static function remover($id)
     {
      try 
      {
@@ -187,7 +187,7 @@ class Produto extends DB
       } 
     }
 
-    public static function last_product()
+    protected static function last_product()
     {
 
      try 

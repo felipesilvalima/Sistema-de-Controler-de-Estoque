@@ -56,8 +56,9 @@ if (!isset($_SESSION['user'])) {
 
     session_write_close();
 
-    $pesquisar = $_GET['pesquisar'] ?? "";
-    $dados =  ProdutoController::index($pesquisar);
+    $produto = new  ProdutoController();
+    $seach = $_GET['pesquisar'] ?? "";
+    $dados = $produto->index($seach);
 
     if (empty($dados)) {
         Feedbacks::feedback_index();

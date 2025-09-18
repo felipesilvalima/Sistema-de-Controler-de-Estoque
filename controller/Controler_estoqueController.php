@@ -13,8 +13,18 @@ require_once __DIR__.'/../controller/MovimentacaoController.php';
 
 class Controler_estoqueController
 {
+    private int $id;
+    private string $produto_name;
+    private string $descricao;
+    private float $preco;
+    private int $quantidade_max;
+    private int $quantidade_min;
+    private string $unidade_medida;
+    private int $categoria_id;
+    private int $fornecedor_id;
+    private int $user_id;
 
-   public static function Alert_controll()
+   public static function Alert_controll(): bool
    {
         try 
         {
@@ -55,22 +65,48 @@ class Controler_estoqueController
    }
 
 
-    public static function Entrada_estoque($id,$produto,$preco,$quantidade,$quantidade_min,$descricao,$unidade_medida,$categoria,$fornecedor, $user_id)
+    public function Entrada_estoque($id,$produto,$preco,$quantidade,$quantidade_min,$descricao,$unidade_medida,$categoria,$fornecedor, $user_id)
     {
         try 
         {
+            $this->id = $id;
+            $this->produto_name = $produto;
+            $this->preco = $preco;
+            $this->quantidade_max = $quantidade;
+            $this->quantidade_min = $quantidade_min;
+            $this->descricao = $descricao;
+            $this->unidade_medida = $unidade_medida;
+            $this->categoria_id = $categoria;
+            $this->fornecedor_id = $fornecedor;
+            $this->user_id = $user_id;
             
-            $quantidade_max = ProdutoController::detalhes($id);
-            $quantidade_entrada = $quantidade;
-            $quantidade += $quantidade_max->quantidade_max;
+            $produtoController = new ProdutoController();
+            $quantidade_max = $produtoController->detalhes($id);
+            $quantidade_entrada = $this->quantidade_max;
+            $this->quantidade_max += $quantidade_max->quantidade_max;
            
-            $entrada = Controler_estoque::update_date_estoque($id,$produto,$preco, $quantidade, $quantidade_min,$descricao,$unidade_medida,$categoria,$fornecedor); 
+            $entrada = Controler_estoque::update_date_estoque(
+                $this->id,
+                $this->produto_name,
+                $this->preco,
+                $this->quantidade_max,
+                $this->quantidade_min,
+                $this->descricao,
+                $this->unidade_medida,
+                $this->categoria_id,
+                $this->fornecedor_id,
+                $this->user_id
+            ); 
 
                 if($entrada)
                 {
                     ProdutoController::feedback_systm('update_true',"Quantidade Inserida com sucesso");
-                    $produto_id = $id;
-                    MovimentacaoController::entrada($produto,$quantidade_entrada,$produto_id, $user_id);  
+                    MovimentacaoController::entrada(
+                    $this->produto_name,
+                    $quantidade_entrada,
+                    $this->id,
+                    $this->user_id
+                );  
                     return true; 
                 }
                 
@@ -82,29 +118,55 @@ class Controler_estoqueController
             }
     }
 
-    public static function Saida_estoque($id,$produto,$preco,$quantidade,$quantidade_min,$descricao,$unidade_medida,$categoria,$fornecedor, $user_id)
+    public function Saida_estoque($id,$produto,$preco,$quantidade,$quantidade_min,$descricao,$unidade_medida,$categoria,$fornecedor, $user_id)
     {
         try 
         {
+          
+            $this->id = $id;
+            $this->produto_name = $produto;
+            $this->preco = $preco;
+            $this->quantidade_max = $quantidade;
+            $this->quantidade_min = $quantidade_min;
+            $this->descricao = $descricao;
+            $this->unidade_medida = $unidade_medida;
+            $this->categoria_id = $categoria;
+            $this->fornecedor_id = $fornecedor;
+            $this->user_id = $user_id;
+
+            $produtoController = new ProdutoController();
+            $quantidade_max = $produtoController->detalhes($id);
+            $quantidade_saida = $this->quantidade_max;
+
+            $this->quantidade_max = $quantidade_max->quantidade_max - $quantidade_saida; 
             
-            $quantidade_max = ProdutoController::detalhes($id);
-            $quantidade_saida = $quantidade;
-            $quantidade_new = $quantidade_max->quantidade_max;
-            $quantidade_new -= $quantidade; 
-            
-            if($quantidade_new < 0)
+            if( $this->quantidade_max < 0)
             {
-                $quantidade_new = 0;
+                $this->quantidade_max = 0;
             }
            
-            $entrada = Controler_estoque::update_date_estoque($id,$produto,$preco, $quantidade_new, $quantidade_min,$descricao,$unidade_medida,$categoria,$fornecedor); 
+            $entrada = Controler_estoque::update_date_estoque(
+                $this->id,
+                $this->produto_name,
+                $this->preco,
+                $this->quantidade_max,
+                $this->quantidade_min,
+                $this->descricao,
+                $this->unidade_medida,
+                $this->categoria_id,
+                $this->fornecedor_id
+            ); 
 
                 if($entrada)
                 {
                      http_response_code(200);//requisição foi processada com sucesso
                     ProdutoController::feedback_systm('update_true',"Quantidade removida com sucesso");
-                    $produto_id = $id;
-                    MovimentacaoController::saida($produto,$quantidade_saida,$produto_id,$user_id); 
+                    MovimentacaoController::saida(
+                    $this->produto_name,
+                    $quantidade_saida,
+                    $this->id,
+                    $this->user_id
+                ); 
                     return true; 
                 }
                 

@@ -18,8 +18,9 @@ if(!isset($_SESSION['user']))
 }
 
 session_write_close();
-(int)$id = $_REQUEST['id'] ?? 0;
-$details =  ProdutoController::detalhes($id);
+$produto = new ProdutoController();
+$id = $_REQUEST['id'] ?? 0;
+$details =  $produto->detalhes((int)$id);
 
 
 if (empty($details))
@@ -29,12 +30,12 @@ if (empty($details))
 }
 
 
-(string)$produto = $_REQUEST['pd']  ?? $details->produto;
-(float)$preco = $_REQUEST['pc']  ?? $details->preco;
-(int)$quantidade = $_REQUEST['qt']  ?? $details->quantidade_max;
-(int)$quantidade_min = $_REQUEST['qt_min']  ?? $details->quantidade_min;
-(string)$descricao = $_REQUEST['descricao']  ?? $details->descricao;
-(string)$unidade_medida = $_REQUEST['unidade_med']  ?? $details->unidade_medida;
+$produto_name = $_REQUEST['pd']  ?? $details->produto;
+$preco = $_REQUEST['pc']  ?? $details->preco;
+$quantidade = $_REQUEST['qt']  ?? $details->quantidade_max;
+$quantidade_min = $_REQUEST['qt_min']  ?? $details->quantidade_min;
+$descricao = $_REQUEST['descricao']  ?? $details->descricao;
+$unidade_medida = $_REQUEST['unidade_med']  ?? $details->unidade_medida;
 $categoria = $_REQUEST['categoria'] ?? $details->categoria_id;
 $fornecedor = $_REQUEST['fornecedor'] ?? $details->fornecedor_id;
 $user_id = $_SESSION['user'] ?? 0;
@@ -49,9 +50,9 @@ if(isset($_REQUEST['btn']))
 {
     if($_SERVER['REQUEST_METHOD'] == 'POST')
     {
-
-        $update_date = ProdutoController::Atulaizar($id,$produto,$preco,$quantidade,$quantidade_min,$descricao,$unidade_medida, (int)$categoria,(int)$fornecedor,$user_id);
-
+       
+        $update_date = $produto->Atulaizar((int)$id,(string)$produto_name,(float)$preco,(int)$quantidade,(int)$quantidade_min,(string)$descricao,(string)$unidade_medida, (int)$categoria,(int)$fornecedor,(int)$user_id);
+        
         if(!$update_date)
         {
               Feedbacks::feedback_atualizar(); 

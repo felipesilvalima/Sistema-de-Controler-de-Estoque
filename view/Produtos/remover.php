@@ -13,11 +13,12 @@ if(!isset($_SESSION['user']))
     die;
 }
 
-(int)$id = $_REQUEST['id'] ?? 0;
-(string)$produto = $_REQUEST['pd'] ?? null;
-(string)$user_id =  $_SESSION['user'] ?? null;
+$id = $_REQUEST['id'] ?? 0;
+$produto_name = $_REQUEST['pd'] ?? null;
+$user_id =  $_SESSION['user'] ?? null;
 
-$remover = ProdutoController::remover_id($id,$produto,$user_id);
+$produto = new ProdutoController();
+$remover = $produto->remover_id((int)$id,(string)$produto_name,(int)$user_id);
 
 if($remover)
 {

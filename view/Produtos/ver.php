@@ -15,10 +15,11 @@ if(!isset($_SESSION['user']))
     die;
 }
 
-(int)$id = $_REQUEST['id'] ?? 0;
- $date = ProdutoController::detalhes($id);
+ $id_produto = $_REQUEST['id'] ?? 0;
+ $produto = new ProdutoController();
+ $date = $produto->detalhes((int)$id_produto);
  
-    if(!$date)
+    if(empty($date))
     {
         header("Location: index.php");
         die;  

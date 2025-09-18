@@ -25,22 +25,22 @@ if(!isset($_SESSION['user']))
     die;
 }
 
- $btn = $_REQUEST['btn'] ?? null;
-(string)$produto = $_REQUEST['pd']  ?? null;
-(string)$descrição = $_REQUEST['descricao']  ?? null;
-(float)$preco = $_REQUEST['pc']  ?? null;
-(int)$quantidade = $_REQUEST['qt']  ?? 0;
-(int)$quantidade_min = $_REQUEST['qt_min']  ?? 0;
-(string)$unidade_medida = $_REQUEST['unidade_med']  ?? null;
-(int)$categoria = $_REQUEST['categoria']  ?? null;
-(int)$fornecedor = $_REQUEST['fornecedor']  ?? null;
+$btn = $_REQUEST['btn'] ?? null;
+$produto_name = $_REQUEST['pd']  ?? null;
+$descricao = $_REQUEST['descricao']  ?? null;
+$preco = $_REQUEST['pc']  ?? null;
+$quantidade = $_REQUEST['qt']  ?? 0;
+$quantidade_min = $_REQUEST['qt_min']  ?? 0;
+$unidade_medida = $_REQUEST['unidade_med']  ?? null;
+$categoria = $_REQUEST['categoria']  ?? null;
+$fornecedor = $_REQUEST['fornecedor']  ?? null;
 
 $user = $_SESSION['user'];
 
 if(isset($btn))
 {
     session_write_close();
-    $validation_fields = ValidationProduto::validation_inserir_fields($produto,$preco,$quantidade,$quantidade_min,$descrição,$unidade_medida,$categoria,$fornecedor,$user);
+    $validation_fields = ValidationProduto::validation_inserir_fields($produto_name,$preco,$quantidade,$quantidade_min,$descricao,$unidade_medida,$categoria,$fornecedor,$user);
 
     if($validation_fields)
     {
@@ -51,8 +51,9 @@ if(isset($btn))
 
             if($_SERVER['REQUEST_METHOD'] == 'POST')
             {
+                $produto = new ProdutoController();
 
-                $inseir = ProdutoController::inseir($produto,$preco,$quantidade,$quantidade_min,$descrição,$unidade_medida,$categoria,$fornecedor,$user);
+                $inseir = $produto->inseir((string)$produto_name,(float)$preco,(int)$quantidade,(int)$quantidade_min,(string)$descricao,(string)$unidade_medida,(int)$categoria,(int)$fornecedor,(int)$user);
     
                 if($inseir)
                 {

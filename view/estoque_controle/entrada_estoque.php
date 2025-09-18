@@ -17,19 +17,20 @@ if(!isset($_SESSION['user']))
 }
 
 session_write_close();
-(int)$id = $_REQUEST['id'] ?? 0;
-$details =  ProdutoController::detalhes($id);
+$id = $_REQUEST['id'] ?? 0;
+$produtoController = new ProdutoController();
+$details =  $produtoController->detalhes((int)$id);
 
 
 $btn = $_REQUEST['btn'] ?? null;
-(string)$produto = $_REQUEST['pd']  ?? $details->produto;
-(float)$preco = $_REQUEST['pc']  ?? $details->preco;
-(int)$quantidade = $_REQUEST['qt']  ?? $details->quantidade_max;
-(int)$quantidade_min = $_REQUEST['qt_min']  ?? $details->quantidade_min;
-(string)$descricao = $_REQUEST['descricao']  ?? $details->descricao;
-(string)$unidade_medida = $_REQUEST['unidade_med']  ?? $details->unidade_medida;
-(int)$categoria = $_REQUEST['categoria']  ?? $details->categoria_id;
-(int)$fornecedor = $_REQUEST['fornecedor']  ?? $details->fornecedor_id;
+$produto = $_REQUEST['pd']  ?? $details->produto;
+$preco = $_REQUEST['pc']  ?? $details->preco;
+$quantidade = $_REQUEST['qt']  ?? $details->quantidade_max;
+$quantidade_min = $_REQUEST['qt_min']  ?? $details->quantidade_min;
+$descricao = $_REQUEST['descricao']  ?? $details->descricao;
+$unidade_medida = $_REQUEST['unidade_med']  ?? $details->unidade_medida;
+$categoria = $_REQUEST['categoria']  ?? $details->categoria_id;
+$fornecedor = $_REQUEST['fornecedor']  ?? $details->fornecedor_id;
 $user_id = $_SESSION['user'] ?? 0;
 
 if (!$details) 
@@ -50,8 +51,9 @@ if(isset($btn))
 
     if($_SERVER['REQUEST_METHOD'] == 'POST')
     {
-    
-        $update_date = Controler_estoqueController::Entrada_estoque($id,$produto,$preco,(int)$quantidade,$quantidade_min,$descricao,$unidade_medida,$categoria,$fornecedor, $user_id);
+        $Estoque = new Controler_estoqueController();
+
+        $update_date = $Estoque->Entrada_estoque((int)$id,(string)$produto,(float)$preco,(int)$quantidade,(int)$quantidade_min,(string)$descricao,(string)$unidade_medida,(int)$categoria,(int)$fornecedor, (int)$user_id);
         
         if(!$update_date)
         {
