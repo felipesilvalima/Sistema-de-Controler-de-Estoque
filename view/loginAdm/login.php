@@ -30,8 +30,9 @@ if(isset($btn))
     
     elseif($_SERVER['REQUEST_METHOD'] == 'POST')
     {
-        $logar = LoginAdmController::User_login($cpf, $password);
-
+        $Login = new LoginAdmController();
+        $logar = $Login->User_login($cpf, $password);
+       
         if($logar)
         {
            header("Location: /controler_de_estoque/view/adm/index.php");

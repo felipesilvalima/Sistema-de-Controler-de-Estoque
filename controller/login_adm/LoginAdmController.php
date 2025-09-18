@@ -10,7 +10,7 @@ require_once __DIR__.'/../../model/login_adm/LoginAdm.php';
 
 class LoginAdmController extends LoginAdm
 {
-     public static function User_login($cpf, $password)
+     public function User_login($cpf, $password)
    {     
         try 
         {

@@ -11,7 +11,7 @@ require_once __DIR__.'/../../controller/login_user/LoginController.php';
 
 class LoginController extends Login
 {
-   public static function User_login($user, $password)
+   public function User_login($user, $password)
    {     
         try 
         {

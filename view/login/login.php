@@ -3,6 +3,7 @@
 use controller\Feedbacks;
 use controller\LoginController;
 use Login\validation\ValidationLogin;
+use model\Login;
 
 require_once __DIR__.'/../../controller/login_user/LoginController.php';
 require_once __DIR__.'/../../controller/feedbacks/Feedbacks.php';
@@ -23,7 +24,8 @@ if(isset($btn))
     
     elseif($_SERVER['REQUEST_METHOD'] == 'POST')
     {
-        $logar = LoginController::User_login($user, $password);
+        $Login = new LoginController();
+        $logar = $Login->User_login($user, $password);
 
         if($logar)
         {
