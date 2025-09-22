@@ -13,8 +13,9 @@ if (!isset($_SESSION['user_adm'])) {
     header("Location: /controler_de_estoque/view/loginAdm/login.php");
     die;
 }
+$fornecedor = new FornecedorController();
 
-$dados = FornecedorController::list_forneceController();
+$dados = $fornecedor->list_forneceController();
 
  Feedbacks::feedback_details();
  Feedbacks::feedback_atualizar();

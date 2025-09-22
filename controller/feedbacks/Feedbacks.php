@@ -85,6 +85,14 @@ class Feedbacks
             unset($_SESSION['fields_empty']);
          }
    }
+   public static function feedback_validation_forn_cpf():void  
+   {
+         if(isset($_SESSION['fields_empty']))
+         {
+            echo "<div class='mensagem erro'>".$_SESSION['fields_empty']."</div>";
+            unset($_SESSION['fields_empty']);
+         }
+   }
 
    public static function feedback_validation_login():void 
    {

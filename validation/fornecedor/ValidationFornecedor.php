@@ -16,4 +16,13 @@ class ValidationFornecedor
              return true;
         }
     }
+
+    public static function validation_cpf($cpf)
+    {
+        if($cpf > 11)
+        {
+            ProdutoController::feedback_systm('fields_empty',"Cpf tem que ter no minimo 11 digitos!");
+            return true;
+        }
+    }
 }

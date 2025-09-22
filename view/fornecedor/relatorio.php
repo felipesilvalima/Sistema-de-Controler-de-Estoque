@@ -9,11 +9,12 @@ if(!isset($_SESSION['user_adm']))
     die;
 }
 
-(int)$id = $_REQUEST['id'] ?? 0;
+$id = $_REQUEST['id'] ?? 0;
 
 session_write_close();
+$fornecedor = new FornecedorController();
 
-$relatorio = FornecedorController::get_forneceController($id);
+$relatorio = $fornecedor->get_forneceController((int)$id);
 
 if(!$relatorio)
 {

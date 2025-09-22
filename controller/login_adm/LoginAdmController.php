@@ -10,12 +10,18 @@ require_once __DIR__.'/../../model/login_adm/LoginAdm.php';
 
 class LoginAdmController extends LoginAdm
 {
-     public function User_login($cpf, $password)
+
+    private string $cpf;
+    private string $password;
+
+     public function User_login($cpf, $password): bool
    {     
         try 
         {
+            $this->cpf = $cpf;
+            $this->password = $password;
 
-           $line = LoginAdm::login($cpf); 
+           $line = LoginAdm::login($this->cpf); 
 
            while($line == null)
            {   
@@ -27,7 +33,7 @@ class LoginAdmController extends LoginAdm
            $password_hash = $line->senha;
            $user_id = $line->id;
            
-           $password_verify = password_verify((string)$password, (string)$password_hash); 
+           $password_verify = password_verify((string)$this->password, (string)$password_hash); 
             
             if($password_verify) 
             {

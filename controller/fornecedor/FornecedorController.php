@@ -11,21 +11,37 @@ require_once __DIR__.'/../../controller/produto/ProdutoController.php';
 
 class FornecedorController extends Fornecedor
 {
-    public static function Inserir_fornecedor($fornecedor,$cpf,$tel,$endereco,$user_id)
+    private int $id;
+    private string $fornecedor;
+    private int $cpf;
+    private int $telefone;
+    private string $endereco;
+
+    public function Inserir_fornecedor($fornecedor,$cpf,$tel,$endereco)
     {
         try 
         {
-            $response = Fornecedor::register_fornec($fornecedor,$cpf,$tel,$endereco);
+            $this->fornecedor = $fornecedor;
+            $this->cpf = $cpf;
+            $this->telefone = $tel;
+            $this->endereco = $endereco;
+
+            $response = Fornecedor::register_fornec(
+                $this->fornecedor,
+                $this->cpf,
+                $this->telefone,
+                $this->endereco
+            );
             
             if($response)
             {
-                 http_response_code(201);//recurso inserido com sucesso
+                http_response_code(201);//recurso inserido com sucesso
                 ProdutoController::feedback_systm('forne',"Fornecedor inserido com sucesso");
                 return true;
             }
                 else
                 {
-                     http_response_code(500);//erro interno
+                    http_response_code(500);//erro interno
                     ProdutoController::feedback_systm('forne_error',"Error ao inserir fornecedor");  
                     return false;
                 }
@@ -36,13 +52,15 @@ class FornecedorController extends Fornecedor
             }
     }
 
-    public static function verify_fonecedorController($fornecedor)
+    public function verify_fonecedorController($fornecedor)
     {
         try 
         {
-            $response = Fornecedor::verify_fornecedor($fornecedor);
+            $this->fornecedor = $fornecedor;
+
+            $response = Fornecedor::verify_fornecedor($this->fornecedor);
     
-            while($response)
+            if($response)
             {
                 http_response_code(409);//O recurso já existe, tentativa de duplicação
                 ProdutoController::feedback_systm('forne_inserir',"Esse Fornecedor já foi inserido");
@@ -54,17 +72,19 @@ class FornecedorController extends Fornecedor
         } 
             catch (PDOException $error) 
             {
-               throw new Exception("Error no metodo (Inserir_fornecedor): ".$error->getMessage());
+               throw new Exception("Error no metodo (verify_fonecedorController): ".$error->getMessage());
             }
     }
 
-    public static function verify_cpfController($cpf)
+    public function verify_cpfController($cpf)
     {
+        $this->cpf = $cpf;
+
         try 
         {
-            $response = Fornecedor::verify_cpf($cpf);
-        
-            while($response)
+            $response = Fornecedor::verify_cpf($this->cpf);
+           
+            if($response)
             {
                 http_response_code(409);//O recurso já existe, tentativa de duplicação
                 ProdutoController::feedback_systm('forne_cpf',"Esse Cpf já foi inserido");
@@ -80,7 +100,7 @@ class FornecedorController extends Fornecedor
             }
     }
 
-    public static function list_forneceController()
+    public function list_forneceController()
     {
         try 
         {
@@ -105,11 +125,13 @@ class FornecedorController extends Fornecedor
             }
     }
 
-    public static function get_forneceController($id)
+    public function get_forneceController($id)
     {
         try 
         {
-            $response = Fornecedor::get_fornec($id);
+            $this->id = $id;
+            
+            $response = Fornecedor::get_fornec($this->id);
 
             while(!isset($response->id) || empty($id)) 
             {
@@ -130,11 +152,23 @@ class FornecedorController extends Fornecedor
             }
     }
 
-    public static function update_forneceController($id,$fornecedor,$cpf,$telefone,$edereco)
+    public function update_forneceController($id,$fornecedor,$cpf,$telefone,$endereco)
     {
         try 
         {
-            $response = Fornecedor::update_fornecedor($id,$fornecedor,$cpf,$telefone,$edereco);
+            $this->id = $id;
+            $this->fornecedor = $fornecedor;
+            $this->cpf = $cpf;
+            $this->telefone = $telefone;
+            $this->endereco = $endereco;
+
+            $response = Fornecedor::update_fornecedor(
+                $this->id,
+                $this->fornecedor,
+                $this->cpf,
+                $this->telefone,
+                $this->endereco  
+            );
 
             if($response)
             {
@@ -145,27 +179,38 @@ class FornecedorController extends Fornecedor
         } 
             catch (PDOException $error) 
             {
-               throw new Exception("Error no metodo (update_forneceController): ".$error->getMessage());
+               throw new Exception("Error no metodo (update_forneceController): " . $error->getMessage());
             }
     }
 
-     public static function remover_fornecedor($id,$fornecedor)
+     public function remover_fornecedor($id)
     {
-        $remover = Fornecedor::remover_idFornercedor($id); 
-
-        if($remover) 
+        try
         {
-            http_response_code(204);//Recurso alterado com sucesso.
-            ProdutoController::feedback_systm('remover',"Removido com sucesso");
-            return true; 
+            $this->id = $id;
+
+            $remover = Fornecedor::remover_idFornercedor($this->id); 
+    
+            if($remover) 
+            {
+                http_response_code(204);//Recurso alterado com sucesso.
+                ProdutoController::feedback_systm('remover',"Removido com sucesso");
+                return true; 
+            }
         }
+            catch(PDOException $error)
+            {
+                throw new Exception("Error no metodo (remover_fornecedor): " . $error->getMessage());
+            }
     }
 
-    public static function fornecedores($fornecedor)
+    public function fornecedores($fornecedor)
     {
         try 
-        {  
-            $data = Fornecedor::fornecedor_get($fornecedor); 
+        { 
+            $this->fornecedor = $fornecedor;
+
+            $data = Fornecedor::fornecedor_get($this->fornecedor); 
             
             if($data) 
             {

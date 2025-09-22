@@ -11,12 +11,18 @@ require_once __DIR__.'/../../controller/login_user/LoginController.php';
 
 class LoginController extends Login
 {
-   public function User_login($user, $password)
+    private string $login;
+    private string $password;
+
+
+   public function User_login($user, $password): bool
    {     
         try 
         {
+            $this->login = $user;
+            $this->password = $password;
 
-           $line = Login::login($user); 
+           $line = Login::login($this->login); 
 
            while($line == null)
            {  
@@ -28,7 +34,7 @@ class LoginController extends Login
            $password_hash = $line->password;
            $user_id = $line->id;
            
-           $password_verify = password_verify((string)$password, (string)$password_hash); 
+           $password_verify = password_verify((string)$this->password, (string)$password_hash); 
             
             if($password_verify) 
             {

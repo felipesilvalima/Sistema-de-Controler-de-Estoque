@@ -19,7 +19,7 @@ class LoginAdm extends DB
             
             $line = $stm->fetch(PDO::FETCH_OBJ);
             
-            if($line)
+            if(!empty($line))
             {
                 return $line;
             }

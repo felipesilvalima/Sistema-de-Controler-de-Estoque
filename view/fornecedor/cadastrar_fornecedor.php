@@ -18,41 +18,49 @@ if(!isset($_SESSION['user_adm']))
 
 session_write_close();
 
-$fornecedor = $_REQUEST['fornec'] ?? null;
+$fornecedor_name = $_REQUEST['fornec'] ?? null;
 $cpf = $_REQUEST['cpf'] ?? null;
 $telefone = $_REQUEST['tel'] ?? null;
 $endereco = $_REQUEST['ender'] ?? null;
-$user_id = $_SESSION['user'] ?? null;
 
 if(isset($_REQUEST['btn']))
 {
 
-    $validation_fields = ValidationFornecedor::validation_fornecedor_fields($fornecedor,$cpf,$telefone,$endereco);
+    $validation_fields = ValidationFornecedor::validation_fornecedor_fields((string)$fornecedor_name,(int)$cpf,(int)$telefone,(string)$endereco);
+    $validation_field_cpf = ValidationFornecedor::validation_cpf((int)$cpf);
     
     
     if(!$validation_fields)
     {
-        $verify_fornecedor = FornecedorController::verify_fonecedorController($fornecedor);
-         session_write_close();
-        $verify_fornecedor_cpf = FornecedorController::verify_cpfController($cpf);
+
+        $fornecedor = new FornecedorController();
         
+        $verify_fornecedor = $fornecedor->verify_fonecedorController((string)$fornecedor_name);
+         session_write_close();
+
+        $verify_fornecedor_cpf = $fornecedor->verify_cpfController((int)$cpf);
+
         if($verify_fornecedor)
         {
             Feedbacks::fornecedor_inserir_verify();
         }
-            elseif($verify_fornecedor_cpf)
+            elseif($verify_fornecedor_cpf || $validation_field_cpf)
             {
                Feedbacks::fornecedor_inserir_verify();
+               Feedbacks::feedback_validation_forn_cpf();
             }
     
                 else
                 {
-    
-                    $inserir = FornecedorController::Inserir_fornecedor($fornecedor,$cpf,$telefone,$endereco,$user_id);
+                    $inserir = $fornecedor->Inserir_fornecedor((string)$fornecedor_name,(int)$cpf,(int)$telefone,(string)$endereco);
                     
                     if($inserir)
                     {
                         Feedbacks::fornecedor_inserir();
+                        unset($fornecedor_name);
+                        unset($cpf);
+                        unset($telefone);
+                        unset($endereco);
                     }
                     
                         else

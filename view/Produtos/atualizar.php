@@ -109,9 +109,10 @@ if(isset($_REQUEST['btn']))
 
         <label for="fornecedor">Fornecedor:</label>
         <select name="fornecedor">
-        <?php 
+        <?php
 
-            $datas_fornecedores = FornecedorController::fornecedores($details->fornecedor_id);  //todas as fornecedores
+            $fornecedor = new FornecedorController();
+            $datas_fornecedores = $fornecedor->fornecedores($details->fornecedor_id);  //todas as fornecedores
 
             echo "<option selected disabled value='$details->fornecedor_id'>$details->fornecedor</option>";
         

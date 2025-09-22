@@ -13,10 +13,11 @@ if(!isset($_SESSION['user_adm']))
 }
 session_write_close();
 
-(int)$id = $_REQUEST['id'] ?? 0;
-(string)$fornecedor = $_REQUEST['pd'] ?? null;
+$id = $_REQUEST['id'] ?? 0;
 
-$remover = FornecedorController::remover_fornecedor($id,$fornecedor);
+$fornecedor = new FornecedorController();
+
+$remover = $fornecedor->remover_fornecedor((int)$id);
 
 if($remover)
 {
