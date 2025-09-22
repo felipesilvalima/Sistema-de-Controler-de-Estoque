@@ -194,9 +194,9 @@ class Fornecedor extends DB
 
      try 
      {
-        $sql = "SELECT id,fornecedor FROM fornecedor WHERE id != :fornecedor";
+        $sql = "SELECT id,fornecedor FROM fornecedor WHERE fornecedor != :fornecedor";
         $stm = DB::connect()->prepare($sql);
-        $stm->bindParam(':fornecedor', $fornecedor, PDO::PARAM_INT);
+        $stm->bindParam(':fornecedor', $fornecedor, PDO::PARAM_STR);
         $stm->execute();
         
         $data = $stm->fetchAll(PDO::FETCH_OBJ);

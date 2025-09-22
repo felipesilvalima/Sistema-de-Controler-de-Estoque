@@ -207,10 +207,10 @@ class FornecedorController extends Fornecedor
     public function fornecedores($fornecedor)
     {
         try 
-        { 
+        {
             $this->fornecedor = $fornecedor;
 
-            $data = Fornecedor::fornecedor_get($this->fornecedor); 
+             $data = Fornecedor::fornecedor_get($this->fornecedor); 
             
             if($data) 
             {
