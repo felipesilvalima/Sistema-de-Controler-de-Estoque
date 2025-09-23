@@ -17,15 +17,19 @@ class FornecedorController extends Fornecedor
     private int $telefone;
     private string $endereco;
 
-    public function Inserir_fornecedor($fornecedor,$cpf,$tel,$endereco)
+    public function __construct($fornecedor,$cpf,$tel,$endereco)
+    {
+        $this->fornecedor = $fornecedor;
+        $this->cpf = $cpf;
+        $this->telefone = $tel;
+        $this->endereco = $endereco;
+    }
+
+    public function Inserir_fornecedor()
     {
         try 
         {
-            $this->fornecedor = $fornecedor;
-            $this->cpf = $cpf;
-            $this->telefone = $tel;
-            $this->endereco = $endereco;
-
+    
             $response = Fornecedor::register_fornec(
                 $this->fornecedor,
                 $this->cpf,
@@ -52,13 +56,12 @@ class FornecedorController extends Fornecedor
             }
     }
 
-    public function verify_fonecedorController($fornecedor)
+    public static function verify_fonecedorController($fornecedor)
     {
         try 
         {
-            $this->fornecedor = $fornecedor;
 
-            $response = Fornecedor::verify_fornecedor($this->fornecedor);
+            $response = Fornecedor::verify_fornecedor($fornecedor);
     
             if($response)
             {
@@ -76,13 +79,12 @@ class FornecedorController extends Fornecedor
             }
     }
 
-    public function verify_cpfController($cpf)
+    public static function verify_cpfController($cpf)
     {
-        $this->cpf = $cpf;
 
         try 
         {
-            $response = Fornecedor::verify_cpf($this->cpf);
+            $response = Fornecedor::verify_cpf($cpf);
            
             if($response)
             {
@@ -100,7 +102,7 @@ class FornecedorController extends Fornecedor
             }
     }
 
-    public function list_forneceController()
+    public static function list_forneceController()
     {
         try 
         {
@@ -125,13 +127,12 @@ class FornecedorController extends Fornecedor
             }
     }
 
-    public function get_forneceController($id)
+    public static function get_forneceController($id)
     {
         try 
         {
-            $this->id = $id;
-            
-            $response = Fornecedor::get_fornec($this->id);
+
+            $response = Fornecedor::get_fornec($id);
 
             while(!isset($response->id) || empty($id)) 
             {
@@ -152,18 +153,13 @@ class FornecedorController extends Fornecedor
             }
     }
 
-    public function update_forneceController($id,$fornecedor,$cpf,$telefone,$endereco)
+    public function update_forneceController($id)
     {
         try 
         {
-            $this->id = $id;
-            $this->fornecedor = $fornecedor;
-            $this->cpf = $cpf;
-            $this->telefone = $telefone;
-            $this->endereco = $endereco;
-
+           
             $response = Fornecedor::update_fornecedor(
-                $this->id,
+                $id,
                 $this->fornecedor,
                 $this->cpf,
                 $this->telefone,
@@ -183,13 +179,12 @@ class FornecedorController extends Fornecedor
             }
     }
 
-     public function remover_fornecedor($id)
+    public static function remover_fornecedor($id)
     {
         try
         {
-            $this->id = $id;
 
-            $remover = Fornecedor::remover_idFornercedor($this->id); 
+            $remover = Fornecedor::remover_idFornercedor($id); 
     
             if($remover) 
             {
@@ -204,13 +199,12 @@ class FornecedorController extends Fornecedor
             }
     }
 
-    public function fornecedores($fornecedor)
+    public static function fornecedores($fornecedor)
     {
         try 
         {
-            $this->fornecedor = $fornecedor;
 
-             $data = Fornecedor::fornecedor_get($this->fornecedor); 
+             $data = Fornecedor::fornecedor_get($fornecedor); 
             
             if($data) 
             {

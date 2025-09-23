@@ -118,8 +118,7 @@ if(isset($btn))
         <select name="fornecedor" required>
         <option selected disabled>Adicione um Fornecedor</option>
         <?php
-            $fornecedor = new FornecedorController();
-            $datas_fornecedores = $fornecedor->fornecedores("");
+            $datas_fornecedores = FornecedorController::fornecedores("");
 
             foreach($datas_fornecedores as $data)
             {
