@@ -32,13 +32,11 @@ if(isset($_REQUEST['btn']))
     
     if(!$validation_fields)
     {
-
-        $fornecedor = new FornecedorController();
-        
-        $verify_fornecedor = $fornecedor->verify_fonecedorController((string)$fornecedor_name);
+ 
+        $verify_fornecedor = FornecedorController::verify_fonecedorController((string)$fornecedor_name);
          session_write_close();
 
-        $verify_fornecedor_cpf = $fornecedor->verify_cpfController((int)$cpf);
+        $verify_fornecedor_cpf = FornecedorController::verify_cpfController((int)$cpf);
 
         if($verify_fornecedor)
         {
@@ -52,7 +50,8 @@ if(isset($_REQUEST['btn']))
     
                 else
                 {
-                    $inserir = $fornecedor->Inserir_fornecedor((string)$fornecedor_name,(int)$cpf,(int)$telefone,(string)$endereco);
+                    $fornecedor = new FornecedorController((string)$fornecedor_name,(int)$cpf,(int)$telefone,(string)$endereco);
+                    $inserir = $fornecedor->Inserir_fornecedor();
                     
                     if($inserir)
                     {

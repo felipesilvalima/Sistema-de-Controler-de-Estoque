@@ -12,9 +12,8 @@ if(!isset($_SESSION['user_adm']))
 $id = $_REQUEST['id'] ?? 0;
 
 session_write_close();
-$fornecedor = new FornecedorController();
 
-$relatorio = $fornecedor->get_forneceController((int)$id);
+$relatorio = FornecedorController::get_forneceController((int)$id);
 
 if(!$relatorio)
 {

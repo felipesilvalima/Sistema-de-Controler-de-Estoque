@@ -15,9 +15,7 @@ session_write_close();
 
 $id = $_REQUEST['id'] ?? 0;
 
-$fornecedor = new FornecedorController();
-
-$remover = $fornecedor->remover_fornecedor((int)$id);
+$remover = FornecedorController::remover_fornecedor((int)$id);
 
 if($remover)
 {

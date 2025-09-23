@@ -16,9 +16,9 @@ if(!isset($_SESSION['user_adm']))
 $id = $_REQUEST['id'] ?? 0; 
 
 session_write_close();
-$fornecedor = new FornecedorController();
 
-$details = $fornecedor->get_forneceController((int)$id);
+
+$details = FornecedorController::get_forneceController((int)$id);
 
 if (!$details) 
 {
@@ -42,7 +42,8 @@ if(isset($btn))
 {
    if($_SERVER['REQUEST_METHOD'] == 'POST')
     {
-        $update_date = $fornecedor->update_forneceController((int)$id,(string)$fornecedor_name,(int)$cpf,(int)$telefone,(string)$endereco);
+        $fornecedor = new FornecedorController((string)$fornecedor_name,(int)$cpf,(int)$telefone,(string)$endereco);
+        $update_date = $fornecedor->update_forneceController((int)$id);
         
         if(!$update_date)
         {
