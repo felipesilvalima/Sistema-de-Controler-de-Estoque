@@ -9,8 +9,7 @@ use PDOException;
 require_once __DIR__.'/../../model/categoria/Categoria.php';
 class CategoriaController extends Categoria
 {
-
-    
+   
     public static function categorias($categoria)
     {
         try 

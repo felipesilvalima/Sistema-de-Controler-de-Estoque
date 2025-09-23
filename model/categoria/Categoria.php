@@ -14,7 +14,7 @@ class Categoria extends DB
 
      try 
      {
-        $sql = "SELECT id,categoria FROM categoria WHERE id != :categoria";
+        $sql = "SELECT id,categoria,descricao FROM categoria WHERE id != :categoria";
         $stm = DB::connect()->prepare($sql);
         $stm->bindValue(':categoria',$categoria, PDO::PARAM_INT);
         $stm->execute();
