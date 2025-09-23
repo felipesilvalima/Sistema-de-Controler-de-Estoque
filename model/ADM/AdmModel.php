@@ -65,5 +65,26 @@ class AdmModel extends DB
                 throw new Exception("Error:". $error->getMessage());
             }
     }
+
+    protected static function movimentacao_limpa()
+    {
+        try
+        {
+            $sql = "DELETE FROM movimentacao_estoque";
+            $stm = DB::connect()->prepare($sql);
+            $stm->execute();
+
+            $remove = $stm->rowCount();
+
+            if($remove > 0)
+            {
+                return true;
+            }          
+        }
+            catch(PDOException $error)
+            {
+                throw new Exception("Error:". $error->getMessage());
+            }
+    }
  
 }

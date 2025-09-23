@@ -11,7 +11,7 @@ require_once __DIR__.'/../../model/login_adm/LoginAdm.php';
 class LoginAdmController extends LoginAdm
 {
 
-    private string $cpf;
+    private int $cpf;
     private string $password;
 
     public function __construct($cpf, $password)

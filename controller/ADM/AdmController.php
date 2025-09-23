@@ -7,6 +7,7 @@ use model\AdmModel as AdmModel;
 use PDOException;
 
 require_once __DIR__.'/../../model/ADM/AdmModel.php';
+require_once __DIR__.'/../../controller/produto/ProdutoController.php';
 
 class AdmController extends AdmModel
 {
@@ -54,6 +55,28 @@ class AdmController extends AdmModel
                 ProdutoController::feedback_systm('Encontrado',"Produto não encontrado!"); 
                 return false; 
             }
+
+        } 
+            catch (PDOException $error) 
+            {
+                throw new Exception("Error:".$error->getMessage());
+            }
+    }
+
+    public static function movimentacao_remove()
+    {
+        try 
+        {
+          $remover =  AdmModel::movimentacao_limpa(); 
+            
+          if($remover)  
+          {
+            http_response_code(200);
+            ProdutoController::feedback_systm('limpa',"Limpeza feita com sucesso");
+            return true; 
+          }
+
+           return false;
 
         } 
             catch (PDOException $error) 

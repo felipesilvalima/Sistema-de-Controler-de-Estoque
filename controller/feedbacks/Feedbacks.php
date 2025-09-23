@@ -112,6 +112,15 @@ class Feedbacks
          }
    }
 
+   public static function limpa_fornec():void 
+   {
+         if(isset($_SESSION['limpa']))
+         {
+            echo "<div class='mensagem erro'>".$_SESSION['limpa']."</div>";
+            unset($_SESSION['limpa']);
+         }
+   }
+
    public static function fornecedor_inserir():void 
    {
          if(isset($_SESSION['forne']))

@@ -37,6 +37,7 @@ if(!isset($_SESSION['user_adm']))
         <input type="search" name="pesquisar" placeholder="Buscar Movimentações...">
         <button type="submit" class="btn search">Procurar</button>
         <button type="submit" class="btn all">Ver todos as Movimentações</button>
+        <a href="remove.php">Limpar tudo</a>
     </form>
     </div><br>
 
@@ -47,6 +48,7 @@ if(!isset($_SESSION['user_adm']))
           Feedbacks::feedback_remover(); 
           Feedbacks::feedback_atualizar();
           Feedbacks::feedback_details();
+          Feedbacks::limpa_fornec();
           
                 session_write_close();
                 
