@@ -18,9 +18,8 @@ if(!isset($_SESSION['user']))
 }
 
 session_write_close();
-$produto = new ProdutoController();
 $id = $_REQUEST['id'] ?? 0;
-$details =  $produto->detalhes((int)$id);
+$details =  ProdutoController::detalhes((int)$id);
 
 
 if (empty($details))
@@ -50,8 +49,14 @@ if(isset($_REQUEST['btn']))
 {
     if($_SERVER['REQUEST_METHOD'] == 'POST')
     {
-       
-        $update_date = $produto->Atulaizar((int)$id,(string)$produto_name,(float)$preco,(int)$quantidade,(int)$quantidade_min,(string)$descricao,(string)$unidade_medida, (int)$categoria,(int)$fornecedor,(int)$user_id);
+        $produto = new ProdutoController((string)$produto_name,(float)$preco,(int)$quantidade);
+        $produto->setQuantidade_min((int)$quantidade_min);
+        $produto->setDescricao((string)$descricao);
+        $produto->setUnidade_medida((string)$unidade_medida);
+        $produto->setCategoria_id((int)$categoria);
+        $produto->setFornecedor_id((int)$fornecedor);
+        $produto->setUser_id((int)$user_id);
+        $update_date = $produto->Atulaizar((int)$id);
         
         if(!$update_date)
         {

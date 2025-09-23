@@ -14,22 +14,28 @@ class ProdutoController extends Produto
 {
     private int $id;
     private string $produto_name;
-    private string $descricao;
     private float $preco;
     private int $quantidade_max;
     private int $quantidade_min;
+    private string $descricao;
     private string $unidade_medida;
     private int $categoria_id;
     private int $fornecedor_id;
     private int $user_id;
 
+    public function __construct($produto,$preco,$quantidade)
+    {
+        $this->produto_name = $produto;
+        $this->preco = $preco;
+        $this->quantidade_max = $quantidade;
+    }
 
-    public function index($seach): array
+    public static function index($seach): array
     {
         try 
         {
-          $this->produto_name = $seach;
-          $datas =  Produto::get_date($this->produto_name); 
+
+          $datas =  Produto::get_date($seach); 
             
           if(!empty($datas))  
           {
@@ -51,14 +57,13 @@ class ProdutoController extends Produto
             }
     }
 
-    public function detalhes($id_produto): object
+    public static function detalhes($id_produto): object
     {
         try
         {
-            $this->id = $id_produto;
-            $line = Produto::get_id($this->id); 
+            $line = Produto::get_id($id_produto); 
             
-            if (!isset($line->id) || empty($this->id)) 
+            if (!isset($line->id) || empty($id_produto)) 
             {
                  http_response_code(404);//O recurso solicitado não existe
                 ProdutoController::feedback_systm('existe',"Produto não encontrado!"); 
@@ -76,23 +81,13 @@ class ProdutoController extends Produto
     }
 
 
-    public function Atulaizar($id,$produto_name,$preco,$quantidade,$quantidade_min,$descricao,$unidade_medida, $categoria,$fornecedor,$user_id)
+    public function Atulaizar($id): bool
     {
         try 
         {
-            $this->id = $id;
-            $this->produto_name = $produto_name;
-            $this->preco = $preco;
-            $this->quantidade_max = $quantidade;
-            $this->quantidade_min = $quantidade_min;
-            $this->descricao = $descricao;
-            $this->unidade_medida = $unidade_medida;
-            $this->categoria_id = $categoria;
-            $this->fornecedor_id = $fornecedor;
-            $this->user_id = $user_id;
            
             $update = Produto::update_date(
-            $this->id,
+            $id,
             $this->produto_name,
             $this->preco,
             $this->quantidade_max,
@@ -101,22 +96,24 @@ class ProdutoController extends Produto
             $this->unidade_medida,
             $this->categoria_id,
             $this->fornecedor_id,
-            $this->fornecedor_id 
+            $this->user_id
             ); 
 
                 if($update)
                 {
             
                     ProdutoController::feedback_systm('update_true',"Atulizado com sucesso");
+
                     MovimentacaoController::update_product(
-                     $this->produto_name,
-                     $this->quantidade_max,
-                     $this->id,
-                     $this->user_id
+                        $this->produto_name,
+                        $this->quantidade_max,
+                        $id,
+                        $this->user_id
                     ); 
                     return true; 
                 }
               
+                return false; 
  
         } 
             catch (PDOException $error) 
@@ -125,21 +122,11 @@ class ProdutoController extends Produto
             }
     }
 
-    public function inseir($produto_name, $preco_pd, $quant_pd, $quantidade_min,$descricao,$unidade_medida,$categoria,$fornecedor,$user)
+    public function inseir()
     {
 
         try 
         {
-
-            $this->produto_name = $produto_name;
-            $this->preco = $preco_pd;
-            $this->quantidade_max = $quant_pd;
-            $this->quantidade_min = $quantidade_min;
-            $this->descricao = $descricao;
-            $this->unidade_medida = $unidade_medida;
-            $this->categoria_id = $categoria;
-            $this->fornecedor_id = $fornecedor;
-            $this->user_id = $user;
             
             $line = Produto::verificarProduto($this->produto_name);
             
@@ -183,22 +170,20 @@ class ProdutoController extends Produto
             }
     }
 
-    public function remover_id($id,$produto,$user_id)
+    public static function remover_id($id,$produto,$user_id)
     {
-        $this->id = $id;
-        $this->produto_name = $produto;
-        $this->user_id = $user_id;
-
-        $remover = Produto::remover($this->id); 
+    
+        $remover = Produto::remover($id); 
 
         if($remover) 
         {
             
             ProdutoController::feedback_systm('remover',"Removido com sucesso");
+
             MovimentacaoController::remocao(
-            $this->id,
-            $this->produto_name,
-            $this->user_id
+            $id,
+            $produto,
+            $user_id
             );
             return true; 
         }
@@ -208,5 +193,76 @@ class ProdutoController extends Produto
     {
          session_start(); 
          $_SESSION[$name_session] =  $messagem; 
+    }
+
+     
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    public function setId($id)
+    {
+        $this->id = $id;
+    }
+
+    public function getQuantidade_min()
+    {
+        return $this->quantidade_min;
+    }
+ 
+    public function setQuantidade_min($quantidade_min)
+    {
+        $this->quantidade_min = $quantidade_min;
+    }
+
+    public function getDescricao()
+    {
+        return $this->descricao;
+    }
+ 
+    public function setDescricao($descricao)
+    {
+        $this->descricao = $descricao;
+    }
+
+    public function getUnidade_medida()
+    {
+        return $this->unidade_medida;
+    }
+
+    public function setUnidade_medida($unidade_medida)
+    {
+        $this->unidade_medida = $unidade_medida;
+    }
+
+    public function getCategoria_id()
+    {
+        return $this->categoria_id;
+    }
+
+    public function setCategoria_id($categoria_id)
+    {
+        $this->categoria_id = $categoria_id;
+    }
+
+    public function getFornecedor_id()
+    {
+        return $this->fornecedor_id;
+    }
+ 
+    public function setFornecedor_id($fornecedor_id)
+    {
+        $this->fornecedor_id = $fornecedor_id;
+    }
+ 
+    public function getUser_id()
+    {
+        return $this->user_id;
+    }
+
+    public function setUser_id($user_id)
+    {
+        $this->user_id = $user_id;
     }
 }

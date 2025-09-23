@@ -10,7 +10,7 @@ require_once __DIR__.'/../../model/ADM/AdmModel.php';
 
 class AdmController extends AdmModel
 {
-     public static function index($search)
+    public static function index($search)
     {
         try 
         {
@@ -36,7 +36,7 @@ class AdmController extends AdmModel
             }
     }
 
-     public static function movimentacao($search)
+    public static function movimentacao($search)
     {
         try 
         {

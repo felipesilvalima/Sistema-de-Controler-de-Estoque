@@ -24,8 +24,8 @@ if(isset($btn))
     
     elseif($_SERVER['REQUEST_METHOD'] == 'POST')
     {
-        $Login = new LoginController();
-        $logar = $Login->User_login($user, $password);
+        $Login = new LoginController((string)$user, (string)$password);
+        $logar = $Login->User_login();
 
         if($logar)
         {

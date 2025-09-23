@@ -16,8 +16,7 @@ if(!isset($_SESSION['user']))
 }
 
  $id_produto = $_REQUEST['id'] ?? 0;
- $produto = new ProdutoController();
- $date = $produto->detalhes((int)$id_produto);
+ $date = ProdutoController::detalhes((int)$id_produto);
  
     if(empty($date))
     {

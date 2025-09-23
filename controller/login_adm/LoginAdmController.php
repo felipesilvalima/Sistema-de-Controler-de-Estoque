@@ -14,12 +14,16 @@ class LoginAdmController extends LoginAdm
     private string $cpf;
     private string $password;
 
-     public function User_login($cpf, $password): bool
+    public function __construct($cpf, $password)
+    {
+       $this->cpf = $cpf; 
+       $this->password = $password;  
+    }
+
+     public function User_login(): bool
    {     
         try 
         {
-            $this->cpf = $cpf;
-            $this->password = $password;
 
            $line = LoginAdm::login($this->cpf); 
 

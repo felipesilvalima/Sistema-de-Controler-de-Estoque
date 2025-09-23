@@ -15,14 +15,21 @@ class Controler_estoqueController extends Controler_estoque
 {
     private int $id;
     private string $produto_name;
-    private string $descricao;
     private float $preco;
     private int $quantidade_max;
+    private string $descricao;
     private int $quantidade_min;
     private string $unidade_medida;
     private int $categoria_id;
     private int $fornecedor_id;
     private int $user_id;
+
+    public function __construct($produto,$preco,$quantidade)
+    {
+        $this->produto_name = $produto;
+        $this->preco = $preco;
+        $this->quantidade_max = $quantidade;
+    }
 
    public static function Alert_controll(): bool
    {
@@ -65,28 +72,17 @@ class Controler_estoqueController extends Controler_estoque
    }
 
 
-    public function Entrada_estoque($id,$produto,$preco,$quantidade,$quantidade_min,$descricao,$unidade_medida,$categoria,$fornecedor, $user_id)
+    public function Entrada_estoque($id)
     {
         try 
         {
-            $this->id = $id;
-            $this->produto_name = $produto;
-            $this->preco = $preco;
-            $this->quantidade_max = $quantidade;
-            $this->quantidade_min = $quantidade_min;
-            $this->descricao = $descricao;
-            $this->unidade_medida = $unidade_medida;
-            $this->categoria_id = $categoria;
-            $this->fornecedor_id = $fornecedor;
-            $this->user_id = $user_id;
             
-            $produtoController = new ProdutoController();
-            $quantidade_max = $produtoController->detalhes($id);
+            $quantidade_max = ProdutoController::detalhes($id);
             $quantidade_entrada = $this->quantidade_max;
             $this->quantidade_max += $quantidade_max->quantidade_max;
            
             $entrada = Controler_estoque::update_date_estoque(
-                $this->id,
+                $id,
                 $this->produto_name,
                 $this->preco,
                 $this->quantidade_max,
@@ -104,7 +100,7 @@ class Controler_estoqueController extends Controler_estoque
                     MovimentacaoController::entrada(
                     $this->produto_name,
                     $quantidade_entrada,
-                    $this->id,
+                    $id,
                     $this->user_id
                 );  
                     return true; 
@@ -118,24 +114,12 @@ class Controler_estoqueController extends Controler_estoque
             }
     }
 
-    public function Saida_estoque($id,$produto,$preco,$quantidade,$quantidade_min,$descricao,$unidade_medida,$categoria,$fornecedor, $user_id)
+    public function Saida_estoque($id)
     {
         try 
         {
           
-            $this->id = $id;
-            $this->produto_name = $produto;
-            $this->preco = $preco;
-            $this->quantidade_max = $quantidade;
-            $this->quantidade_min = $quantidade_min;
-            $this->descricao = $descricao;
-            $this->unidade_medida = $unidade_medida;
-            $this->categoria_id = $categoria;
-            $this->fornecedor_id = $fornecedor;
-            $this->user_id = $user_id;
-
-            $produtoController = new ProdutoController();
-            $quantidade_max = $produtoController->detalhes($id);
+            $quantidade_max = ProdutoController::detalhes($id);
             $quantidade_saida = $this->quantidade_max;
 
             $this->quantidade_max = $quantidade_max->quantidade_max - $quantidade_saida; 
@@ -146,7 +130,7 @@ class Controler_estoqueController extends Controler_estoque
             }
            
             $entrada = Controler_estoque::update_date_estoque(
-                $this->id,
+                $id,
                 $this->produto_name,
                 $this->preco,
                 $this->quantidade_max,
@@ -164,7 +148,7 @@ class Controler_estoqueController extends Controler_estoque
                     MovimentacaoController::saida(
                     $this->produto_name,
                     $quantidade_saida,
-                    $this->id,
+                    $id,
                     $this->user_id
                 ); 
                     return true; 
@@ -176,5 +160,75 @@ class Controler_estoqueController extends Controler_estoque
             {
               throw new Exception("Error:".$error->getMessage());      
             }
+    }
+
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    public function setId($id)
+    {
+        $this->id = $id;
+    }
+
+    public function getDescricao()
+    {
+        return $this->descricao;
+    }
+
+    public function setDescricao($descricao)
+    {
+        $this->descricao = $descricao;
+    }
+
+    public function getQuantidade_min()
+    {
+        return $this->quantidade_min;
+    }
+
+    public function setQuantidade_min($quantidade_min)
+    {
+        $this->quantidade_min = $quantidade_min;
+    }
+
+    public function getUnidade_medida()
+    {
+        return $this->unidade_medida;
+    }
+
+    public function setUnidade_medida($unidade_medida)
+    {
+        $this->unidade_medida = $unidade_medida;
+    }
+
+    public function getCategoria_id()
+    {
+        return $this->categoria_id;
+    }
+
+    public function setCategoria_id($categoria_id)
+    {
+        $this->categoria_id = $categoria_id;
+    }
+
+    public function getFornecedor_id()
+    {
+        return $this->fornecedor_id;
+    }
+
+    public function setFornecedor_id($fornecedor_id)
+    {
+        $this->fornecedor_id = $fornecedor_id;
+    }
+
+    public function getUser_id()
+    {
+        return $this->user_id;
+    }
+
+    public function setUser_id($user_id)
+    {
+        $this->user_id = $user_id;
     }
 }

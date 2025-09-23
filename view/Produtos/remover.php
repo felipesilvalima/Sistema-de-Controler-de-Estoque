@@ -17,8 +17,8 @@ $id = $_REQUEST['id'] ?? 0;
 $produto_name = $_REQUEST['pd'] ?? null;
 $user_id =  $_SESSION['user'] ?? null;
 
-$produto = new ProdutoController();
-$remover = $produto->remover_id((int)$id,(string)$produto_name,(int)$user_id);
+
+$remover = ProdutoController::remover_id((int)$id,(string)$produto_name,(int)$user_id);
 
 if($remover)
 {

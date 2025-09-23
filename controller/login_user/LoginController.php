@@ -14,13 +14,16 @@ class LoginController extends Login
     private string $login;
     private string $password;
 
+    public function __construct($login, $password)
+    {
+       $this->login = $login; 
+       $this->password = $password; 
+    }
 
-   public function User_login($user, $password): bool
+   public function User_login(): bool
    {     
         try 
         {
-            $this->login = $user;
-            $this->password = $password;
 
            $line = Login::login($this->login); 
 

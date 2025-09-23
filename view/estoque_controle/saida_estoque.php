@@ -18,9 +18,8 @@ if(!isset($_SESSION['user']))
 }
 
 session_write_close();
-(int)$id = $_REQUEST['id'] ?? 0;
-$produtoController = new ProdutoController();
-$details =  $produtoController->detalhes((int)$id);
+$id = $_REQUEST['id'] ?? 0;
+$details =  ProdutoController::detalhes((int)$id);
 
 $btn = $_REQUEST['btn'] ?? null;
 $produto = $_REQUEST['pd']  ?? $details->produto;
@@ -51,9 +50,14 @@ if(isset($btn))
 
     if($_SERVER['REQUEST_METHOD'] == 'POST')
     {
-        $estoque = new Controler_estoqueController();
-
-        $update_date = $estoque->Saida_estoque((int)$id,(string)$produto,(float)$preco,(int)$quantidade,(int)$quantidade_min,(string)$descricao,(string)$unidade_medida,(int)$categoria,(int)$fornecedor, (int)$user_id);
+        $Estoque = new Controler_estoqueController((string)$produto,(float)$preco,(int)$quantidade);
+        $Estoque->setQuantidade_min((int)$quantidade_min);
+        $Estoque->setDescricao((string)$descricao);
+        $Estoque->setUnidade_medida((string)$unidade_medida);
+        $Estoque->setCategoria_id((int)$categoria);
+        $Estoque->setFornecedor_id((int)$fornecedor);
+        $Estoque->setUser_id((int)$user_id);
+        $update_date = $Estoque->Saida_estoque((int)$id);
         
         if(!$update_date)
         {

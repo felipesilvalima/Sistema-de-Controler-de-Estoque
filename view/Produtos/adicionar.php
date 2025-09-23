@@ -25,16 +25,17 @@ if(!isset($_SESSION['user']))
     die;
 }
 
+ 
+
 $btn = $_REQUEST['btn'] ?? null;
 $produto_name = $_REQUEST['pd']  ?? null;
-$descricao = $_REQUEST['descricao']  ?? null;
 $preco = $_REQUEST['pc']  ?? null;
 $quantidade = $_REQUEST['qt']  ?? 0;
+$descricao = $_REQUEST['descricao']  ?? null;
 $quantidade_min = $_REQUEST['qt_min']  ?? 0;
 $unidade_medida = $_REQUEST['unidade_med']  ?? null;
 $categoria = $_REQUEST['categoria']  ?? null;
 $fornecedor = $_REQUEST['fornecedor']  ?? null;
-
 $user = $_SESSION['user'];
 
 if(isset($btn))
@@ -51,9 +52,14 @@ if(isset($btn))
 
             if($_SERVER['REQUEST_METHOD'] == 'POST')
             {
-                $produto = new ProdutoController();
-
-                $inseir = $produto->inseir((string)$produto_name,(float)$preco,(int)$quantidade,(int)$quantidade_min,(string)$descricao,(string)$unidade_medida,(int)$categoria,(int)$fornecedor,(int)$user);
+                $produto = new ProdutoController((string)$produto_name,(float)$preco,(int)$quantidade);
+                $produto->setDescricao((string)$descricao);
+                $produto->setQuantidade_min((int)$quantidade_min);
+                $produto->setUnidade_medida((string)$unidade_medida);
+                $produto->setCategoria_id((int)$categoria);
+                $produto->setFornecedor_id((int)$fornecedor);
+                $produto->setUser_id((int)$user);
+                $inseir = $produto->inseir();
     
                 if($inseir)
                 {

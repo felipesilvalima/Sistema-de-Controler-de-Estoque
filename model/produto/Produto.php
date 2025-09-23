@@ -20,9 +20,8 @@ class Produto extends DB
             $stm->execute();
 
             $dates = $stm->fetchAll(PDO::FETCH_OBJ);
-            $datas_total = $stm->rowCount();
 
-            if($datas_total > 0)
+            if(!empty($dates))
             {
                 return $dates;
             }

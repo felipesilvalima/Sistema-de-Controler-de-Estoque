@@ -30,8 +30,8 @@ if(isset($btn))
     
     elseif($_SERVER['REQUEST_METHOD'] == 'POST')
     {
-        $Login = new LoginAdmController();
-        $logar = $Login->User_login($cpf, $password);
+        $Login = new LoginAdmController((int)$cpf, (string)$password);
+        $logar = $Login->User_login();
        
         if($logar)
         {
