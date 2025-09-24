@@ -23,11 +23,17 @@ class ProdutoController extends Produto
     private int $fornecedor_id;
     private int $user_id;
 
-    public function __construct($produto,$preco,$quantidade)
+    public function __construct(array $dados)
     {
-        $this->produto_name = $produto;
-        $this->preco = $preco;
-        $this->quantidade_max = $quantidade;
+        $this->produto_name = $dados[''];
+        $this->preco = $dados[''];
+        $this->quantidade_max = $dados[''];
+        $this->quantidade_min = $dados[''];
+        $this->descricao = $dados[''];
+        $this->unidade_medida = $dados[''];
+        $this->categoria_id = $dados[''];
+        $this->fornecedor_id = $dados[''];
+        $this->user_id = $dados[''];
     }
 
     public static function index($seach): array
@@ -69,9 +75,12 @@ class ProdutoController extends Produto
                 ProdutoController::feedback_systm('existe',"Produto não encontrado!"); 
                 return $line;
             }
+                else 
+                {
+                    http_response_code(200);//requisição foi processada com sucesso
+                    return $line; 
+                }
 
-              http_response_code(200);//requisição foi processada com sucesso
-              return $line; 
         }
             catch(PDOException $error)
             {

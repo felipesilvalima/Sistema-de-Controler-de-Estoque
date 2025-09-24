@@ -43,6 +43,10 @@ if(isset($btn))
     session_write_close();
     $validation_fields = ValidationProduto::validation_inserir_fields($produto_name,$preco,$quantidade,$quantidade_min,$descricao,$unidade_medida,$categoria,$fornecedor,$user);
 
+    $dados = [
+
+    ];
+
     if($validation_fields)
     {
        Feedbacks::feedback_validation_inserir();
@@ -52,13 +56,9 @@ if(isset($btn))
 
             if($_SERVER['REQUEST_METHOD'] == 'POST')
             {
-                $produto = new ProdutoController((string)$produto_name,(float)$preco,(int)$quantidade);
-                $produto->setDescricao((string)$descricao);
-                $produto->setQuantidade_min((int)$quantidade_min);
-                $produto->setUnidade_medida((string)$unidade_medida);
-                $produto->setCategoria_id((int)$categoria);
-                $produto->setFornecedor_id((int)$fornecedor);
-                $produto->setUser_id((int)$user);
+                var_dump($dados);
+                die;
+                $produto = new ProdutoController($dados);
                 $inseir = $produto->inseir();
     
                 if($inseir)

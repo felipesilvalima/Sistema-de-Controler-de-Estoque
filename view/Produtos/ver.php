@@ -17,12 +17,6 @@ if(!isset($_SESSION['user']))
 
  $id_produto = $_REQUEST['id'] ?? 0;
  $date = ProdutoController::detalhes((int)$id_produto);
- 
-    if(empty($date))
-    {
-        header("Location: index.php");
-        die;  
-    }
 
       echo "<div class='detalhes-produto'>
         <h1>Relátorio do Produto</h1>
