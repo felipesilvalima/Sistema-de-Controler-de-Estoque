@@ -43,13 +43,13 @@ class Controler_estoque extends DB
         try 
         {
 
-            $sql = "UPDATE produtos SET produto=:pd, preco=:pc, quantidade_max=:qt, quantidade_min=:qt_min, descricao=:desc, unidade_medida=:um, categoria_id=:cat, fornecedor_id=:forn WHERE id = :id";
+            $sql = "UPDATE produtos SET produto=:pd, preco=:pc, quantidade_max=:qt, quantidade_min=:qt_min, descricao=:descr, unidade_medida=:um, categoria_id=:cat, fornecedor_id=:forn WHERE id = :id";
             $stm = DB::connect()->prepare($sql);
             $stm->bindParam(':id',$id, PDO::PARAM_INT);
             $stm->bindParam(':pd',$pd, PDO::PARAM_STR);
             $stm->bindParam(':pc',$pc, PDO::PARAM_STR);
             $stm->bindParam(':qt',$qt, PDO::PARAM_INT);
-            $stm->bindParam(':desc',$des, PDO::PARAM_STR);
+            $stm->bindParam(':descr',$des, PDO::PARAM_STR);
             $stm->bindParam(':um',$um, PDO::PARAM_STR);
             $stm->bindParam(':cat',$cat, PDO::PARAM_INT);
             $stm->bindParam(':forn',$for, PDO::PARAM_INT);

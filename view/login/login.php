@@ -27,15 +27,7 @@ if(isset($btn))
         $Login = new LoginController((string)$user, (string)$password);
         $logar = $Login->User_login();
 
-        if($logar)
-        {
-           header("Location: /controler_de_estoque/view/Produtos/index.php");
-           die;
-        }
-            else
-            {
-               Feedbacks::feedback_login();
-            }
+         Feedbacks::feedback_login();
     }
 
 }

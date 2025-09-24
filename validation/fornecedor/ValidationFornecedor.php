@@ -8,9 +8,9 @@ require_once __DIR__.'/../../controller/produto/ProdutoController.php';
 
 class ValidationFornecedor
 {
-    public static function validation_fornecedor_fields($fornecedor,$cpf,$telefone,$endereco)
+    public static function validation_fornecedor_fields(array $dados)
     {
-        if(empty($fornecedor) || empty($cpf) || empty($telefone) || empty($endereco))
+        if(empty($dados['fornecedor']) || empty($dados['cpf']) || empty($dados['telefone']) || empty($dados['endereco']))
         {
             ProdutoController::feedback_systm('fields_empty',"Preencher todos os campos vazios!");
              return true;

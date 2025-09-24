@@ -24,11 +24,16 @@ class Controler_estoqueController extends Controler_estoque
     private int $fornecedor_id;
     private int $user_id;
 
-    public function __construct($produto,$preco,$quantidade)
+    public function __construct(array $dados)
     {
-        $this->produto_name = $produto;
-        $this->preco = $preco;
-        $this->quantidade_max = $quantidade;
+        $this->produto_name = $dados['produto'];
+        $this->preco = $dados['preco'];
+        $this->quantidade_max = $dados['quantidade'];
+        $this->quantidade_min = $dados['quantidade_min'];
+        $this->descricao = $dados['descricao'];
+        $this->unidade_medida = $dados['unidade_med'];
+        $this->categoria_id = $dados['categoria'];
+        $this->fornecedor_id = $dados['fornecedor'];
     }
 
    public static function Alert_controll(): bool
@@ -72,12 +77,19 @@ class Controler_estoqueController extends Controler_estoque
    }
 
 
-    public function Entrada_estoque($id)
+    public function Entrada_estoque($id,$user_id)
     {
         try 
         {
             
             $quantidade_max = ProdutoController::detalhes($id);
+           
+            if (!$quantidade_max) 
+            {
+                header("Location: /controler_de_estoque/view/Produtos/index.php");
+                die;
+            }
+
             $quantidade_entrada = $this->quantidade_max;
             $this->quantidade_max += $quantidade_max->quantidade_max;
            
@@ -91,7 +103,7 @@ class Controler_estoqueController extends Controler_estoque
                 $this->unidade_medida,
                 $this->categoria_id,
                 $this->fornecedor_id,
-                $this->user_id
+                $user_id
             ); 
 
                 if($entrada)
@@ -101,12 +113,15 @@ class Controler_estoqueController extends Controler_estoque
                     $this->produto_name,
                     $quantidade_entrada,
                     $id,
-                    $this->user_id
-                );  
-                    return true; 
+                    $user_id
+                    );
+                    header("Location: /controler_de_estoque/view/Produtos/index.php");
+                    die;  
                 }
-                
- 
+                    else 
+                    {
+                        ProdutoController::feedback_systm('update_false'," Error ao inserir Quantidade");
+                    } 
         } 
             catch (PDOException $error) 
             {
@@ -114,12 +129,19 @@ class Controler_estoqueController extends Controler_estoque
             }
     }
 
-    public function Saida_estoque($id)
+    public function Saida_estoque($id,$user_id)
     {
         try 
         {
           
             $quantidade_max = ProdutoController::detalhes($id);
+
+            if (!$quantidade_max) 
+            {
+                header("Location: /controler_de_estoque/view/Produtos/index.php");
+                die;
+            }
+
             $quantidade_saida = $this->quantidade_max;
 
             $this->quantidade_max = $quantidade_max->quantidade_max - $quantidade_saida; 
@@ -149,11 +171,16 @@ class Controler_estoqueController extends Controler_estoque
                     $this->produto_name,
                     $quantidade_saida,
                     $id,
-                    $this->user_id
-                ); 
-                    return true; 
-                }
+                    $user_id
+                    );
+                    header("Location: /controler_de_estoque/view/Produtos/index.php");
+                    die; 
                 
+                }
+                    else 
+                    {
+                        ProdutoController::feedback_systm('update_false'," Error ao remover Quantidade");
+                    }      
  
         } 
             catch (PDOException $error) 
@@ -162,73 +189,4 @@ class Controler_estoqueController extends Controler_estoque
             }
     }
 
-    public function getId()
-    {
-        return $this->id;
-    }
-
-    public function setId($id)
-    {
-        $this->id = $id;
-    }
-
-    public function getDescricao()
-    {
-        return $this->descricao;
-    }
-
-    public function setDescricao($descricao)
-    {
-        $this->descricao = $descricao;
-    }
-
-    public function getQuantidade_min()
-    {
-        return $this->quantidade_min;
-    }
-
-    public function setQuantidade_min($quantidade_min)
-    {
-        $this->quantidade_min = $quantidade_min;
-    }
-
-    public function getUnidade_medida()
-    {
-        return $this->unidade_medida;
-    }
-
-    public function setUnidade_medida($unidade_medida)
-    {
-        $this->unidade_medida = $unidade_medida;
-    }
-
-    public function getCategoria_id()
-    {
-        return $this->categoria_id;
-    }
-
-    public function setCategoria_id($categoria_id)
-    {
-        $this->categoria_id = $categoria_id;
-    }
-
-    public function getFornecedor_id()
-    {
-        return $this->fornecedor_id;
-    }
-
-    public function setFornecedor_id($fornecedor_id)
-    {
-        $this->fornecedor_id = $fornecedor_id;
-    }
-
-    public function getUser_id()
-    {
-        return $this->user_id;
-    }
-
-    public function setUser_id($user_id)
-    {
-        $this->user_id = $user_id;
-    }
 }

@@ -20,38 +20,41 @@ class LoginController extends Login
        $this->password = $password; 
     }
 
-   public function User_login(): bool
+   public function User_login()
    {     
         try 
         {
 
            $line = Login::login($this->login); 
 
-           while($line == null)
+           if($line == null)
            {  
                 http_response_code(404); //O recurso solicitado não existe 
                ProdutoController::feedback_systm('user_invalido',"Usuário não existe");
                return false; 
            }
-
-           $password_hash = $line->password;
-           $user_id = $line->id;
-           
-           $password_verify = password_verify((string)$this->password, (string)$password_hash); 
-            
-            if($password_verify) 
-            {
-                http_response_code(200); //requisição foi processada com sucesso
-                ProdutoController::feedback_systm('autenticado',"Usuário logado com sucesso"); 
-                $_SESSION['user'] = $user_id; 
-                return true;  
-            }
-                else 
+                else
                 {
-                    http_response_code(401); //error de Auteticação
-                    ProdutoController::feedback_systm('user_invalido',"Usuário inválido"); 
-                    return false; 
+                    $password_hash = $line->password;
+                    $user_id = $line->id;
+                    
+                    $password_verify = password_verify((string)$this->password, (string)$password_hash); 
+                     
+                     if($password_verify) 
+                     {
+                         http_response_code(200); //requisição foi processada com sucesso
+                         ProdutoController::feedback_systm('autenticado',"Usuário logado com sucesso"); 
+                         $_SESSION['user'] = $user_id; 
+                         header("Location: /controler_de_estoque/view/Produtos/index.php");
+                         die;  
+                     }
+                         else 
+                         {
+                             http_response_code(401); //error de Auteticação
+                             ProdutoController::feedback_systm('user_invalido',"Usuário inválido");  
+                         }
                 }
+
         } 
 
         catch (PDOException $error) 

@@ -15,13 +15,6 @@ session_write_close();
 
 $relatorio = FornecedorController::get_forneceController((int)$id);
 
-if(!$relatorio)
-{
-    header("Location: lista_de_fornecedor.php");
-    die;
-}
-    else
-    {
         echo "<div class='detalhes-produto'>
         <h1>Relátorio do Fornecedor</h1>
         <p><strong>ID:</strong> ". $relatorio->id ."</p>
@@ -34,4 +27,4 @@ if(!$relatorio)
         </details> <br>
         <a href='lista_de_fornecedor.php' class='btn voltar'>Voltar</a>
       </div>";
-    }
+    

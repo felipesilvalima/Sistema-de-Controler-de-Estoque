@@ -17,11 +17,5 @@ $id = $_REQUEST['id'] ?? 0;
 $produto_name = $_REQUEST['pd'] ?? null;
 $user_id =  $_SESSION['user'] ?? null;
 
-
 $remover = ProdutoController::remover_id((int)$id,(string)$produto_name,(int)$user_id);
 
-if($remover)
-{
-    header("Location: index.php");
-    die;
-}

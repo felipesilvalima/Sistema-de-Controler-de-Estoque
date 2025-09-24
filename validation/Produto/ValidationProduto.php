@@ -9,9 +9,9 @@ class ValidationProduto
 {
     
 
-    public static function validation_inserir_fields($produto,$preco,$quantidade,$quantidade_min,$descrição,$unidade_medida,$categoria,$fornecedor,$user)
+    public static function validation_inserir_fields(array $dados)
     {
-        if(empty($produto) || empty($preco) || empty($quantidade) || empty($quantidade_min) || empty($descrição) || empty($unidade_medida)  || empty($categoria)  || empty($fornecedor) || empty($user))
+        if(empty($dados['produto']) || empty($dados['preco']) || empty($dados['quantidade']) || empty($dados['quantidade_min']) || empty($dados['descricao']) || empty($dados['unidade_med'])  || empty($dados['categoria'])  || empty($dados['fornecedor']))
         {
              ProdutoController::feedback_systm('fields_empty',"Preencher todos os campos vazios!");
              return true;

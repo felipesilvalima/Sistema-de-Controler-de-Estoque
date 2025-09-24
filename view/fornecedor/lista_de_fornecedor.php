@@ -19,6 +19,7 @@ $dados = FornecedorController::list_forneceController();
  Feedbacks::feedback_details();
  Feedbacks::feedback_atualizar();
  Feedbacks::feedback_remover();
+ Feedbacks::fornecedor_inserir();
 
 if (!$dados) {
     Feedbacks::fornecedor_list();

@@ -17,12 +17,12 @@ class FornecedorController extends Fornecedor
     private int $telefone;
     private string $endereco;
 
-    public function __construct($fornecedor,$cpf,$tel,$endereco)
+    public function __construct($dados)
     {
-        $this->fornecedor = $fornecedor;
-        $this->cpf = $cpf;
-        $this->telefone = $tel;
-        $this->endereco = $endereco;
+        $this->fornecedor = $dados['fornecedor'];
+        $this->cpf = $dados['cpf'];
+        $this->telefone = $dados['telefone'];
+        $this->endereco = $dados['endereco'];
     }
 
     public function Inserir_fornecedor()
@@ -39,16 +39,15 @@ class FornecedorController extends Fornecedor
             
             if($response)
             {
-                http_response_code(201);//recurso inserido com sucesso
-                ProdutoController::feedback_systm('forne',"Fornecedor inserido com sucesso");
-                return true;
+                ProdutoController::feedback_systm('forne',"Fornecedor inserido com sucesso"); 
             }
                 else
                 {
-                    http_response_code(500);//erro interno
                     ProdutoController::feedback_systm('forne_error',"Error ao inserir fornecedor");  
-                    return false;
                 }
+
+                header("Location: lista_de_fornecedor.php");
+                die;
         } 
             catch (PDOException $error) 
             {
@@ -134,17 +133,18 @@ class FornecedorController extends Fornecedor
 
             $response = Fornecedor::get_fornec($id);
 
-            while(!isset($response->id) || empty($id)) 
+            if(!isset($response->id) || empty($id)) 
             {
                 http_response_code(404);//O recurso solicitado não existe
                 ProdutoController::feedback_systm('existe',"Fornecedor não encontrado!"); 
-                return false;
+                header("Location: lista_de_fornecedor.php");
+                die;
             }
     
-            if(!empty($response))
-            {
-                return $response;
-            }
+                else
+                {
+                    return $response;
+                }
              
         } 
             catch (PDOException $error) 
@@ -170,8 +170,15 @@ class FornecedorController extends Fornecedor
             {
                 http_response_code(204);//Recurso alterado com sucesso
                 ProdutoController::feedback_systm('update_true',"Atulizado com sucesso");
-                return true;
-            }       
+               
+            }  
+                else 
+                {
+                    ProdutoController::feedback_systm('update_false',"error ao Atulizar");
+                }
+                
+                header("Location: lista_de_fornecedor.php");
+                die; 
         } 
             catch (PDOException $error) 
             {
@@ -190,7 +197,8 @@ class FornecedorController extends Fornecedor
             {
                 http_response_code(204);//Recurso alterado com sucesso.
                 ProdutoController::feedback_systm('remover',"Removido com sucesso");
-                return true; 
+                header("Location: lista_de_fornecedor.php");
+                die;
             }
         }
             catch(PDOException $error)

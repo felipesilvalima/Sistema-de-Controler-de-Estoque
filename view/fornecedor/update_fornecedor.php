@@ -20,17 +20,7 @@ session_write_close();
 
 $details = FornecedorController::get_forneceController((int)$id);
 
-if (!$details) 
-{
-     header("Location: lista_de_fornecedor.php");
-     die;
-}
-
 $btn = $_REQUEST['btn'] ?? null;
-$fornecedor_name = $_REQUEST['for'] ?? $details->fornecedor;
-$cpf = $_REQUEST['cpf'] ?? $details->cpf;
-$telefone = $_REQUEST['tel'] ?? $details->telefone;
-$endereco = $_REQUEST['endereco'] ?? $details->endereco;
 
  if(isset($_SESSION['update_false']))
  {
@@ -40,21 +30,18 @@ $endereco = $_REQUEST['endereco'] ?? $details->endereco;
 
 if(isset($btn))
 {
-   if($_SERVER['REQUEST_METHOD'] == 'POST')
-    {
-        $fornecedor = new FornecedorController((string)$fornecedor_name,(int)$cpf,(int)$telefone,(string)$endereco);
-        $update_date = $fornecedor->update_forneceController((int)$id);
-        
-        if(!$update_date)
-        {
-              Feedbacks::feedback_atualizar(); 
-        }
+    $dados = [
+        'fornecedor' => (string)$fornecedor_name = $_REQUEST['for'] ?? $details->fornecedor,
+        'cpf' => (int)$cpf = $_REQUEST['cpf'] ?? $details->cpf,
+        'telefone' => (int)$telefone = $_REQUEST['tel'] ?? $details->telefone,
+        'endereco' => (string)$endereco = $_REQUEST['endereco'] ?? $details->endereco
+    ];
 
-        if(isset($update_date) && $update_date)
-        {
-            header("Location: lista_de_fornecedor.php");
-            die;  
-        }
+
+    if($_SERVER['REQUEST_METHOD'] == 'POST')
+    {
+        $fornecedor = new FornecedorController($dados);
+        $update_date = $fornecedor->update_forneceController((int)$id);
     } 
 }
 

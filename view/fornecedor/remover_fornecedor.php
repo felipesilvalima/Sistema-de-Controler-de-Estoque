@@ -17,8 +17,3 @@ $id = $_REQUEST['id'] ?? 0;
 
 $remover = FornecedorController::remover_fornecedor((int)$id);
 
-if($remover)
-{
-    header("Location: lista_de_fornecedor.php");
-    die;
-}

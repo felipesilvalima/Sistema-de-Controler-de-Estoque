@@ -18,25 +18,9 @@ if(!isset($_SESSION['user']))
 }
 
 session_write_close();
+
 $id = $_REQUEST['id'] ?? 0;
 $details =  ProdutoController::detalhes((int)$id);
-
-
-if (empty($details))
-{
-     header("Location: /controler_de_estoque/view/Produtos/index.php");
-     die;
-}
-
-
-$produto_name = $_REQUEST['pd']  ?? $details->produto;
-$preco = $_REQUEST['pc']  ?? $details->preco;
-$quantidade = $_REQUEST['qt']  ?? $details->quantidade_max;
-$quantidade_min = $_REQUEST['qt_min']  ?? $details->quantidade_min;
-$descricao = $_REQUEST['descricao']  ?? $details->descricao;
-$unidade_medida = $_REQUEST['unidade_med']  ?? $details->unidade_medida;
-$categoria = $_REQUEST['categoria'] ?? $details->categoria_id;
-$fornecedor = $_REQUEST['fornecedor'] ?? $details->fornecedor_id;
 $user_id = $_SESSION['user'] ?? 0;
 
  if(isset($_SESSION['update_false']))
@@ -44,30 +28,25 @@ $user_id = $_SESSION['user'] ?? 0;
     echo $_SESSION['update_false'];
     unset($_SESSION['update_false']);
  }
-
+ 
 if(isset($_REQUEST['btn']))
 {
+
+    $dados = [
+     'produto' => (string)$produto_name = $_REQUEST['pd']  ?? $details->produto,
+     'preco' =>  (float)$preco = $_REQUEST['pc']  ?? $details->preco,
+     'quantidade' => (int)$quantidade = $_REQUEST['qt']  ?? $details->quantidade_max,
+     'quantidade_min' => (int)$quantidade_min = $_REQUEST['qt_min']  ?? $details->quantidade_min,
+     'descricao' => (string)$descricao = $_REQUEST['descricao']  ?? $details->descricao,
+     'unidade_med' => (string)$unidade_medida = $_REQUEST['unidade_med']  ?? $details->unidade_medida,
+     'categoria' => (int)$categoria = $_REQUEST['categoria'] ?? $details->categoria_id,
+     'fornecedor' => (int)$fornecedor = $_REQUEST['fornecedor'] ?? $details->fornecedor_id
+    ];
+
     if($_SERVER['REQUEST_METHOD'] == 'POST')
     {
-        $produto = new ProdutoController((string)$produto_name,(float)$preco,(int)$quantidade);
-        $produto->setQuantidade_min((int)$quantidade_min);
-        $produto->setDescricao((string)$descricao);
-        $produto->setUnidade_medida((string)$unidade_medida);
-        $produto->setCategoria_id((int)$categoria);
-        $produto->setFornecedor_id((int)$fornecedor);
-        $produto->setUser_id((int)$user_id);
-        $update_date = $produto->Atulaizar((int)$id);
-        
-        if(!$update_date)
-        {
-              Feedbacks::feedback_atualizar(); 
-        }
-
-        if(isset($update_date) && $update_date  == true)
-        {       
-            header("Location:  index.php");
-            die;  
-        }
+        $produto = new ProdutoController($dados);
+        $update_date = $produto->Atulaizar((int)$id,(int)$user_id);
     }
     
 }
@@ -101,7 +80,7 @@ if(isset($_REQUEST['btn']))
         <select name="categoria">
         <?php 
 
-            $datas_categoria = CategoriaController::categorias($details->categoria_id); //todas as categorias
+            $datas_categoria = CategoriaController::categorias((int)$details->categoria_id); //todas as categorias
 
             echo "<option selected disabled value='$details->categoria_id'>$details->categoria</option>";
         
@@ -117,7 +96,7 @@ if(isset($_REQUEST['btn']))
         <?php
 
             
-            $datas_fornecedores = FornecedorController::fornecedores($details->fornecedor);  //todas as fornecedores
+            $datas_fornecedores = FornecedorController::fornecedores((string)$details->fornecedor);  //todas as fornecedores
 
             echo "<option selected disabled value='$details->fornecedor_id'>$details->fornecedor</option>";
         

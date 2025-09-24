@@ -14,7 +14,7 @@ if(!isset($_SESSION['user']))
     header("Location:  /controler_de_estoque/view/login/login.php");
     die;
 }
-
+session_write_close();
 (int)$cpf = $_REQUEST['cpf'] ?? 0;
 (string)$password = $_REQUEST['password'] ?? null;
 $btn =  $_REQUEST['btn'] ?? null;
@@ -31,21 +31,12 @@ if(isset($btn))
     elseif($_SERVER['REQUEST_METHOD'] == 'POST')
     {
         $Login = new LoginAdmController((int)$cpf, (string)$password);
-        $logar = $Login->User_login();
+        $logar = $Login->User_login();   
        
-        if($logar)
-        {
-           header("Location: /controler_de_estoque/view/adm/index.php");
-           die;
-        }
-            else
-            {
-               Feedbacks::feedback_login();
-            }
+        Feedbacks::feedback_login();
     }
 
 }
-
 
 ?>
 

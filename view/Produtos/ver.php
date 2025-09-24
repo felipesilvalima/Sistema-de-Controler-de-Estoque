@@ -17,7 +17,8 @@ if(!isset($_SESSION['user']))
 
  $id_produto = $_REQUEST['id'] ?? 0;
  $date = ProdutoController::detalhes((int)$id_produto);
-
+ 
+  
       echo "<div class='detalhes-produto'>
         <h1>Relátorio do Produto</h1>
         <p><strong>ID:</strong> ". $date->id ."</p>

@@ -27,10 +27,16 @@ class Feedbacks
             unset($_SESSION['inserido']);
          }
 
-        elseif(isset($_SESSION['existe']))
+         elseif(isset($_SESSION['existe']))
          {
             echo "<div class='mensagem erro'>".$_SESSION['existe']."</div>";
             unset($_SESSION['existe']);
+         }
+
+         elseif(isset($_SESSION['inserir_error']))
+         {
+            echo "<div class='mensagem erro'>".$_SESSION['inserir_error']."</div>";
+            unset($_SESSION['inserir_error']);
          }
    }
 

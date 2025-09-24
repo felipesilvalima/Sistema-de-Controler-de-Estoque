@@ -11,7 +11,6 @@ use controller\ProdutoController;
 use model\Produto;
 use validation\Produto\ValidationProduto;
 
-
 require_once __DIR__.'/../../controller/produto/ProdutoController.php';
 require_once __DIR__.'/../../controller/feedbacks/Feedbacks.php';
 require_once __DIR__.'/../../validation/Produto/ValidationProduto.php';
@@ -25,27 +24,25 @@ if(!isset($_SESSION['user']))
     die;
 }
 
- 
-
 $btn = $_REQUEST['btn'] ?? null;
-$produto_name = $_REQUEST['pd']  ?? null;
-$preco = $_REQUEST['pc']  ?? null;
-$quantidade = $_REQUEST['qt']  ?? 0;
-$descricao = $_REQUEST['descricao']  ?? null;
-$quantidade_min = $_REQUEST['qt_min']  ?? 0;
-$unidade_medida = $_REQUEST['unidade_med']  ?? null;
-$categoria = $_REQUEST['categoria']  ?? null;
-$fornecedor = $_REQUEST['fornecedor']  ?? null;
-$user = $_SESSION['user'];
+$user_id = $_SESSION['user'];
 
 if(isset($btn))
 {
     session_write_close();
-    $validation_fields = ValidationProduto::validation_inserir_fields($produto_name,$preco,$quantidade,$quantidade_min,$descricao,$unidade_medida,$categoria,$fornecedor,$user);
-
+    
     $dados = [
-
+     'produto' => (string)$produto_name = $_REQUEST['pd']  ?? null,
+     'preco' =>  (float)$preco = $_REQUEST['pc']  ?? null,
+     'quantidade' => (int)$quantidade = $_REQUEST['qt']  ?? 0,
+     'quantidade_min' => (int)$quantidade_min = $_REQUEST['qt_min']  ?? 0,
+     'descricao' => (string)$descricao = $_REQUEST['descricao']  ?? null,
+     'unidade_med' => (string)$unidade_medida = $_REQUEST['unidade_med']  ?? null,
+     'categoria' => (int)$categoria = $_REQUEST['categoria'] ?? 0,
+     'fornecedor' => (int)$fornecedor = $_REQUEST['fornecedor'] ?? 0
     ];
+
+    $validation_fields = ValidationProduto::validation_inserir_fields($dados);
 
     if($validation_fields)
     {
@@ -56,21 +53,8 @@ if(isset($btn))
 
             if($_SERVER['REQUEST_METHOD'] == 'POST')
             {
-                var_dump($dados);
-                die;
                 $produto = new ProdutoController($dados);
-                $inseir = $produto->inseir();
-    
-                if($inseir)
-                {
-                    header("Location: index.php");
-                    die;
-                }
-                    else
-                    {
-                          Feedbacks::feedback_inserir();
-                    }
-    
+                $inseir = $produto->inseir($user_id);
             }
         }
     
