@@ -13,26 +13,34 @@ require_once __DIR__.'/../../controller/categoria/CategoriaController.php';
 
 $categorias = CategoriaController::categorias("");
 
-foreach($categorias as $categoria )
-{
-    echo "
-    <table border=1>
+?>
+
+    <table border='1'>
     <thead align='center'>
     <tr>
+        <th>ID</th>
         <th>Categoria</th>
         <th>Descrição</th>
     </tr>
     </thead>
     <tbody align='center'>
-    <tr>
-        <td>$categoria->categoria</td>
-        <td rowspan='3'><details>
-                <summary>Descrição</summary>
-                <p>$categoria->descricao</p>
-            </details></td>
-    </tr>
+    <?php
+        
+        foreach($categorias as $categoria )
+        {
+          echo"
+        <tr>
+            <td>$categoria->id</td>
+            <td>$categoria->categoria</td>
+            <td>
+                <details>
+                    <summary>Descrição</summary>
+                    <p>$categoria->descricao</p>
+                </details>
+            </td>
+        </tr>";
+        }
+    ?>
 </tbody>
-</table>";
-}
-?>
+</table>
 <a href="/controler_de_estoque/view/adm/index.php">Voltar</a>

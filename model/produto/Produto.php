@@ -43,7 +43,7 @@ class Produto extends DB
         try
         {
             $sql = "SELECT produtos.id,produtos.produto,produtos.descricao,produtos.preco,produtos.quantidade_max,produtos.quantidade_min,produtos.unidade_medida,produtos.categoria_id,produtos.fornecedor_id,produtos.usuario_id, categoria.categoria,fornecedor.fornecedor
-             FROM produtos LEFT JOIN categoria ON produtos.categoria_id = categoria.id LEFT JOIN fornecedor ON produtos.fornecedor_id = fornecedor.id WHERE produtos.id = :id";
+             FROM produtos INNER JOIN categoria ON produtos.categoria_id = categoria.id INNER JOIN fornecedor ON produtos.fornecedor_id = fornecedor.id WHERE produtos.id = :id";
             $stm = DB::connect()->prepare($sql);
             $stm->bindParam(':id', $id, PDO::PARAM_STR);
             $stm->execute();
