@@ -19,8 +19,8 @@ $relatorio = FornecedorController::get_forneceController((int)$id);
         <h1>Relátorio do Fornecedor</h1>
         <p><strong>ID:</strong> ". $relatorio->id ."</p>
         <p><strong>Fornecedor:</strong> ". $relatorio->fornecedor ."</p>
-        <p><strong>Cpf:</strong> ". $relatorio->cpf ."</p>
-        <p><strong>Telefone:</strong> ". $relatorio->telefone ." </p>
+        <p><strong>Cpf:</strong> ". preg_replace('/(\d{3})(\d{3})(\d{3})(\d{2})/','$1.$2.$3-$4',(string)$relatorio->cpf) ."</p>
+        <p><strong>Telefone:</strong> ". preg_replace('/(\d{2})(\d{5})(\d{4})/','($1) $2-$3',(string)$relatorio->telefone) ." </p>
         <details>
         <summary><strong>Endereço</strong></summary>
          <p>$relatorio->endereco</p>

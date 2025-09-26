@@ -34,9 +34,18 @@ if(isset($_REQUEST['btn']))
         $fornecedor = new FornecedorController($dados);
         $inserir = $fornecedor->Inserir_fornecedor();
         
-            Feedbacks::fornecedor_inserir_verify(); // feedback do campo fornecedor
-            Feedbacks::feedback_validation_forn_cpf(); // feedback do campo cpf
-            Feedbacks::feedback_validation_inserir(); // feedback de campos vazios    
+        $feedbacks = 
+        [
+            Feedbacks::fornecedor_inserir_verify(), // feedback de verificação de registro existente no DB
+            Feedbacks::feedback_validation_form_limit(), // feedback do limite dos campos
+            Feedbacks::feedback_validation_inserir() // feedback de campos vazios    
+        ];
+
+        foreach($feedbacks as $feedback)
+        {
+            $feedback;
+        }
+        
     }
 }
 
@@ -48,8 +57,8 @@ if(isset($_REQUEST['btn']))
     <input type="text" name="fornec" placeholder="Insirar um Fornecedor"> <br><br>
     <label for="cpf">Cpf</label>
     <input type="number" name="cpf" placeholder="Insirar o Cpf"> <br><br>
-    <label for="tel">Telefone</label>
-    <input type="tel" name="tel" placeholder="Insirar o Telefone"> <br><br>
+    <label for="number">Telefone</label>
+    <input type="number" name="tel" placeholder="Insirar o Telefone"> <br><br>
     <label for="ender">Endereço</label>
     <textarea name="ender" rows="5" cols="30"></textarea> <br><br>
     <input type="submit" value="Inserir" name="btn"> <br><br>

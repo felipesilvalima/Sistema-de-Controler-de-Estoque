@@ -44,18 +44,24 @@ class FornecedorController extends Fornecedor
             if(!$validacao_campos)
             {
                 $verificando_fornecedor = FornecedorController::verify_fonecedorController($dados['fornecedor']); // verificando se o fornencedor já existe no BD
+
                 session_write_close();
+
                 $verificando_cpf = FornecedorController::verify_cpfController($dados['cpf']); // verificando se o cpf já existe no BD
+                $validacao_limit_cpf = ValidationFornecedor::validation_cpf_limit($dados['cpf']); // verificando se o cpf tem 11 digitos
+
                 session_write_close();
-                $validacao_limit_cpf = ValidationFornecedor::validation_cpf($dados['cpf']); // verificando se o cpf tem 11 digitos
-                   
-                    if($verificando_fornecedor || $verificando_cpf || $validacao_limit_cpf) // se não passa pela validação retornar falso
+                
+                $validacao_limit_tel = ValidationFornecedor::validation_tel_limit($dados['telefone']); // verificando se o telefone tem 11 digitos
+                 
+                    if($verificando_fornecedor || $verificando_cpf || $validacao_limit_cpf || $validacao_limit_tel) // se não passa pela validação retornar falso
                     {
                         return false;
+                        die;
                     }
-
-                        $response = Fornecedor::register_fornec // se passa inserir regristros
-                        (
+                        
+                        // se passa inserir regristros
+                        $response = Fornecedor::register_fornec(
                             $this->fornecedor,
                             $this->cpf,
                             $this->telefone,

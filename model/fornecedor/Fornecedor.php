@@ -69,7 +69,7 @@ class Fornecedor extends DB
         {
            $sql = "SELECT cpf FROM fornecedor WHERE cpf = :cpf";
            $stm = DB::connect()->prepare($sql);
-           $stm->bindParam(':cpf',$cpf,PDO::PARAM_INT);
+           $stm->bindParam(':cpf',$cpf,PDO::PARAM_STR);
            $stm->execute();
 
             if($stm && $stm->rowCount() > 0)

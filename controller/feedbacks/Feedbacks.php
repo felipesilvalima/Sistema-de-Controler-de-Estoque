@@ -99,15 +99,21 @@ class Feedbacks
             unset($_SESSION['fields_empty']);
          }
    }
-   public static function feedback_validation_forn_cpf():void  
+   public static function feedback_validation_form_limit():void  
    {
          if(isset($_SESSION['fields_cpf_limit']))
          {
             echo "<div class='mensagem erro'>".$_SESSION['fields_cpf_limit']."</div>";
             unset($_SESSION['fields_cpf_limit']);
          }
-   }
 
+          if(isset($_SESSION['fields_telefone_limit']))
+         {
+            echo "<div class='mensagem erro'>".$_SESSION['fields_telefone_limit']."</div>";
+            unset($_SESSION['fields_telefone_limit']);
+         }
+   }
+  
    public static function feedback_alerta_de_estoque():void 
    {
          if(isset($_SESSION['estoque_error']))

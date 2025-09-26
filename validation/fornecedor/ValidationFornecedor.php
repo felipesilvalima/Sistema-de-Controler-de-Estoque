@@ -17,12 +17,22 @@ class ValidationFornecedor
         }
     }
 
-    public static function validation_cpf($cpf)
+    public static function validation_cpf_limit($cpf)
     {
-        if($cpf > 11)
+        if(strlen((string)$cpf) != 11)
         {
             ProdutoController::feedback_systm('fields_cpf_limit',"Cpf tem que ter 11 digitos!");
             return true;
         }
     }
+
+    public static function validation_tel_limit($telefone)
+    {
+        if(strlen((string)$telefone) != 11)
+        {
+            ProdutoController::feedback_systm('fields_telefone_limit',"Telefone tem que ter 11 digitos!");
+            return true;
+        }
+    }
+
 }

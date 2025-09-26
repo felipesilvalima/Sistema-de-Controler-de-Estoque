@@ -20,7 +20,7 @@ $dados = FornecedorController::list_forneceController();
  Feedbacks::feedback_atualizar();
  Feedbacks::feedback_remover();
  Feedbacks::fornecedor_inserir();
-
+ 
 if (!$dados) {
     Feedbacks::fornecedor_list();
 } else {
@@ -40,8 +40,8 @@ if (!$dados) {
 
         echo "<td>" . (int)$date->id . "</td>";
         echo "<td>" . (string)$date->fornecedor . "</td>";
-        echo "<td>" . (string)$date->cpf . "</td>";
-        echo "<td>" . (string)$date->telefone . "</td>";
+        echo "<td>" . preg_replace('/(\d{3})(\d{3})(\d{3})(\d{2})/','$1.$2.$3-$4',(string)$date->cpf) . "</td>";
+        echo "<td>" . preg_replace('/(\d{2})(\d{5})(\d{4})/','($1) $2-$3',(string)$date->telefone) . "</td>";
         echo "<td>
             <a href='relatorio.php?id=$date->id'>Relatório</a>
              <a href='update_fornecedor.php?id=$date->id'>Editar Fornecedor</a>
