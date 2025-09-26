@@ -101,10 +101,10 @@ class Feedbacks
    }
    public static function feedback_validation_forn_cpf():void  
    {
-         if(isset($_SESSION['fields_empty']))
+         if(isset($_SESSION['fields_cpf_limit']))
          {
-            echo "<div class='mensagem erro'>".$_SESSION['fields_empty']."</div>";
-            unset($_SESSION['fields_empty']);
+            echo "<div class='mensagem erro'>".$_SESSION['fields_cpf_limit']."</div>";
+            unset($_SESSION['fields_cpf_limit']);
          }
    }
 

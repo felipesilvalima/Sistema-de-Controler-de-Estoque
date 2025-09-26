@@ -18,50 +18,26 @@ if(!isset($_SESSION['user_adm']))
 
 session_write_close();
 
-
-if(isset($_REQUEST['btn']))
-{
-    $dados = [
+ $dados = [
         'fornecedor' => (string)$fornecedor_name = $_REQUEST['fornec'] ?? null,
         'cpf' => (int)$cpf = $_REQUEST['cpf'] ?? null,
         'telefone' => (int)$telefone = $_REQUEST['tel'] ?? null,
         'endereco' => (string)$endereco = $_REQUEST['ender'] ?? null
     ];
 
-    $validation_fields = ValidationFornecedor::validation_fornecedor_fields($dados);
-    $validation_field_cpf = ValidationFornecedor::validation_cpf($dados['cpf']);
     
-    
-    if(!$validation_fields)
+if(isset($_REQUEST['btn']))
+{
+   
+    if($_SERVER['REQUEST_METHOD'] == 'POST')
     {
- 
-        $verify_fornecedor = FornecedorController::verify_fonecedorController($dados['fornecedor']);
-
-         session_write_close();
-
-        $verify_fornecedor_cpf = FornecedorController::verify_cpfController($dados['cpf']);
-
-        if($verify_fornecedor)
-        {
-            Feedbacks::fornecedor_inserir_verify();
-        }
-            elseif($verify_fornecedor_cpf || $validation_field_cpf)
-            {
-               Feedbacks::fornecedor_inserir_verify();
-               Feedbacks::feedback_validation_forn_cpf();
-            }
-    
-                else
-                {
-                    $fornecedor = new FornecedorController($dados);
-                    $inserir = $fornecedor->Inserir_fornecedor();
-                }
-    
+        $fornecedor = new FornecedorController($dados);
+        $inserir = $fornecedor->Inserir_fornecedor();
+        
+            Feedbacks::fornecedor_inserir_verify(); // feedback do campo fornecedor
+            Feedbacks::feedback_validation_forn_cpf(); // feedback do campo cpf
+            Feedbacks::feedback_validation_inserir(); // feedback de campos vazios    
     }
-        else
-        {
-            Feedbacks::feedback_validation_inserir();
-        }
 }
 
 

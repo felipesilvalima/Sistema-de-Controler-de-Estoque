@@ -3,11 +3,13 @@
 namespace controller;
 
 use Exception;
+use fornecedor\validation\ValidationFornecedor;
 use model\Fornecedor as Fornecedor;
 use PDOException;
 
 require_once __DIR__.'/../../model/fornecedor/Fornecedor.php';
 require_once __DIR__.'/../../controller/produto/ProdutoController.php';
+require_once __DIR__.'/../../validation/fornecedor/ValidationFornecedor.php';
 
 class FornecedorController extends Fornecedor
 {
@@ -29,25 +31,51 @@ class FornecedorController extends Fornecedor
     {
         try 
         {
-    
-            $response = Fornecedor::register_fornec(
-                $this->fornecedor,
-                $this->cpf,
-                $this->telefone,
-                $this->endereco
-            );
-            
-            if($response)
-            {
-                ProdutoController::feedback_systm('forne',"Fornecedor inserido com sucesso"); 
-            }
-                else
-                {
-                    ProdutoController::feedback_systm('forne_error',"Error ao inserir fornecedor");  
-                }
+            $dados = 
+            [
+                'fornecedor' => $this->fornecedor,
+                'cpf' => $this->cpf,
+                'telefone' => $this->telefone,
+                'endereco' => $this->endereco
+            ];
 
-                header("Location: lista_de_fornecedor.php");
-                die;
+            $validacao_campos = ValidationFornecedor::validation_fornecedor_fields($dados); // verificar se os campos estão vazios
+
+            if(!$validacao_campos)
+            {
+                $verificando_fornecedor = FornecedorController::verify_fonecedorController($dados['fornecedor']); // verificando se o fornencedor já existe no BD
+                session_write_close();
+                $verificando_cpf = FornecedorController::verify_cpfController($dados['cpf']); // verificando se o cpf já existe no BD
+                session_write_close();
+                $validacao_limit_cpf = ValidationFornecedor::validation_cpf($dados['cpf']); // verificando se o cpf tem 11 digitos
+                   
+                    if($verificando_fornecedor || $verificando_cpf || $validacao_limit_cpf) // se não passa pela validação retornar falso
+                    {
+                        return false;
+                    }
+
+                        $response = Fornecedor::register_fornec // se passa inserir regristros
+                        (
+                            $this->fornecedor,
+                            $this->cpf,
+                            $this->telefone,
+                            $this->endereco
+                        );
+                
+                        if($response)
+                        {
+                            ProdutoController::feedback_systm('forne',"Fornecedor inserido com sucesso"); 
+                        }
+
+                            else
+                            {
+                                ProdutoController::feedback_systm('forne_error',"Error ao inserir fornecedor");  
+                            }
+    
+                            header("Location: lista_de_fornecedor.php");
+                            die;
+            }
+    
         } 
             catch (PDOException $error) 
             {
