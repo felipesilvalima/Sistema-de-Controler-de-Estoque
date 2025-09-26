@@ -15,15 +15,14 @@ require_once __DIR__ . '/../../validation/Login/ValidationLogin.php';
 (string)$password = $_REQUEST['password'] ?? null;
 $btn =  $_REQUEST['btn'] ?? null;
 
-if (isset($btn)) {
-    $validation_fields = ValidationLogin::validation_login_fields($user, $password);
-
-    if ($validation_fields) {
-        Feedbacks::feedback_validation_login();
-    } elseif ($_SERVER['REQUEST_METHOD'] == 'POST') {
+if (isset($btn)) 
+{
+    if($_SERVER['REQUEST_METHOD'] == 'POST') 
+    {
         $Login = new LoginController((string)$user, (string)$password);
         $logar = $Login->User_login();
-        Feedbacks::feedback_login();
+
+            Feedbacks::feedback_login();
     }
 }
 

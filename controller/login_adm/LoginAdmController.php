@@ -3,10 +3,13 @@
 namespace controller;
 
 use Exception;
+use Login\validation\ValidationLogin;
 use model\LoginAdm as LoginAdm;
 use PDOException;
 
 require_once __DIR__.'/../../model/login_adm/LoginAdm.php';
+require_once __DIR__.'/../../validation/Login/ValidationLogin.php';
+require_once __DIR__.'/../../controller/produto/ProdutoController.php';
 
 class LoginAdmController extends LoginAdm
 {
@@ -24,36 +27,41 @@ class LoginAdmController extends LoginAdm
    {     
         try 
         {
+            $validation_fields = ValidationLogin::validation_login_fields($this->cpf,$this->password);
 
-           $line = LoginAdm::login($this->cpf); 
+            if(!$validation_fields)
+            {
 
-           if($line == null)
-           {   
-                http_response_code(404); //O recurso solicitado não existe
-               ProdutoController::feedback_systm('user_invalido',"Usuário não existe"); 
-               return false; 
-           }
-                else 
-                {      
-                    $password_hash = $line->senha;
-                    $user_id = $line->id;
-                   
-                     $password_verify = password_verify((string)$this->password, (string)$password_hash); 
-                    
-                    if($password_verify) 
-                    {
-                        http_response_code(200); //requisição foi processada com sucesso
-                        ProdutoController::feedback_systm('autenticado',"Usuário logado com sucesso"); 
-                        $_SESSION['user_adm'] = $user_id;
-                        header("Location: /controler_de_estoque/view/adm/index.php");
-                        die;      
-                    }
-                        else 
-                        {
-                            http_response_code(401); //error de Auteticação 
-                            ProdutoController::feedback_systm('user_invalido',"Usuário inválido"); 
-                        }
+                $line = LoginAdm::login($this->cpf); 
+     
+                if($line == null)
+                {   
+                     http_response_code(404); //O recurso solicitado não existe
+                    ProdutoController::feedback_systm('user_invalido',"Usuário não existe"); 
+                    return false; 
                 }
+                     else 
+                     {      
+                         $password_hash = $line->senha;
+                         $user_id = $line->id;
+                        
+                          $password_verify = password_verify((string)$this->password, (string)$password_hash); 
+                         
+                         if($password_verify) 
+                         {
+                             http_response_code(200); //requisição foi processada com sucesso
+                             ProdutoController::feedback_systm('autenticado',"Usuário logado com sucesso"); 
+                             $_SESSION['user_adm'] = $user_id;
+                             header("Location: /controler_de_estoque/view/adm/index.php");
+                             die;      
+                         }
+                             else 
+                             {
+                                 http_response_code(401); //error de Auteticação 
+                                 ProdutoController::feedback_systm('user_invalido',"Usuário inválido"); 
+                             }
+                     }
+            }
 
         } 
 

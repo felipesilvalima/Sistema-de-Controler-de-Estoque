@@ -9,6 +9,7 @@ use model\Movimentacao as Movimentacao;
 require_once __DIR__.'/../../model/produto/Produto.php';
 require_once __DIR__.'/../../controller/movimentacao/MovimentacaoController.php';
 use PDOException;
+use validation\Produto\ValidationProduto;
 
 class ProdutoController extends Produto
 {
@@ -147,48 +148,67 @@ class ProdutoController extends Produto
 
         try 
         {
-            
-            $line = Produto::verificarProduto($this->produto_name);
-            
-            if($line)  
-            {
-                ProdutoController::feedback_systm('existe',"Produto já existe!"); 
-                http_response_code(409);//O recurso já existe, tentativa de duplicação
-                header("Location: index.php");
-                die; 
-            }
+             $dados = 
+             [
+                'produto' => $this->produto_name,
+                'preco' =>  $this->preco,
+                'quantidade' => $this->quantidade_max,
+                'quantidade_min' => $this->quantidade_min,
+                'descricao' => $this->descricao,
+                'unidade_med' => $this->unidade_medida,
+                'categoria' => $this->categoria_id,
+                'fornecedor' => $this->fornecedor_id
+             ];
 
-            $inserir = Produto::inserir_produto(
-            $this->produto_name,
-            $this->preco,
-            $this->quantidade_max,
-            $this->quantidade_min,
-            $this->descricao,
-            $this->unidade_medida,
-            $this->categoria_id,
-            $this->fornecedor_id,
-            $user_id
-            ); 
-            
-            if($inserir)
-            {
-                ProdutoController::feedback_systm('inserido',"Inserido com sucesso");
-                $data = Produto::last_product();
 
-                MovimentacaoController::insercao(
-                $this->produto_name,
-                $this->quantidade_max,
-                $this->id = $data->id,
-                $user_id);  
-            }
-                else
+            $validation_fields = ValidationProduto::validation_inserir_fields($dados);
+
+            if(!$validation_fields)
+            {
+
+                $line = Produto::verificarProduto($this->produto_name);
+            
+                if($line)  
                 {
-                    ProdutoController::feedback_systm('inserir_error'," Error ao Inserir Produto");
+                    ProdutoController::feedback_systm('existe',"Produto já existe!"); 
+                    http_response_code(409);//O recurso já existe, tentativa de duplicação
+                    header("Location: index.php");
+                    die; 
                 }
-
-                header("Location: index.php");
-                die;
+    
+                $inserir = Produto::inserir_produto(
+                $this->produto_name,
+                $this->preco,
+                $this->quantidade_max,
+                $this->quantidade_min,
+                $this->descricao,
+                $this->unidade_medida,
+                $this->categoria_id,
+                $this->fornecedor_id,
+                $user_id
+                ); 
                 
+                if($inserir)
+                {
+                    ProdutoController::feedback_systm('inserido',"Inserido com sucesso");
+                    $data = Produto::last_product();
+    
+                    MovimentacaoController::insercao(
+                    $this->produto_name,
+                    $this->quantidade_max,
+                    $this->id = $data->id,
+                    $user_id);  
+                }
+                    else
+                    {
+                        ProdutoController::feedback_systm('inserir_error'," Error ao Inserir Produto");
+                    }
+    
+                    header("Location: index.php");
+                    die;
+                    
+            }
+            
                  
         }
             catch (PDOException $error) 

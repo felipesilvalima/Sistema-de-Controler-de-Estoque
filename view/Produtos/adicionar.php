@@ -42,21 +42,14 @@ if(isset($btn))
      'fornecedor' => (int)$fornecedor = $_REQUEST['fornecedor'] ?? 0
     ];
 
-    $validation_fields = ValidationProduto::validation_inserir_fields($dados);
-
-    if($validation_fields)
-    {
-       Feedbacks::feedback_validation_inserir();
-    }
-        else
+        if($_SERVER['REQUEST_METHOD'] == 'POST')
         {
+            $produto = new ProdutoController($dados);
+            $inseir = $produto->inseir($user_id);
 
-            if($_SERVER['REQUEST_METHOD'] == 'POST')
-            {
-                $produto = new ProdutoController($dados);
-                $inseir = $produto->inseir($user_id);
-            }
+                Feedbacks::feedback_validation_inserir();
         }
+        
     
 }
 

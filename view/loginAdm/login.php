@@ -21,19 +21,12 @@ $btn =  $_REQUEST['btn'] ?? null;
 
 if(isset($btn))
 {
-    $validation_fields = ValidationLogin::validation_login_fields($cpf,$password);
-
-    if($validation_fields)
-    {     
-        Feedbacks::feedback_validation_login();  
-    }
-    
-    elseif($_SERVER['REQUEST_METHOD'] == 'POST')
+    if($_SERVER['REQUEST_METHOD'] == 'POST')
     {
         $Login = new LoginAdmController((int)$cpf, (string)$password);
         $logar = $Login->User_login();   
        
-        Feedbacks::feedback_login();
+            Feedbacks::feedback_login();
     }
 
 }

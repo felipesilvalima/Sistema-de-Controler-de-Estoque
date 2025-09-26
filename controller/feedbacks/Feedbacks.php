@@ -6,7 +6,14 @@ class Feedbacks
 {
    public static function feedback_login(): void 
    {
-         if(isset($_SESSION['user_invalido']))
+
+        if(isset($_SESSION['fields_empty']))
+         {
+            echo "<div class='mensagem erro'>".$_SESSION['fields_empty']."</div>";
+            unset($_SESSION['fields_empty']);
+         }
+
+         elseif(isset($_SESSION['user_invalido']))
          {
             echo "<div class='mensagem erro'>".$_SESSION['user_invalido']."</div>";
             unset($_SESSION['user_invalido']); 
@@ -17,6 +24,7 @@ class Feedbacks
             echo "<div class='mensagem sucesso'>".$_SESSION['autenticado']."</div>";
             unset($_SESSION['autenticado']);
          }
+
    }
 
    public static function feedback_inserir(): void 
@@ -92,15 +100,6 @@ class Feedbacks
          }
    }
    public static function feedback_validation_forn_cpf():void  
-   {
-         if(isset($_SESSION['fields_empty']))
-         {
-            echo "<div class='mensagem erro'>".$_SESSION['fields_empty']."</div>";
-            unset($_SESSION['fields_empty']);
-         }
-   }
-
-   public static function feedback_validation_login():void 
    {
          if(isset($_SESSION['fields_empty']))
          {
