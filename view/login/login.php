@@ -20,9 +20,7 @@ if (isset($btn))
     if($_SERVER['REQUEST_METHOD'] == 'POST') 
     {
         $Login = new LoginController((string)$user, (string)$password);
-        $logar = $Login->User_login();
-
-            Feedbacks::feedback_login();
+        $logar = $Login->User_login();    
     }
 }
 
@@ -30,18 +28,22 @@ if (isset($btn))
 ?>
 
 <link rel="stylesheet" href="../css/styles.css">
+<body id="background">
 
-<body>
     <div class="form-login">
         <h1 id="titulo_login">Login</h1>
         <form action="login.php" method="post">
-            <label for="user">Email:</label>
-            <input type="email" name="user" placeholder="Digite seu Email">
+            <code>
+            <?= Feedbacks::feedback_login();?>
+            </code>
+            <label class="label-input" for="user">Email</label><br>
+            <input class="input-login" type="email" name="user" placeholder="Digite seu Email"><br>
 
-            <label for="password">Senha:</label>
-            <input type="password" name="password" placeholder="Digite sua Senha">
+            <label class="label-input"  for="password">Senha</label><br>
+            <input class="input-login" type="password" name="password" placeholder="Digite sua Senha"><br>
 
-            <input type="submit" value="Entrar" name="btn" class="btn entrar">
+            <input class="input-button" type="submit" value="Entrar" name="btn" class="btn entrar">
         </form>
     </div>
+    <img id="img-estoque" src="../../view/css/img/estoque.png" alt="estoque" width="48%">
 </body>

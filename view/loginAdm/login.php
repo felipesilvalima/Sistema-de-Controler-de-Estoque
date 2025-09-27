@@ -25,25 +25,31 @@ if(isset($btn))
     {
         $Login = new LoginAdmController((int)$cpf, (string)$password);
         $logar = $Login->User_login();   
-       
-            Feedbacks::feedback_login();
     }
 
 }
 
 ?>
 
-
-<div class="form-login">
-    <h1>Login Administração</h1>
-    <form action="login.php" method="post">
-        <label for="cpf">Cpf:</label>
-        <input type="number" name="cpf" placeholder="Digite seu cpf"> <br><br>
-
-        <label for="password">Senha:</label>
-        <input type="password" name="password" placeholder="Digite sua Senha"> <br><br>
-
-        <input type="submit" value="Entrar" name="btn" class="btn entrar">
-    </form>
-    <a href="/controler_de_estoque/view/produtos/index.php">Voltar para Controler de Produtos</a>
+<link rel="stylesheet" href="../css/styles.css">
+<body id="background">
+    <div class="form-login">
+        <h1 id="titulo_adm">Login Administração</h1>
+        <form action="login.php" method="post">
+            <code>
+               <?= Feedbacks::feedback_login(); ?> 
+            </code>
+            <label class="label-input-adm" for="cpf">Cpf</label>
+            <input class="input-login" type="number" name="cpf" placeholder="Digite seu cpf"> <br><br>
+    
+            <label class="label-input-adm" for="password">Senha</label>
+            <input class="input-login" type="password" name="password" placeholder="Digite sua Senha"> <br><br>
+    
+            <input class="input-button" type="submit" value="Entrar" name="btn" class="btn entrar">
+        </form>
+        <div class="input-button-voltar">
+            <a  href="/controler_de_estoque/view/produtos/index.php">Voltar para Controler de Produtos</a>
 </div>
+    </div>
+    <img id="img-estoque" src="../../view/css/img/estoque.png" alt="estoque" width="48%">
+</body>

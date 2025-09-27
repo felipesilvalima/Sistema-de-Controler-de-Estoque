@@ -1,7 +1,147 @@
-body
+/*=========== Página de login User/Adm =============== */
+
+#background {
+  background: rgb(228, 226, 226);   /* cor de fundo */
+}
+
+#img-estoque
 {
-    background-color: rgb(247, 252, 250);
+  position: absolute; /* posicionamento livre */
+  left: 30%; /*  esquerda */
+  top: 0;  /* distância do elemento em relação ao topo */
+}
+
+.form-login {
+    background: white;  /* cor do elemento */
+    width: 490px;  /* largura do elemento */
+    height: 690px; /* altura do elemento */
+    border-radius: 25px; /* redondamento da borda do elemento */
+    padding: 10px; /* espaçamento do conteudo */
+    position: absolute;  /* posicionamento livre */
+    top: 12%;  /* distância do elemento em relação ao topo */
+    left: 2%; /*  esquerda */
+    
+}
+
+#titulo_login
+{
+    font-size: 50px;  /* tamanho da fonte */
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;  /* fonte */
+    text-align: center;  /* alinhar texto */
+    color: rgb(0, 0, 0);  /* cor do texto */
+    position: relative;
+    top: 80px;
+}
+
+#titulo_adm
+{
+    font-size: 40px;  /* tamanho da fonte */
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;  /* fonte */
+    text-align: center;  /* alinhar texto */
+    color: rgb(0, 0, 0);  /* cor do texto */
+    position: relative;
+    top: 80px; 
+}
+
+.input-login
+{
+    width: 80%;
+    height: 60px;
+    padding: 5px;
+    margin: 30px;
+    border-radius: 10px;
+    border: 2px solid rgb(5, 5, 5);
+    position: relative;
+    top: 80px;
+    left: 10px;
 }
 
 
 
+.input-button
+{
+    width: 80%;
+    height: 50px;
+    padding: 5px;
+    margin: 15px;
+    position: relative;
+    top: 100px;
+    left: 25px;
+    border-radius: 10px;
+    font-size: 20px;
+    background: rgb(42, 245, 1);
+    color: white;
+}
+
+.input-button-voltar
+{
+    width: 75%;
+    height: 30px;
+    padding: 10px;
+    margin: 15px;
+    text-align: center;
+    position: relative;
+    top: 100px;
+    left: 25px;
+    border-radius: 10px;
+    font-size: 20px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    background: rgb(1, 58, 245);
+}
+.input-button-voltar:hover
+{
+   background: rgb(1, 43, 182); 
+}
+a{
+    text-decoration: none;
+    color: rgb(255, 255, 255);
+}
+.input-button:hover
+{
+    background: rgb(11, 194, 11);
+}
+
+.label-input
+{
+    font-size: 15px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    position: relative;
+    top: 100px;
+    left: 45px;
+}
+
+.label-input-adm
+{
+    font-size: 18px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    position: relative;
+    top: 100px;
+    left: 30px;
+    margin: 20px;
+}
+
+.mensagem-erro
+{
+    color: red;
+    text-align: center;
+    position: relative;
+    top: -70px;
+    font-size: 20px;
+}
+
+.mensagem-sucesso
+{
+    color: rgb(0, 255, 55);
+    text-align: center;
+    position: relative;
+    top: -70px;
+    font-size: 20px;
+}
+
+
+/*=========== Página principal =============== */
+
+#background-index
+{
+    background: rgb(105, 105, 105);
+}

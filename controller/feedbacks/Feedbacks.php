@@ -6,22 +6,22 @@ class Feedbacks
 {
    public static function feedback_login(): void 
    {
-
+        
         if(isset($_SESSION['fields_empty']))
          {
-            echo "<div class='mensagem erro'>".$_SESSION['fields_empty']."</div>";
+            echo "<div class='mensagem-erro'>".$_SESSION['fields_empty']."</div>";
             unset($_SESSION['fields_empty']);
          }
 
          elseif(isset($_SESSION['user_invalido']))
          {
-            echo "<div class='mensagem erro'>".$_SESSION['user_invalido']."</div>";
+            echo "<div class='mensagem-erro'>".$_SESSION['user_invalido']."</div>";
             unset($_SESSION['user_invalido']); 
          }
 
          elseif(isset($_SESSION['autenticado']))
          {
-            echo "<div class='mensagem sucesso'>".$_SESSION['autenticado']."</div>";
+            echo "<div class='mensagem-sucesso'>".$_SESSION['autenticado']."</div>";
             unset($_SESSION['autenticado']);
          }
 
@@ -31,19 +31,19 @@ class Feedbacks
    {
         if(isset($_SESSION['inserido']))
          {
-            echo "<div class='mensagem sucesso'>".$_SESSION['inserido']."</div>";
+            echo "<div class='mensagem-sucesso'>".$_SESSION['inserido']."</div>";
             unset($_SESSION['inserido']);
          }
 
          elseif(isset($_SESSION['existe']))
          {
-            echo "<div class='mensagem erro'>".$_SESSION['existe']."</div>";
+            echo "<div class='mensagem-erro'>".$_SESSION['existe']."</div>";
             unset($_SESSION['existe']);
          }
 
          elseif(isset($_SESSION['inserir_error']))
          {
-            echo "<div class='mensagem erro'>".$_SESSION['inserir_error']."</div>";
+            echo "<div class='mensagem-erro'>".$_SESSION['inserir_error']."</div>";
             unset($_SESSION['inserir_error']);
          }
    }
@@ -52,7 +52,7 @@ class Feedbacks
    {
         if(isset($_SESSION['Encontrado']))
         {
-            echo "<div class='mensagem erro'>".$_SESSION['Encontrado']."</div>";
+            echo "<div class='mensagem-erro'>".$_SESSION['Encontrado']."</div>";
             unset($_SESSION['Encontrado']);
          }
    }
@@ -61,7 +61,7 @@ class Feedbacks
    {
         if(isset($_SESSION['remover']))
         {
-            echo "<div class='mensagem erro'>".$_SESSION['remover']."</div>";
+            echo "<div class='mensagem-erro'>".$_SESSION['remover']."</div>";
             unset($_SESSION['remover']);
          }
    }
@@ -70,13 +70,13 @@ class Feedbacks
    {
         if(isset($_SESSION['update_true']))
         {
-            echo "<div class='mensagem sucesso'>".$_SESSION['update_true']."</div>";
+            echo "<div class='mensagem-sucesso'>".$_SESSION['update_true']."</div>";
             unset($_SESSION['update_true']);
          }
 
         elseif(isset($_SESSION['update_false']))
         {
-            echo "<div class='mensagem erro'>".$_SESSION['update_false']."</div>";
+            echo "<div class='mensagem-erro'>".$_SESSION['update_false']."</div>";
             unset($_SESSION['update_false']);
          }
          
@@ -86,7 +86,7 @@ class Feedbacks
    {
      if(isset($_SESSION['existe']))
          {
-            echo "<div class='mensagem erro'>".$_SESSION['existe']."</div>";
+            echo "<div class='mensagem-erro'>".$_SESSION['existe']."</div>";
             unset($_SESSION['existe']);
          }
    }
@@ -95,7 +95,7 @@ class Feedbacks
    {
          if(isset($_SESSION['fields_empty']))
          {
-            echo "<div class='mensagem erro'>".$_SESSION['fields_empty']."</div>";
+            echo "<div class='mensagem-erro'>".$_SESSION['fields_empty']."</div>";
             unset($_SESSION['fields_empty']);
          }
    }
@@ -103,13 +103,13 @@ class Feedbacks
    {
          if(isset($_SESSION['fields_cpf_limit']))
          {
-            echo "<div class='mensagem erro'>".$_SESSION['fields_cpf_limit']."</div>";
+            echo "<div class='mensagem-erro'>".$_SESSION['fields_cpf_limit']."</div>";
             unset($_SESSION['fields_cpf_limit']);
          }
 
           if(isset($_SESSION['fields_telefone_limit']))
          {
-            echo "<div class='mensagem erro'>".$_SESSION['fields_telefone_limit']."</div>";
+            echo "<div class='mensagem-erro'>".$_SESSION['fields_telefone_limit']."</div>";
             unset($_SESSION['fields_telefone_limit']);
          }
    }
@@ -118,7 +118,7 @@ class Feedbacks
    {
          if(isset($_SESSION['estoque_error']))
          {
-            echo "<div class='mensagem erro'>".$_SESSION['estoque_error']."</div>";
+            echo "<div class='mensagem-erro'>".$_SESSION['estoque_error']."</div>";
             unset($_SESSION['estoque_error']);
          }
    }
@@ -127,7 +127,7 @@ class Feedbacks
    {
          if(isset($_SESSION['limpa']))
          {
-            echo "<div class='mensagem erro'>".$_SESSION['limpa']."</div>";
+            echo "<div class='mensagem-erro'>".$_SESSION['limpa']."</div>";
             unset($_SESSION['limpa']);
          }
    }
@@ -136,13 +136,13 @@ class Feedbacks
    {
          if(isset($_SESSION['forne']))
          {
-            echo "<div class='mensagem sucesso'>".$_SESSION['forne']."</div>";
+            echo "<div class='mensagem-sucesso'>".$_SESSION['forne']."</div>";
             unset($_SESSION['forne']);
          }
 
          if(isset($_SESSION['forne_error']))
          {
-            echo "<div class='mensagem erro'>".$_SESSION['forne_error']."</div>";
+            echo "<div class='mensagem-erro'>".$_SESSION['forne_error']."</div>";
             unset($_SESSION['forne_error']);
          }
    }
@@ -151,13 +151,13 @@ class Feedbacks
    {
          if(isset($_SESSION['forne_inserir']))
          {
-            echo "<div class='mensagem erro'>".$_SESSION['forne_inserir']."</div>";
+            echo "<div class='mensagem-erro'>".$_SESSION['forne_inserir']."</div>";
             unset($_SESSION['forne_inserir']);
          }
 
          if(isset($_SESSION['forne_cpf']))
          {
-            echo "<div class='mensagem erro'>".$_SESSION['forne_cpf']."</div>";
+            echo "<div class='mensagem-erro'>".$_SESSION['forne_cpf']."</div>";
             unset($_SESSION['forne_cpf']);
          }
    }
@@ -166,7 +166,7 @@ class Feedbacks
    {
          if(isset($_SESSION['list_fornec']))
          {
-            echo "<div class='mensagem erro'>".$_SESSION['list_fornec']."</div>";
+            echo "<div class='mensagem-erro'>".$_SESSION['list_fornec']."</div>";
             unset($_SESSION['list_fornec']);
          }
 

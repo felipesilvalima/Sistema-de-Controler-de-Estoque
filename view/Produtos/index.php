@@ -28,7 +28,7 @@ if (!isset($_SESSION['user'])) {
     <link rel="stylesheet" href="../css/styles.css">
 </head>
 
-<body>
+<body id="background-index">
     <div class="titulo">
         <h1>Tabela de Produtos</h1>
         <a href="../login/logout.php" class="btn sair">Sair</a>
