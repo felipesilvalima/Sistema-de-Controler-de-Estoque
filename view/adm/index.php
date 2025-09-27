@@ -26,7 +26,7 @@ if(!isset($_SESSION['user_adm']))
     <title>Controler de estoque</title>
     <link rel="stylesheet" href="../css/styles.css">
 </head>
-<body>
+<body id="background-index">
     <div class="titulo">
         <h1>Tabela de Usuários</h1>
         <a href="/controler_de_estoque/view/loginadm/login.php" class="btn sair">Sair</a>

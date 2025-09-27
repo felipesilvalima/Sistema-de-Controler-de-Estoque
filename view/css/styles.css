@@ -73,6 +73,11 @@
     color: white;
 }
 
+.input-button:hover
+{
+    background: rgb(11, 194, 11);
+}
+
 .input-button-voltar
 {
     width: 75%;
@@ -86,19 +91,17 @@
     border-radius: 10px;
     font-size: 20px;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    border: 2px solid black;
     background: rgb(1, 58, 245);
 }
 .input-button-voltar:hover
 {
    background: rgb(1, 43, 182); 
 }
+
 a{
     text-decoration: none;
     color: rgb(255, 255, 255);
-}
-.input-button:hover
-{
-    background: rgb(11, 194, 11);
 }
 
 .label-input
