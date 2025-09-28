@@ -40,12 +40,14 @@ if (!isset($_SESSION['user'])) {
             </ul>
         </div>
     </nav>
+
+    
     <h1 id="titulo-produtos">Tabela de Produtos</h1>
     <div class="form">
         <form action="index.php" method="get">
-            <input type="search" name="pesquisar" placeholder="Buscar produto...">
-            <button type="submit" class="btn search">Procurar</button>
-            <button type="submit" class="btn all">Ver todos os produtos</button>
+            <input class="search" type="search" name="pesquisar" placeholder="Buscar produto...">
+            <button class="button-search" type="submit">🔎</button>
+            <button class="button-search-all" type="submit" class="btn all">Ver todos os produtos</button>
         </form>
     </div><br>
 
@@ -69,7 +71,7 @@ if (!isset($_SESSION['user'])) {
     } else {
 
         echo "<div class='table'>
-                        <table border='1'>
+                        <table>
                         <tr>
                             <th>ID</th>
                             <th>Produto</th>

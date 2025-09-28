@@ -59,6 +59,7 @@
     position: relative;
     top: 80px;
     left: 10px;
+    font-size: 20px;
 }
 
 
@@ -111,7 +112,7 @@
 
 .label-input
 {
-    font-size: 15px;
+    font-size: 18px;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     position: relative;
     top: 100px;
@@ -151,7 +152,7 @@
 
 #background-index
 {
-    background: rgb(228, 226, 226);
+    background: rgb(218, 217, 217);
 }
 
 .table
@@ -160,8 +161,8 @@
   position: fixed;
   margin: 15px;
   padding: 10px;
-  left: 25%;
-  top: 350px;
+  left: -1.40%;
+  top: 120px;
 
 }
 
@@ -171,18 +172,52 @@
   position: fixed;
   margin: 15px;
   padding: 10px;
-  left: 25%;
-  top: 300px;
+  left: -0%;
+  top: 100px;
 }
+.search
+{
+    height: 45px;
+    width: 300px;
+    border-radius: 10px;
+    font-size: 20px;
+    position: fixed;
+    left: 1%;
+    top: 25px;
+}
+
+.button-search
+{
+    height: 45px;
+    width: 65px;
+    border-radius: 10px;
+    font-size: 20px;
+    position: fixed;
+    left: 17%;
+    top: 25px;
+}
+
+.button-search-all
+{
+    height: 45px;
+    width: 220px;
+    border-radius: 10px;
+    font-size: 20px;
+    position: fixed;
+    left: 21%;
+    top: 25px;
+    background: rgb(206, 206, 206);
+}
+
 
 #titulo-produtos
 {
     position: fixed;
-    top: 170px;
+    top: 25px;
     left: 40%;
     font-size: 40px;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-    color: rgb(10, 10, 10);
+    color: rgb(255, 255, 255);
 }
 
 .Encontrado
@@ -197,7 +232,7 @@
 .menu
 {
     width: 200%;
-    height: 80px;
+    height: 100px;
     position: fixed;
     left: -25%;
     background: rgb(1, 58, 245);
@@ -208,17 +243,18 @@
 {
     list-style: none;    /* tira as bolinhas da lista */
     position: relative;
-    left: 40%;
+    left: 45%;
     display: flex;       /* coloca item lado a lado */
-    gap: 130px;           /* espaçamento entre cada item */
+    gap: 70px;           /* espaçamento entre cada item */
     padding: 20px;
+    top: 8px;
 }
 
 .insert
 {
     display: inline-block; /* permite largura e altura */
     background: rgb(5, 221, 5);
-    width: 150%;
+    width: 120%;
     height: 30px;
     color: white;
     padding: 5px;
@@ -237,7 +273,7 @@
 {
     display: inline-block; /* permite largura e altura */
     background: rgb(247, 151, 42);
-    width: 150%;
+    width: 120%;
     height: 30px;
     color: white;
     padding: 5px;
@@ -270,3 +306,33 @@
 {
   background: rgb(156, 2, 2); 
 }
+
+table
+{
+    font-family: Arial, sans-serif;
+    border-collapse: collapse; /* Remove espaços entre células */
+    width: 175%;
+}
+th td
+{
+    text-align: center;
+    padding: 20px;
+}
+
+tr:nth-child(even) {
+    background-color: #f2f2f2; /* linhas claras */
+  }
+
+tr:nth-child(odd) {
+    background-color: #ffffff; /* linhas brancas */
+  }
+
+tr {
+    height: 70px; /* define altura mínima da linha */
+    font-size: 20px;
+}
+
+ th {
+    background-color: #333; /* cabeçalho escuro */
+    color: white;
+  }
