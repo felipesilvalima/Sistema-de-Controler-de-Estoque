@@ -29,19 +29,23 @@ if (!isset($_SESSION['user'])) {
 </head>
 
 <body id="background-index">
-    <div class="titulo">
-        <h1>Tabela de Produtos</h1>
-        <a href="../login/logout.php" class="btn sair">Sair</a>
-    </div>
-
+    <nav>
+        <div class="menu">
+            <ul>
+                <div class="nav">
+                    <li><a class="insert" href="adicionar.php">Inserir novo produto</a></li>
+                    <li><a class="alert" href="/controler_de_estoque/view/estoque_controle/alerta.php">Alerta de Estoque Baixo</a></li>
+                    <li><a class="logout" href="../login/logout.php">Sair</a></li>
+                </div>
+            </ul>
+        </div>
+    </nav>
+    <h1 id="titulo-produtos">Tabela de Produtos</h1>
     <div class="form">
         <form action="index.php" method="get">
             <input type="search" name="pesquisar" placeholder="Buscar produto...">
             <button type="submit" class="btn search">Procurar</button>
             <button type="submit" class="btn all">Ver todos os produtos</button>
-            <a href=adicionar.php class='btn add'>Inserir novo produto</a> <code><?php echo "|"; ?></code>
-            <a href=/controler_de_estoque/view/estoque_controle/alerta.php class='btn all'>Alerta de Estoque Baixo</a> <code><?php echo "|"; ?></code>
-            <a href=/controler_de_estoque/view/loginadm/login.php class='btn all'>Administração</a>
         </form>
     </div><br>
 
@@ -58,6 +62,7 @@ if (!isset($_SESSION['user'])) {
 
     $seach = $_GET['pesquisar'] ?? "";
     $dados = ProdutoController::index($seach);
+
 
     if (empty($dados)) {
         Feedbacks::feedback_index();

@@ -56,57 +56,59 @@ if(isset($btn))
 ?>
 
 <link rel="stylesheet" href="../css/styles.css">
-<div class="form-adicionar">
-    <h1>Adicionar Produto</h1>
-    <form action="adicionar.php" method="post">
-        <label for="pd">Produto:</label>
-        <input type="text" name="pd" placeholder="Nome do Produto">
-
-        <label for="descricao">Descrição:</label>
-        <textarea name="descricao" placeholder="Descrição do produto..." cols="50" rows="5"></textarea>
-
-        <label for="pc">Preço:</label>
-        <input type="text" name="pc" placeholder="Preço do Produto">
-
-        <label for="qt">Quantidade:</label>
-        <input type="number" name="qt" placeholder="Quantidade">
-
-        <label for="qt_min">Quantidade_minima:</label>
-        <input type="number" name="qt_min" placeholder="Quantidade_minima">
-
-        <label for="unidade_med">Unidade de Médida:</label>
-        <input type="text" name="unidade_med" placeholder="Unidade de Médida">
-
-        <label for="categoria">Categoria:</label>
-        <select name="categoria" required>
-        <option selected disabled>Adicione uma Categoria</option>
-        <?php 
-
-        $datas_categoria = CategoriaController::categorias("");
-
-        foreach($datas_categoria as $data)
-        {
-            echo" <option value='$data->id'>$data->categoria</option> ";
-        }
-        ?>
-        </select>
-
-        <label for="fornecedor">Fornecedor:</label>
-        <select name="fornecedor" required>
-        <option selected disabled>Adicione um Fornecedor</option>
-        <?php
-            $datas_fornecedores = FornecedorController::fornecedores("");
-
-            foreach($datas_fornecedores as $data)
+<body id="background-index">
+    <div class="form-adicionar">
+        <h1>Adicionar Produto</h1>
+        <form action="adicionar.php" method="post">
+            <label for="pd">Produto:</label>
+            <input type="text" name="pd" placeholder="Nome do Produto">
+    
+            <label for="descricao">Descrição:</label>
+            <textarea name="descricao" placeholder="Descrição do produto..." cols="50" rows="5"></textarea>
+    
+            <label for="pc">Preço:</label>
+            <input type="text" name="pc" placeholder="Preço do Produto">
+    
+            <label for="qt">Quantidade:</label>
+            <input type="number" name="qt" placeholder="Quantidade">
+    
+            <label for="qt_min">Quantidade_minima:</label>
+            <input type="number" name="qt_min" placeholder="Quantidade_minima">
+    
+            <label for="unidade_med">Unidade de Médida:</label>
+            <input type="text" name="unidade_med" placeholder="Unidade de Médida">
+    
+            <label for="categoria">Categoria:</label>
+            <select name="categoria" required>
+            <option selected disabled>Adicione uma Categoria</option>
+            <?php 
+    
+            $datas_categoria = CategoriaController::categorias("");
+    
+            foreach($datas_categoria as $data)
             {
-                echo" <option value='$data->id'>$data->fornecedor</option> ";
+                echo" <option value='$data->id'>$data->categoria</option> ";
             }
-        ?>
-        </select>
-
-        <input type="submit" value="Inserir" name="btn" class="btn inserir">
-        <input type="reset" value="Limpar" class="btn remover">
-    </form>
-    <a href="index.php" class="btn voltar">Voltar</a>
-</div>
+            ?>
+            </select>
+    
+            <label for="fornecedor">Fornecedor:</label>
+            <select name="fornecedor" required>
+            <option selected disabled>Adicione um Fornecedor</option>
+            <?php
+                $datas_fornecedores = FornecedorController::fornecedores("");
+    
+                foreach($datas_fornecedores as $data)
+                {
+                    echo" <option value='$data->id'>$data->fornecedor</option> ";
+                }
+            ?>
+            </select>
+    
+            <input type="submit" value="Inserir" name="btn" class="btn inserir">
+            <input type="reset" value="Limpar" class="btn remover">
+        </form>
+        <a href="index.php" >Voltar</a>
+    </div>
+</body>
 

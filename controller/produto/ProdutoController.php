@@ -35,7 +35,7 @@ class ProdutoController extends Produto
         $this->fornecedor_id = $dados['fornecedor'];
     }
 
-    public static function index($seach): array
+    public static function index($seach)
     {
         try 
         {

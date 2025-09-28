@@ -45,7 +45,7 @@ if (isset($btn))
             <input class="input-button" type="submit" value="Entrar" name="btn" class="btn entrar">
         </form>
         <div class="input-button-voltar">
-            <a  href="/controler_de_estoque/view/loginadm/login.php">Acessar como Administrador</a>
+            <a class="button-acessar" href="/controler_de_estoque/view/loginadm/login.php">Acessar como Administrador</a>
         </div>
     </div>
     <img id="img-estoque" src="../../view/css/img/estoque.png" alt="estoque" width="48%">

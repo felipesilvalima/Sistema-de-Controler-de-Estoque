@@ -52,7 +52,7 @@ class Feedbacks
    {
         if(isset($_SESSION['Encontrado']))
         {
-            echo "<div class='mensagem-erro'>".$_SESSION['Encontrado']."</div>";
+            echo "<div class='Encontrado'>".$_SESSION['Encontrado']."</div>";
             unset($_SESSION['Encontrado']);
          }
    }
