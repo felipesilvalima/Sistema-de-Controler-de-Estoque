@@ -83,8 +83,12 @@
     background: rgb(11, 194, 11);
 }
 
-.input-button-voltar
+.button-acessar
 {
+  
+  display: inline-block; /* permite largura e altura */
+  text-decoration: none;
+  color: rgb(255, 255, 255);
     width: 75%;
     height: 30px;
     padding: 10px;
@@ -98,16 +102,9 @@
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     border: 2px solid black;
     background: rgb(1, 58, 245);
-    
-}
-.button-acessar
-{
-  display: inline-block; /* permite largura e altura */
-  text-decoration: none;
-  color: rgb(255, 255, 255);
 }
 
-.input-button-voltar:hover
+.button-acessar:hover
 {
    background: rgb(1, 43, 182); 
 }
@@ -214,7 +211,7 @@
     left: 40%;
     display: flex;       /* coloca item lado a lado */
     gap: 130px;           /* espaçamento entre cada item */
-    padding: 25px;
+    padding: 20px;
 }
 
 .insert
@@ -224,6 +221,7 @@
     width: 150%;
     height: 30px;
     color: white;
+    padding: 5px;
     text-align: center;
     text-decoration: none;
     border-radius: 5px;
@@ -242,6 +240,7 @@
     width: 150%;
     height: 30px;
     color: white;
+    padding: 5px;
     text-align: center;
     text-decoration: none;
     border-radius: 5px;
@@ -259,6 +258,7 @@
     background: rgb(214, 0, 0);
     width: 200%;
     height: 30px;
+    padding: 5px;
     color: white;
     text-align: center;
     text-decoration: none;
