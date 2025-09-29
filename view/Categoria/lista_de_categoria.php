@@ -21,11 +21,12 @@ $categorias = CategoriaController::categorias("");
         <th>ID</th>
         <th>Categoria</th>
         <th>Descrição</th>
+        <th>Ações</th>
     </tr>
     </thead>
     <tbody align='center'>
     <?php
-        
+    
         foreach($categorias as $categoria )
         {
           echo"
@@ -38,9 +39,15 @@ $categorias = CategoriaController::categorias("");
                     <p>$categoria->descricao</p>
                 </details>
             </td>
+            <td>
+                <a href='?id=$categoria->id'>Relatório</a>
+                <a href='?id=$categoria->id'>Editar Categoria</a>
+                <a href='?id=$categoria->id'>Remover Categoria</a>
+            </td>
         </tr>";
         }
     ?>
 </tbody>
 </table>
+<a href="">Inserir nova Categoria</a>
 <a href="/controler_de_estoque/view/adm/index.php">Voltar</a>

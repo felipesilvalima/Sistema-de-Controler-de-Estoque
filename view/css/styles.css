@@ -161,7 +161,7 @@
   position: fixed;
   margin: 15px;
   padding: 10px;
-  left: -1.40%;
+  left: -1.30%;
   top: 120px;
 
 }
@@ -272,7 +272,7 @@
 .alert
 {
     display: inline-block; /* permite largura e altura */
-    background: rgb(247, 151, 42);
+    background: rgb(241, 197, 1);
     width: 120%;
     height: 30px;
     color: white;
@@ -285,7 +285,7 @@
 
 .alert:hover
 {
-  background: rgb(197, 108, 7); 
+  background: rgb(156, 141, 2); 
 }
 
 .logout
@@ -311,7 +311,7 @@ table
 {
     font-family: Arial, sans-serif;
     border-collapse: collapse; /* Remove espaços entre células */
-    width: 175%;
+    width: 114%;
 }
 th td
 {
@@ -336,3 +336,103 @@ tr {
     background-color: #333; /* cabeçalho escuro */
     color: white;
   }
+
+  .btn-relatorio
+  {
+     display: inline-block; /* permite largura e altura */
+     background: rgb(0, 89, 255);
+     font-size: 25px;
+     text-decoration: none;
+     position: relative;
+     left:  -1%;
+     width: 160px;
+     height: 30px;
+     padding: 5px;
+     color: white;
+     border-radius: 10px;
+  }
+
+    .btn-relatorio:hover
+    {
+      background: rgb(0, 61, 173);
+    }
+
+  .btn-entrada
+  {
+     display: inline-block; /* permite largura e altura */
+     background: rgb(0, 255, 55);
+     font-size: 25px;
+     text-decoration: none;
+     position: relative;
+     left:  0%;
+     width: 280px;
+     height: 30px;
+     padding: 5px;
+     color: white;
+     border-radius: 10px;
+  }
+
+    .btn-entrada:hover
+    {
+      background: rgb(33, 187, 40)
+    }
+
+  .btn-baixa
+  {
+     display: inline-block; /* permite largura e altura */
+     background: rgb(255, 166, 0);
+     font-size: 25px;
+     text-decoration: none;
+     position: relative;
+     left:  1%;
+     width: 280px;
+     height: 30px;
+     padding: 5px;
+     color: white;
+     border-radius: 10px;
+  }
+
+    .btn-baixa:hover
+    {
+      background: rgb(197, 128, 0)
+    }
+
+  .btn-atualizar
+  {
+     display: inline-block; /* permite largura e altura */
+     background: rgb(255, 123, 0);
+     font-size: 25px;
+     text-decoration: none;
+     position: relative;
+     left:  2%;
+     width: 280px;
+     height: 30px;
+     padding: 5px;
+     color: white;
+     border-radius: 10px;
+  }
+
+    .btn-atualizar:hover
+    {
+      background: rgb(170, 83, 1)
+    }
+
+  .btn-remover
+  {
+     display: inline-block; /* permite largura e altura */
+     background: rgb(255, 0, 0);
+     font-size: 25px;
+     text-decoration: none;
+     position: relative;
+     left:  3%;
+     width: 280px;
+     height: 30px;
+     padding: 5px;
+     color: white;
+     border-radius: 10px;
+  }
+
+    .btn-remover:hover
+    {
+      background: rgb(180, 2, 2)
+    }

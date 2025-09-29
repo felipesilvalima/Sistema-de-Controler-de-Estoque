@@ -44,8 +44,8 @@ if (!$dados) {
         echo "<td>" . preg_replace('/(\d{2})(\d{5})(\d{4})/','($1) $2-$3',(string)$date->telefone) . "</td>";
         echo "<td>
             <a href='relatorio.php?id=$date->id'>Relatório</a>
-             <a href='update_fornecedor.php?id=$date->id'>Editar Fornecedor</a>
-              <a href='remover_fornecedor.php?id=$date->id&pd=$date->fornecedor'>Remover Fornecedor</a>
+            <a href='update_fornecedor.php?id=$date->id'>Editar Fornecedor</a>
+            <a href='remover_fornecedor.php?id=$date->id'>Remover Fornecedor</a>
             
             </td>";
 
@@ -55,5 +55,5 @@ if (!$dados) {
 
 ?>
 </table>
-<a href="/controler_de_estoque/view/fornecedor/cadastrar_fornecedor.php">Cadastrar fornecedor</a> <br><br>
+<a href="/controler_de_estoque/view/fornecedor/cadastrar_fornecedor.php">Inserir novo fornecedor</a> <br><br>
 <a href="/controler_de_estoque/view/adm/index.php">Voltar</a>

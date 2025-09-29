@@ -35,7 +35,7 @@ if (!isset($_SESSION['user'])) {
                 <div class="nav">
                     <li><a class="insert" href="adicionar.php">Inserir novo produto</a></li>
                     <li><a class="alert" href="/controler_de_estoque/view/estoque_controle/alerta.php">Alerta de Estoque Baixo</a></li>
-                    <li><a class="logout" href="../login/logout.php">Sair</a></li>
+                    <li><a class="logout" href="../login/logout.php" onclick = "return confirm('Tem certeza que deseja Sair ?')">Sair</a></li>
                 </div>
             </ul>
         </div>
@@ -64,7 +64,7 @@ if (!isset($_SESSION['user'])) {
 
     $seach = $_GET['pesquisar'] ?? "";
     $dados = ProdutoController::index($seach);
-
+    
 
     if (empty($dados)) {
         Feedbacks::feedback_index();
@@ -81,20 +81,17 @@ if (!isset($_SESSION['user'])) {
                         </tr>";
         foreach ($dados as $date) {
             echo "<tr>";
-
-            echo "<td>" . (int)$date->id . "</td>";
-            echo "<td>" . (string)$date->produto . "</td>";
-            echo "<td> R$ " . number_format((float)$date->preco, 2, ',', '.') . "</td>";
-            echo "<td>" . (int)$date->quantidade_max . "</td>";
-            echo "<td>
-                            <div class='buttons'>
-                            <a href='ver.php?id=$date->id' class='btn ver'>Relatório</a> |
-                            <a href='/controler_de_estoque/view/estoque_controle/entrada_estoque.php?id=$date->id' class='btn add'>Entrada de Estoque</a> |
-                            <a href='/controler_de_estoque/view/estoque_controle/saida_estoque.php?id=$date->id' class='btn add'>Saida de Estoque</a> |
-                            <a href='atualizar.php?id=$date->id' class='btn atualizar'>Editar Produto</a> |
-                            <a href='remover.php?id=$date->id&pd=$date->produto' class='btn remover'>Remover Produto</a>
-                            </div></td>";
-
+                echo "<td>" . (int)$date->id . "</td>";
+                echo "<td>" . (string)$date->produto . "</td>";
+                echo "<td> R$ " . number_format((float)$date->preco, 2, ',', '.') . "</td>";
+                echo "<td>" . (int)$date->quantidade_max . "</td>";
+                echo "<td>
+                        <a href='ver.php?id=$date->id' class='btn-relatorio ver'>Relatório</a> 
+                        <a href='/controler_de_estoque/view/estoque_controle/entrada_estoque.php?id=$date->id' class='btn-entrada'>Entrada de Estoque</a> 
+                        <a href='/controler_de_estoque/view/estoque_controle/saida_estoque.php?id=$date->id' class='btn-baixa'>Saida de Estoque</a> 
+                        <a href='atualizar.php?id=$date->id' class='btn-atualizar'>Editar Produto</a> 
+                        <a href='remover.php?id=$date->id&pd=$date->produto' class='btn-remover' onclick='return confirm(\"Tem certezar que deseja Remover ?\")'>Remover Produto</a>
+                     </td>";
             echo "</tr>";
         }
     }
