@@ -70,7 +70,7 @@ class ProdutoController extends Produto
             
             if (!isset($line->id) || empty($id_produto)) 
             {
-                 http_response_code(404);//O recurso solicitado não existe
+                http_response_code(404);//O recurso solicitado não existe
                 ProdutoController::feedback_systm('existe',"Produto não encontrado!"); 
                 header("Location: index.php");
                 die;

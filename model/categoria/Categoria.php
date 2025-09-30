@@ -9,31 +9,59 @@ use PDOException;
 require_once __DIR__.'/../conexao/DB.php';
 class Categoria extends DB
 {
-    protected static function categoria_get($categoria)
+    protected static function categoria_list($categoria)
     {
 
-     try 
-     {
-        $sql = "SELECT id,categoria,descricao FROM categoria WHERE id != :categoria";
-        $stm = DB::connect()->prepare($sql);
-        $stm->bindValue(':categoria',$categoria, PDO::PARAM_INT);
-        $stm->execute();
-        
-        $data = $stm->fetchAll(PDO::FETCH_OBJ);
-
-        if(!empty($data))
+        try 
         {
-            return $data;
-        }
-            else
-            {
-                throw new Exception("Error: na consultar no metodo (categoria_get) ");
-            }
+            $sql = "SELECT id,categoria,descricao FROM categoria WHERE id != :categoria";
+            $stm = DB::connect()->prepare($sql);
+            $stm->bindValue(':categoria',$categoria, PDO::PARAM_INT);
+            $stm->execute();
+        
+            $data = $stm->fetchAll(PDO::FETCH_OBJ);
 
-     }
-      catch (PDOException $error) 
-      {
-         throw new Exception("Error:". $error->getMessage());
-      } 
+                if(!empty($data))
+                {
+                    return $data;
+                }
+                    else
+                    {
+                        throw new Exception("Error: na consultar no metodo (categoria_list) ");
+                    }
+
+        }
+            catch (PDOException $error) 
+            {
+                throw new Exception("Error:". $error->getMessage());
+            } 
+    }
+
+    protected static function categoria_get($id)
+    {
+
+        try 
+        {
+            $sql = "SELECT id,categoria,descricao FROM categoria WHERE id = :id";
+            $stm = DB::connect()->prepare($sql);
+            $stm->bindValue(':id',$id, PDO::PARAM_INT);
+            $stm->execute();
+        
+                $data = $stm->fetch(PDO::FETCH_OBJ);
+
+                if(!empty($data))
+                {
+                    return $data;
+                }
+                    else
+                    {
+                        throw new Exception("Error: na consultar no metodo (categoria_get) ");
+                    }
+
+        }
+            catch (PDOException $error) 
+            {
+                throw new Exception("Error:". $error->getMessage());
+            } 
     }
 }

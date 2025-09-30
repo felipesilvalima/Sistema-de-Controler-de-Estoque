@@ -14,13 +14,47 @@ class CategoriaController extends Categoria
     {
         try 
         {  
-            $data = Categoria::categoria_get($categoria); 
-            
-            if($data) 
+            $data = Categoria::categoria_list($categoria);
+
+            if(empty($data))
             {
-                http_response_code(200);//requisição foi processada com sucesso
-                return $data; 
+                http_response_code(404);//O recurso solicitado não existe
+                ProdutoController::feedback_systm('existe',"Categorias não encontrado!"); 
+                header("Location: lista_de_categoria.php");
+                die;
+            }  
+                else
+                {
+                    http_response_code(200);//requisição foi processada com sucesso
+                    return $data; 
+                }
+
+        } 
+            catch (PDOException $error) 
+            {
+                throw new Exception("Error:".$error->getMessage());
             }
+    }
+
+    public static function categoria_relatorio($id)
+    {
+        try 
+        {  
+            $data = Categoria::categoria_get($id);
+            
+            if(!isset($id) || empty($data->id))
+            {
+                http_response_code(404);//O recurso solicitado não existe
+                ProdutoController::feedback_systm('existe',"Categoria não encontrado!"); 
+                header("Location: lista_de_categoria.php");
+                die;
+            }
+                else
+                {
+                    http_response_code(200);//requisição foi processada com sucesso
+                    return $data; 
+                }
+            
 
         } 
             catch (PDOException $error) 

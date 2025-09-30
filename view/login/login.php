@@ -11,13 +11,13 @@ require_once __DIR__ . '/../../controller/login_user/LoginController.php';
 require_once __DIR__ . '/../../controller/feedbacks/Feedbacks.php';
 require_once __DIR__ . '/../../validation/Login/ValidationLogin.php';
 
-(string)$user = $_REQUEST['user'] ?? null;
-(string)$password = $_REQUEST['password'] ?? null;
+$user = $_REQUEST['user'] ?? null;
+$password = $_REQUEST['password'] ?? null;
 $btn =  $_REQUEST['btn'] ?? null;
 
 if (isset($btn)) {
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-        $Login = new LoginController((string)$user, (string)$password);
+        $Login = new LoginController( strip_tags((string)$user), strip_tags((string)$password));
         $logar = $Login->User_login();
     }
 }

@@ -18,7 +18,7 @@ class LoginController extends Login
 
     public function __construct($login, $password)
     {
-       $this->login = $login; 
+       $this->login =  $login; 
        $this->password = $password; 
     }
 

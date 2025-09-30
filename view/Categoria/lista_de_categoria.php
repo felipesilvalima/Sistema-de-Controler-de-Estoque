@@ -40,7 +40,7 @@ $categorias = CategoriaController::categorias("");
                 </details>
             </td>
             <td>
-                <a href='?id=$categoria->id'>Relatório</a>
+                <a href='relatorio_categoria.php?id=$categoria->id'>Relatório</a>
                 <a href='?id=$categoria->id'>Editar Categoria</a>
                 <a href='?id=$categoria->id'>Remover Categoria</a>
             </td>
