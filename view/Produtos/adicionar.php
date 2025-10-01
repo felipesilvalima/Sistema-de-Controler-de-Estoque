@@ -46,8 +46,6 @@ if(isset($btn))
         {
             $produto = new ProdutoController($dados);
             $inseir = $produto->inseir($user_id);
-
-                Feedbacks::feedback_validation_inserir();
         }
         
     
@@ -57,29 +55,30 @@ if(isset($btn))
 
 <link rel="stylesheet" href="../css/styles.css">
 <body id="background-index">
+    <?= Feedbacks::feedback_validation_inserir(); ?>
     <div class="form-adicionar">
-        <h1>Adicionar Produto</h1>
+        <h1 class="titulo-adicionar">Adicionar Produto</h1>
         <form action="adicionar.php" method="post">
-            <label for="pd">Produto:</label>
-            <input type="text" name="pd" placeholder="Nome do Produto">
+            <label class="label-adicionar" for="pd">Produto:</label>
+            <input class="input-adicionar" type="text" name="pd" placeholder="Nome do Produto">
     
-            <label for="descricao">Descrição:</label>
-            <textarea name="descricao" placeholder="Descrição do produto..." cols="50" rows="5"></textarea>
+            <label class="label-adicionar"  for="descricao">Descrição:</label>
+            <textarea class="input-descricao" name="descricao" placeholder="Descrição do produto..." cols="50" rows="5"></textarea>
     
-            <label for="pc">Preço:</label>
-            <input type="text" name="pc" placeholder="Preço do Produto">
+            <label class="label-adicionar" for="pc">Preço:</label>
+            <input class="input-adicionar" type="number" name="pc" placeholder="Preço do Produto">
     
-            <label for="qt">Quantidade:</label>
-            <input type="number" name="qt" placeholder="Quantidade">
+            <label class="label-adicionar" for="qt">Quantidade:</label>
+            <input class="input-adicionar" type="number" name="qt" placeholder="Quantidade">
     
-            <label for="qt_min">Quantidade_minima:</label>
-            <input type="number" name="qt_min" placeholder="Quantidade_minima">
+            <label class="label-adicionar" for="qt_min">Quantidade_minima:</label>
+            <input class="input-adicionar" type="number" name="qt_min" placeholder="Quantidade_minima">
     
-            <label for="unidade_med">Unidade de Médida:</label>
-            <input type="text" name="unidade_med" placeholder="Unidade de Médida">
+            <label class="label-adicionar" for="unidade_med">Unidade de Médida:</label>
+            <input class="input-adicionar" type="text" name="unidade_med" placeholder="Unidade de Médida">
     
-            <label for="categoria">Categoria:</label>
-            <select name="categoria" required>
+            <label class="label-adicionar" for="categoria">Categoria:</label>
+            <select class="select-adicionar" name="categoria" required>
             <option selected disabled>Adicione uma Categoria</option>
             <?php 
     
@@ -92,8 +91,8 @@ if(isset($btn))
             ?>
             </select>
     
-            <label for="fornecedor">Fornecedor:</label>
-            <select name="fornecedor" required>
+            <label class="label-adicionar" for="fornecedor">Fornecedor:</label>
+            <select class="select-adicionar" name="fornecedor" required>
             <option selected disabled>Adicione um Fornecedor</option>
             <?php
                 $datas_fornecedores = FornecedorController::fornecedores("");
@@ -104,11 +103,12 @@ if(isset($btn))
                 }
             ?>
             </select>
-    
-            <input type="submit" value="Inserir" name="btn" class="btn inserir">
-            <input type="reset" value="Limpar" class="btn remover">
+                <div class="button-adicionar">
+                    <input type="submit" value="Inserir" name="btn" class="btn-inserir">
+                    <input type="reset" value="Limpar" class="btn-limpar">
+                    <a href="index.php" class="voltar">Voltar</a>
+                </div>
         </form>
-        <a href="index.php" >Voltar</a>
     </div>
 </body>
 

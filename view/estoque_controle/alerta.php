@@ -13,20 +13,15 @@ if(!isset($_SESSION['user']))
     header("Location: /controler_de_estoque/view/login/login.php");
     die;
 }
+session_write_close();
 
-$alert = Controler_estoqueController::Alert_controll();
-
-  if($alert)
-  {
-     Feedbacks::feedback_alerta_de_estoque();
-  }
-
-    else
-    {
-        Feedbacks::feedback_alerta_de_estoque();
-    }
-
-
+  Controler_estoqueController::Alert_controll();
 ?>
+<link rel="stylesheet" href="../css/styles.css">
+<div class="estoque-alert"></div>
+<details class='mensagem-estoque-alert'>
+     <summary style='color: black'>Produtos que estão com estoque baixo!!</summary>
+      <?=  Feedbacks::feedback_alerta_de_estoque();?>
+ </details>
 
-<a href="/controler_de_estoque/view/Produtos/index.php">Voltar</a>
+<a class="voltar-estoque" href="/controler_de_estoque/view/Produtos/index.php">Voltar</a>

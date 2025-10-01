@@ -9,7 +9,7 @@ class Feedbacks
         
         if(isset($_SESSION['fields_empty']))
          {
-            echo "<div class='mensagem-erro'>".$_SESSION['fields_empty']."</div>";
+            echo "<div class='mensagem-empty'>".$_SESSION['fields_empty']."</div>";
             unset($_SESSION['fields_empty']);
          }
 
@@ -95,7 +95,7 @@ class Feedbacks
    {
          if(isset($_SESSION['fields_empty']))
          {
-            echo "<div class='mensagem-erro'>".$_SESSION['fields_empty']."</div>";
+            echo "<div class='mensagem-empty-adicionar'>".$_SESSION['fields_empty']."</div>";
             unset($_SESSION['fields_empty']);
          }
    }
@@ -116,9 +116,24 @@ class Feedbacks
   
    public static function feedback_alerta_de_estoque():void 
    {
-         if(isset($_SESSION['estoque_error']))
+         if(isset($_SESSION['estoque_alert']))
          {
-            echo "<div class='mensagem-erro'>".$_SESSION['estoque_error']."</div>";
+            foreach($_SESSION['estoque_alert'] as $sessao_new)
+            {
+               echo "<div>".$sessao_new."</div>";
+               unset($_SESSION['estoque_alert']);
+            }
+         }
+
+         elseif(isset($_SESSION['estoque_not_alert']))
+         {
+            echo "<div class='mensagem-estoque-not-alert'>".$_SESSION['estoque_not_alert']."</div>";
+            unset($_SESSION['estoque_not_alert']);
+         }
+
+         elseif(isset($_SESSION['estoque_error']))
+         {
+            echo "<div class='mensagem-estoque-alert'>".$_SESSION['estoque_error']."</div>";
             unset($_SESSION['estoque_error']);
          }
    }

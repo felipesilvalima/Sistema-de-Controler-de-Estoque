@@ -36,7 +36,7 @@ class Controler_estoqueController extends Controler_estoque
         $this->fornecedor_id = $dados['fornecedor'];
     }
 
-   public static function Alert_controll(): bool
+   public static function Alert_controll()
    {
         try 
         {
@@ -44,36 +44,36 @@ class Controler_estoqueController extends Controler_estoque
             
              if($datas > 0)
              {
+                
                  $alerta_estoque = 0;
-
                  foreach($datas as $data)
                  {
+
                      if($data->quantidade_max <= $data->quantidade_min)
                      {
-                         session_write_close();
                          $alerta_estoque = 1;
                          http_response_code(200);//requisição foi processada com sucesso
-                         echo "O produto $data->produto está com estoque baixo!!<br>"; 
+                         Controler_estoqueController::feedback_systm_alert('estoque_alert',"Produto: ". $data->produto);
                      }
                  }
                     if($alerta_estoque == 0)
                     {
+                        session_write_close();
                          http_response_code(200);//requisição foi processada com sucesso
-                        echo "Sem Alerta de estoque baixo!!<br>"; 
+                        ProdutoController::feedback_systm('estoque_not_alert',"Sem Alerta de estoque baixo!!"); 
                     }
-     
-                 return true;
              }
                  else
                  {
                     http_response_code(204);//recurso encontrado, mas não há conteúdo para retornar.
                      ProdutoController::feedback_systm('estoque_error',"O seu estoque está vázio!!");
-                     return false;
                  }
             
-        } catch (PDOException $error) {
-            throw new Exception("Error no método (Alert_controll).  Error: ".$error->getMessage());
-        }
+        } 
+            catch (PDOException $error) 
+            {
+                 new Exception("Error no método (Alert_controll).  Error: ".$error->getMessage());
+            }
    }
 
 
@@ -166,7 +166,7 @@ class Controler_estoqueController extends Controler_estoque
                 if($entrada)
                 {
                      http_response_code(200);//requisição foi processada com sucesso
-                    ProdutoController::feedback_systm('update_true',"Quantidade removida com sucesso");
+                    ProdutoController::feedback_systm('update_false',"Quantidade removida com sucesso");
                     MovimentacaoController::saida(
                     $this->produto_name,
                     $quantidade_saida,
@@ -187,6 +187,11 @@ class Controler_estoqueController extends Controler_estoque
             {
               throw new Exception("Error:".$error->getMessage());      
             }
+    }
+
+    public static function feedback_systm_alert(string $name_session, string $messagem): void
+    {
+         $_SESSION[$name_session][] =  $messagem;
     }
 
 }
