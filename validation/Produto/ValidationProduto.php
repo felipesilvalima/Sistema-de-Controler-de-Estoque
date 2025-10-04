@@ -18,6 +18,24 @@ class ValidationProduto
         }
     }
 
+    public static function validation_entrada(int $entrada)
+    {
+        if(empty($entrada))
+        {
+             ProdutoController::feedback_systm('fields_empty_estoque',"Preencha o campo vazio!");
+             return true;
+        }
+    }
+
+    public static function validation_saida(int $saida)
+    {
+        if(empty($saida))
+        {
+             ProdutoController::feedback_systm('fields_empty_estoque',"Preencha o campo vazio!");
+             return true;
+        }
+    }
+
    
 
     

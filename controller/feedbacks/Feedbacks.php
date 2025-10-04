@@ -99,6 +99,16 @@ class Feedbacks
             unset($_SESSION['fields_empty']);
          }
    }
+
+   public static function feedback_validation_estoque():void  
+   {
+         if(isset($_SESSION['fields_empty_estoque']))
+         {
+            echo "<div class='mensagem-empty-adicionar-estoque'>".$_SESSION['fields_empty_estoque']."</div>";
+            unset($_SESSION['fields_empty_estoque']);
+         }
+   }
+
    public static function feedback_validation_form_limit():void  
    {
          if(isset($_SESSION['fields_cpf_limit']))

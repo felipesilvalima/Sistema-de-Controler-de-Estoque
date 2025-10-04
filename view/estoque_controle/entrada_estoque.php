@@ -49,23 +49,28 @@ if(isset($btn))
         $Estoque = new Controler_estoqueController($dados);
         $update_date = $Estoque->Entrada_estoque((int)$id,(int)$user_id);
         
-        Feedbacks::feedback_atualizar();     
+        Feedbacks::feedback_atualizar();   
+   
     }
     
 }
 
 ?>
 <link rel="stylesheet" href="../css/styles.css">
-<div class="form-update">
-    <h1>Inserir Quantidade</h1>
+ <?= Feedbacks::feedback_validation_estoque(); ?>
+<div class="estoque-alert">
+    <h1 class="titulo-adicionar">Inserir Quantidade</h1>
     <form action="entrada_estoque.php" method="post">
-        <label for="id">ID:</label>
-        <input type="number" name="id" value="<?=$details->id ?>" readonly>
+        
+        <label class="label-entrada" for="id">ID:</label>
+        <input class="input-entrada" type="number" name="id" value="<?=$details->id ?>" readonly>
 
-        <label for="qt">Quantidade:</label>
-        <input type="number" name="qt" placeholder="Insirar uma quantidade">
+        <label class="label-entrada" for="qt">Quantidade:</label>
+        <input class="input-entrada" type="number" name="qt" placeholder="Insirar uma quantidade">
 
-        <input type="submit" value="Inserir" name="btn" class="btn atualizar">
+         <div class="button-adicionar">
+                <input type="submit" value="Inserir" name="btn" class="btn-inserir">
+                <a href="../Produtos/index.php" class="voltar">Voltar</a>
+        </div>
     </form>
-    <a href="../Produtos/index.php" class="btn voltar">Voltar</a>
 </div>

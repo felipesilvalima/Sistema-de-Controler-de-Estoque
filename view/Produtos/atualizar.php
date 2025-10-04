@@ -53,65 +53,69 @@ if(isset($_REQUEST['btn']))
  
 ?>
 <link rel="stylesheet" href="../css/styles.css">
-<div class="form-update">
-    <h1>Atualizar Produto</h1>
-    <form action="atualizar.php" method="post">
-        <label for="id">ID:</label>
-        <input type="number" name="id" value="<?=$details->id ?>" readonly>
-
-        <label for="pd">Produto:</label>
-        <input type="text" name="pd" value="<?=$details->produto ?>">
-
-        <label for="descricao">Descrição:</label>
-        <textarea name="descricao" placeholder="Descrição do produto..." cols="50" rows="5"><?=$details->descricao?></textarea>
-
-        <label for="pc">Preço:</label>
-        <input type="text" name="pc" value="<?=number_format((float)$details->preco,2, '.' , ',')?>">
-
-        <input type="number" name="qt" value="<?=$details->quantidade_max ?>" hidden>
-
-        <label for="qt_min">Quantidade Minima</label>
-        <input type="number" name="qt_min" value="<?=$details->quantidade_min?>">
-
-        <label for="unidade_med">Unidade de Médida:</label>
-        <input type="text" name="unidade_med" placeholder="Unidade de Médida" value="<?=$details->unidade_medida?>">
-
-        <label for="categoria">Categoria:</label>
-        <select name="categoria">
-        <?php 
-
-            $datas_categoria = CategoriaController::categorias((int)$details->categoria_id); //todas as categorias
-
-            echo "<option selected disabled value='$details->categoria_id'>$details->categoria</option>";
-        
-            foreach($datas_categoria as $data)
-            {
-                echo" <option value='$data->id'>$data->categoria</option> ";
-            }
-        ?>
-        </select>
-
-        <label for="fornecedor">Fornecedor:</label>
-        <select name="fornecedor">
-        <?php
-
+<body id="background-index">
+    <div class="form-adicionar">
+        <h1 class="titulo-adicionar">Atualizar Produto</h1>
+        <form action="atualizar.php" method="post">
+            <label class="label-adicionar" for="id">ID:</label>
+            <input class="input-adicionar" type="number" name="id" value="<?=$details->id ?>" readonly>
+    
+            <label class="label-adicionar" for="pd">Produto:</label>
+            <input class="input-adicionar" type="text" name="pd" value="<?=$details->produto ?>">
+    
+            <label class="label-adicionar" for="descricao">Descrição:</label>
+            <textarea class="input-descricao" name="descricao" placeholder="Descrição do produto..." cols="50" rows="5"><?=$details->descricao?></textarea>
+    
+            <label class="label-adicionar" for="pc">Preço:</label>
+            <input class="input-adicionar" type="text" name="pc" value="<?=number_format((float)$details->preco,2, '.' , ',')?>">
+    
+            <input  type="number" name="qt" value="<?=$details->quantidade_max ?>" hidden>
+    
+            <label class="label-adicionar" for="qt_min">Quantidade Minima</label>
+            <input class="input-adicionar" type="number" name="qt_min" value="<?=$details->quantidade_min?>">
+    
+            <label class="label-adicionar" for="unidade_med">Unidade de Médida:</label>
+            <input class="input-adicionar" type="text" name="unidade_med" placeholder="Unidade de Médida" value="<?=$details->unidade_medida?>">
+    
+            <label class="label-adicionar" for="categoria">Categoria:</label>
+            <select class="select-adicionar" name="categoria">
+            <?php 
+    
+                $datas_categoria = CategoriaController::categorias((int)$details->categoria_id); //todas as categorias
+    
+                echo "<option selected disabled value='$details->categoria_id'>$details->categoria</option>";
             
-            $datas_fornecedores = FornecedorController::fornecedores((string)$details->fornecedor);  //todas as fornecedores
-
-            echo "<option selected disabled value='$details->fornecedor_id'>$details->fornecedor</option>";
-        
-
-            foreach($datas_fornecedores as $data)
-            {
-                echo" <option value='$data->id'>$data->fornecedor</option> ";
-            }
-        ?>
-        </select>
-
-        <input type="submit" value="Atualizar" name="btn">
-    </form>
-    <a href="index.php" class="btn voltar">Voltar</a>
-</div>
+                foreach($datas_categoria as $data)
+                {
+                    echo" <option value='$data->id'>$data->categoria</option> ";
+                }
+            ?>
+            </select>
+    
+            <label class="label-adicionar" for="fornecedor">Fornecedor:</label>
+            <select class="select-adicionar" name="fornecedor">
+            <?php
+    
+                
+                $datas_fornecedores = FornecedorController::fornecedores((string)$details->fornecedor);  //todas as fornecedores
+    
+                echo "<option selected disabled value='$details->fornecedor_id'>$details->fornecedor</option>";
+            
+    
+                foreach($datas_fornecedores as $data)
+                {
+                    echo" <option value='$data->id'>$data->fornecedor</option> ";
+                }
+            ?>
+            </select>
+    
+             <div class="button-adicionar">
+                    <input type="submit" value="Atualizar" name="btn" class="btn-inserir">
+                    <a href="index.php" class="voltar">Voltar</a>
+             </div>
+        </form>
+    </div>
+</body>
 
 
 

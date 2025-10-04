@@ -6,10 +6,12 @@ use Exception;
 use model\Controler_estoque as Controler_estoque;
 use model\Produto;
 use PDOException;
+use validation\Produto\ValidationProduto;
 
 require_once __DIR__.'/../../model/controle_estoque/Controler_estoque.php';
 require_once __DIR__.'/../../controller/produto/ProdutoController.php';
 require_once __DIR__.'/../../controller/movimentacao/MovimentacaoController.php';
+require_once __DIR__.'/../../validation/Produto/ValidationProduto.php';
 
 class Controler_estoqueController 
 {
@@ -81,47 +83,53 @@ class Controler_estoqueController
     {
         try 
         {
-            
-            $quantidade_max = ProdutoController::detalhes($id);
-           
-            if (!$quantidade_max) 
+            $validacao = ValidationProduto::validation_entrada($this->quantidade_max);  
+
+            if(!$validacao)
             {
-                header("Location: /controler_de_estoque/view/Produtos/index.php");
-                die;
-            }
 
-            $quantidade_entrada = $this->quantidade_max;
-            $this->quantidade_max += $quantidade_max->quantidade_max;
-           
-            $entrada = Controler_estoque::update_date_estoque(
-                $id,
-                $this->produto_name,
-                $this->preco,
-                $this->quantidade_max,
-                $this->quantidade_min,
-                $this->descricao,
-                $this->unidade_medida,
-                $this->categoria_id,
-                $this->fornecedor_id,
-                $user_id
-            ); 
-
-                if($entrada)
+                $quantidade_max = ProdutoController::detalhes($id);
+               
+                if (!$quantidade_max) 
                 {
-                    ProdutoController::feedback_systm('update_true',"Quantidade Inserida com sucesso");
-                    MovimentacaoController::entrada(
-                    $this->produto_name,
-                    $quantidade_entrada,
-                    $id,
-                    $user_id
-                    );
                     header("Location: /controler_de_estoque/view/Produtos/index.php");
-                    die;  
+                    die;
                 }
-                    else 
+    
+                $quantidade_entrada = $this->quantidade_max;
+                $this->quantidade_max += $quantidade_max->quantidade_max;
+               
+                $entrada = Controler_estoque::update_date_estoque(
+                    $id,
+                    $this->produto_name,
+                    $this->preco,
+                    $this->quantidade_max,
+                    $this->quantidade_min,
+                    $this->descricao,
+                    $this->unidade_medida,
+                    $this->categoria_id,
+                    $this->fornecedor_id,
+                    $user_id
+                ); 
+    
+                    if($entrada)
                     {
-                        ProdutoController::feedback_systm('update_false'," Error ao inserir Quantidade");
-                    } 
+                        ProdutoController::feedback_systm('update_true',"Quantidade Inserida com sucesso");
+                        MovimentacaoController::entrada(
+                        $this->produto_name,
+                        $quantidade_entrada,
+                        $id,
+                        $user_id
+                        );
+                        header("Location: /controler_de_estoque/view/Produtos/index.php");
+                        die;  
+                    }
+                        else 
+                        {
+                            ProdutoController::feedback_systm('update_false'," Error ao inserir Quantidade");
+                        } 
+            }
+            
         } 
             catch (PDOException $error) 
             {
@@ -133,54 +141,60 @@ class Controler_estoqueController
     {
         try 
         {
-          
-            $quantidade_max = ProdutoController::detalhes($id);
+            $validacao = ValidationProduto::validation_entrada($this->quantidade_max);
 
-            if (!$quantidade_max) 
+            if(!$validacao)
             {
-                header("Location: /controler_de_estoque/view/Produtos/index.php");
-                die;
-            }
 
-            $quantidade_saida = $this->quantidade_max;
-
-            $this->quantidade_max = $quantidade_max->quantidade_max - $quantidade_saida; 
-            
-            if( $this->quantidade_max < 0)
-            {
-                $this->quantidade_max = 0;
-            }
-           
-            $entrada = Controler_estoque::update_date_estoque(
-                $id,
-                $this->produto_name,
-                $this->preco,
-                $this->quantidade_max,
-                $this->quantidade_min,
-                $this->descricao,
-                $this->unidade_medida,
-                $this->categoria_id,
-                $this->fornecedor_id
-            ); 
-
-                if($entrada)
+                $quantidade_max = ProdutoController::detalhes($id);
+    
+                if (!$quantidade_max) 
                 {
-                     http_response_code(200);//requisição foi processada com sucesso
-                    ProdutoController::feedback_systm('update_false',"Quantidade removida com sucesso");
-                    MovimentacaoController::saida(
-                    $this->produto_name,
-                    $quantidade_saida,
-                    $id,
-                    $user_id
-                    );
                     header("Location: /controler_de_estoque/view/Produtos/index.php");
-                    die; 
-                
+                    die;
                 }
-                    else 
+    
+                $quantidade_saida = $this->quantidade_max;
+    
+                $this->quantidade_max = $quantidade_max->quantidade_max - $quantidade_saida; 
+                
+                if( $this->quantidade_max < 0)
+                {
+                    $this->quantidade_max = 0;
+                }
+               
+                $entrada = Controler_estoque::update_date_estoque(
+                    $id,
+                    $this->produto_name,
+                    $this->preco,
+                    $this->quantidade_max,
+                    $this->quantidade_min,
+                    $this->descricao,
+                    $this->unidade_medida,
+                    $this->categoria_id,
+                    $this->fornecedor_id
+                ); 
+    
+                    if($entrada)
                     {
-                        ProdutoController::feedback_systm('update_false'," Error ao remover Quantidade");
-                    }      
+                         http_response_code(200);//requisição foi processada com sucesso
+                        ProdutoController::feedback_systm('update_false',"Quantidade removida com sucesso");
+                        MovimentacaoController::saida(
+                        $this->produto_name,
+                        $quantidade_saida,
+                        $id,
+                        $user_id
+                        );
+                        header("Location: /controler_de_estoque/view/Produtos/index.php");
+                        die; 
+                    
+                    }
+                        else 
+                        {
+                            ProdutoController::feedback_systm('update_false'," Error ao remover Quantidade");
+                        }      
+            }
+          
  
         } 
             catch (PDOException $error) 
