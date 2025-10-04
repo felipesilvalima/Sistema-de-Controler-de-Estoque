@@ -11,7 +11,7 @@ require_once __DIR__.'/../../model/login_adm/LoginAdm.php';
 require_once __DIR__.'/../../validation/Login/ValidationLogin.php';
 require_once __DIR__.'/../../controller/produto/ProdutoController.php';
 
-class LoginAdmController extends LoginAdm
+class LoginAdmController 
 {
 
     private int $cpf;

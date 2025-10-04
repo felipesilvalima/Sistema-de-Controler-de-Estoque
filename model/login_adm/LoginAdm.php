@@ -8,7 +8,7 @@ use PDOException;
 require_once __DIR__.'/../conexao/DB.php';
 class LoginAdm extends DB
 {
-     protected static function login($cpf)
+     public static function login($cpf)
    {
         try 
         {       

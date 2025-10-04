@@ -10,7 +10,7 @@ require_once __DIR__.'/../conexao/DB.php';
 
 class AdmModel extends DB
 {
-   protected static function get_date_user($seach)
+   public static function get_date_user($seach)
     {
         try
         {
@@ -38,7 +38,7 @@ class AdmModel extends DB
             }
     }
 
-   protected static function get_date_movimentacao($seach)
+   public static function get_date_movimentacao($seach)
     {
         try
         {
@@ -66,7 +66,7 @@ class AdmModel extends DB
             }
     }
 
-    protected static function movimentacao_limpa()
+    public static function movimentacao_limpa()
     {
         try
         {

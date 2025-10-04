@@ -11,7 +11,7 @@ require_once __DIR__.'/../conexao/DB.php';
 class Controler_estoque extends DB
 {
     
-    protected static function get_quant_min_max()
+    public static function get_quant_min_max()
     {
         try 
         {
@@ -38,7 +38,7 @@ class Controler_estoque extends DB
     }
 
 
-     protected static function update_date_estoque($id,$pd,$pc,$qt,$qt_min,$des,$um,$cat,$for)
+     public static function update_date_estoque($id,$pd,$pc,$qt,$qt_min,$des,$um,$cat,$for)
     {
         try 
         {

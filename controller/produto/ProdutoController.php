@@ -11,7 +11,7 @@ require_once __DIR__.'/../../controller/movimentacao/MovimentacaoController.php'
 use PDOException;
 use validation\Produto\ValidationProduto;
 
-class ProdutoController extends Produto
+class ProdutoController
 {
     private int $id;
     private string $produto_name;

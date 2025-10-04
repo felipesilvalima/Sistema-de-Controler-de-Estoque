@@ -11,7 +11,7 @@ require_once __DIR__.'/../../model/fornecedor/Fornecedor.php';
 require_once __DIR__.'/../../controller/produto/ProdutoController.php';
 require_once __DIR__.'/../../validation/fornecedor/ValidationFornecedor.php';
 
-class FornecedorController extends Fornecedor
+class FornecedorController 
 {
     private int $id;
     private string $fornecedor;

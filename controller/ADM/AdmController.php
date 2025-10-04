@@ -9,7 +9,7 @@ use PDOException;
 require_once __DIR__.'/../../model/ADM/AdmModel.php';
 require_once __DIR__.'/../../controller/produto/ProdutoController.php';
 
-class AdmController extends AdmModel
+class AdmController
 {
     public static function index($search)
     {

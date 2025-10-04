@@ -9,7 +9,7 @@ require_once __DIR__.'/../conexao/DB.php';
 
 class Login extends DB
 {
-   protected static function login($user)
+   public static function login($user)
    {
         try 
         {       

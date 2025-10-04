@@ -10,7 +10,7 @@ use PDOException;
 
 class Produto extends DB
 {
-    protected static function get_date($seach)
+    public static function get_date($seach)
     {
         try
         {
@@ -38,7 +38,7 @@ class Produto extends DB
     }
 
 
-    protected static function get_id($id)
+    public static function get_id($id)
     {
         try
         {
@@ -66,7 +66,7 @@ class Produto extends DB
             }
     }
 
-    protected static function update_date($id,$produto,$preco,$quantidade,$quantidade_min,$descricao,$unidade_medida, $categoria,$fornecedor)
+    public static function update_date($id,$produto,$preco,$quantidade,$quantidade_min,$descricao,$unidade_medida, $categoria,$fornecedor)
     {
         try 
         {
@@ -90,7 +90,7 @@ class Produto extends DB
             }
                 else
                 {
-                    throw new Exception("Error: na Atualização do produto no metodo (update_date) ");
+                    return false;
                 }
 
         } 
@@ -100,7 +100,7 @@ class Produto extends DB
             }
     }
 
-    protected static function inserir_produto($produto_name, $preco_pd, $quant_pd,$quantidade_min,$descricao,$unidade_medida,$categoria,$fornecedor,$user)
+    public static function inserir_produto($produto_name, $preco_pd, $quant_pd,$quantidade_min,$descricao,$unidade_medida,$categoria,$fornecedor,$user)
     {
         try 
         {
@@ -124,7 +124,7 @@ class Produto extends DB
             }
                 else
                 {
-                    throw new Exception("Error: na inserção do produto no metodo (inserir_produto) ");
+                    return false;
                 }
 
         }
@@ -135,7 +135,7 @@ class Produto extends DB
 
     }
 
-    protected static function verificarProduto($produto_name)
+    public static function verificarProduto($produto_name)
     {
         try 
         {
@@ -160,7 +160,7 @@ class Produto extends DB
          }
     }
 
-    protected static function remover($id)
+    public static function remover($id)
     {
      try 
      {
@@ -175,7 +175,7 @@ class Produto extends DB
         }
             else
             {
-                throw new Exception("Error: na remoção do produto no metodo (remover) ");
+                return false;
             }
 
      }
@@ -185,7 +185,7 @@ class Produto extends DB
       } 
     }
 
-    protected static function last_product()
+    public static function last_product()
     {
 
      try 
@@ -202,7 +202,7 @@ class Produto extends DB
         }
             else
             {
-                throw new Exception("Error: na consultar no metodo (last_product) ");
+                return null;
             }
 
      }

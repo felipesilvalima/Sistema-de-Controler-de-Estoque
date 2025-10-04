@@ -10,7 +10,7 @@ require_once __DIR__.'/../conexao/DB.php';
 
 class Fornecedor extends DB
 {
-    protected static function register_fornec($fornecedor,$cpf,$tel,$endereco)
+    public static function register_fornec($fornecedor,$cpf,$tel,$endereco)
     {
         try 
         {
@@ -38,7 +38,7 @@ class Fornecedor extends DB
             }
     }
 
-    protected static function verify_fornecedor($fornecedor)
+    public static function verify_fornecedor($fornecedor)
     {
         try 
         {
@@ -63,7 +63,7 @@ class Fornecedor extends DB
             }
     }
 
-    protected static function verify_cpf($cpf)
+    public static function verify_cpf($cpf)
     {
         try 
         {
@@ -84,7 +84,7 @@ class Fornecedor extends DB
             }
     }
 
-    protected static function list_fornec()
+    public static function list_fornec()
     {
         try 
         {
@@ -109,7 +109,7 @@ class Fornecedor extends DB
             }
     }
 
-    protected static function get_fornec($id)
+    public static function get_fornec($id)
     {
         try 
         {
@@ -135,7 +135,7 @@ class Fornecedor extends DB
             }
     }
 
-    protected static function update_fornecedor($id,$fornecedor,$cpf,$telefone,$edereco)
+    public static function update_fornecedor($id,$fornecedor,$cpf,$telefone,$edereco)
     {
         try 
         {
@@ -164,7 +164,7 @@ class Fornecedor extends DB
             }
     }
 
-     protected static function remover_idFornercedor($id)
+     public static function remover_idFornercedor($id)
     {
      try 
      {
@@ -189,7 +189,7 @@ class Fornecedor extends DB
       } 
     }
 
-    protected static function fornecedor_get($fornecedor)
+    public static function fornecedor_get($fornecedor)
     {
 
      try 

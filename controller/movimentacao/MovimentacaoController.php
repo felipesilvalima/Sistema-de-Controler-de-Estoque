@@ -6,7 +6,7 @@ use model\Movimentacao as Movimentacao;
 
 require_once __DIR__.'/../../model/movimentacao/Movimentacao.php';
 
-class MovimentacaoController extends Movimentacao
+class MovimentacaoController 
 {
     public static function insercao($produto, $quantidade,$id_produto,$user_id)
     {

@@ -7,7 +7,7 @@ use model\Categoria as Categoria;
 use PDOException;
 
 require_once __DIR__.'/../../model/categoria/Categoria.php';
-class CategoriaController extends Categoria
+class CategoriaController
 {
    
     public static function categorias($categoria)

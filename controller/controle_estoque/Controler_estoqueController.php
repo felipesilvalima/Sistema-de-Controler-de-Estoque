@@ -11,7 +11,7 @@ require_once __DIR__.'/../../model/controle_estoque/Controler_estoque.php';
 require_once __DIR__.'/../../controller/produto/ProdutoController.php';
 require_once __DIR__.'/../../controller/movimentacao/MovimentacaoController.php';
 
-class Controler_estoqueController extends Controler_estoque
+class Controler_estoqueController 
 {
     private int $id;
     private string $produto_name;

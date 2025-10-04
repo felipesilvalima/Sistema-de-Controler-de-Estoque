@@ -9,7 +9,7 @@ use PDOException;
 require_once __DIR__.'/../conexao/DB.php';
 class Categoria extends DB
 {
-    protected static function categoria_list($categoria)
+    public static function categoria_list($categoria)
     {
 
         try 
@@ -37,7 +37,7 @@ class Categoria extends DB
             } 
     }
 
-    protected static function categoria_get($id)
+    public static function categoria_get($id)
     {
 
         try 
