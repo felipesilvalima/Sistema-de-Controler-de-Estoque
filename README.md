@@ -1,11 +1,11 @@
-📦 Sistema de Controle de Estoque
+## 📦 Sistema de Controle de Estoque
 
 Sistema de gerenciamento de estoque desenvolvido em PHP, com funcionalidades completas para controle de produtos, usuários, fornecedores, categorias e movimentação de estoque. Possui níveis de acesso diferenciados: usuário comum e administrativo, permitindo uma gestão segura e eficiente.
 
-✅ Funcionalidades
+## ✅ Funcionalidades
 
 
-👤 Usuário Comum
+## 👤 Usuário Comum
 
 Buscar produtos: pesquisa por nome e exibição de detalhes (quantidade, preço, fornecedor, categoria).
 
@@ -26,7 +26,7 @@ Relatórios: movimentações e status do estoque.
 Imagem da tela do usuário comum:
 
 
-🛠 Usuário Administrativo
+## 🛠 Usuário Administrativo
 
 Gerenciamento de usuários: inserir, editar, remover e buscar usuários.
 
@@ -43,7 +43,7 @@ Relatórios administrativos: produtos, movimentações, usuários, fornecedores 
 Imagem da tela administrativa:
 
 
-🛠 Tecnologias e Conceitos Utilizados
+## 🛠 Tecnologias e Conceitos Utilizados
 
 PHP 8+ com PDO para conexão com banco de dados.
 
@@ -66,7 +66,7 @@ Modularização e organização em classes e métodos.
 ![Painel Principal](view/css/img_projeto/controle_de_estoque.png)
 
 
-▶️ Como executar
+## ▶️ Como executar
 
 Clone o repositório:
 
@@ -82,7 +82,7 @@ Configure seu servidor local (XAMPP, WAMP, Laragon ou Docker) e importe o banco 
 
 Abra o sistema no navegador acessando http://localhost/pasta-do-projeto.
 
-👨‍💻 Autor
+## 👨‍💻 Autor
 
 Felipe Silva Lima
 📧 felipesilvalima200@gmail.com
