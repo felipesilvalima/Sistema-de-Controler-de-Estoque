@@ -23,59 +23,61 @@ class LoginAdmController
        $this->password = $password;  
     }
 
-     public function User_login()
-   {     
+    // Realiza o login do usuário administrador
+    public function User_login()
+    {     
         try 
         {
-            $validation_fields = ValidationLogin::validation_login_fields($this->cpf,$this->password);
-
+            // Valida campos de CPF e senha
+            $validation_fields = ValidationLogin::validation_login_fields($this->cpf, $this->password);
+    
             if(!$validation_fields)
             {
-
+                // Busca usuário administrador pelo CPF
                 $line = LoginAdm::login($this->cpf); 
-     
+    
                 if($line == null)
                 {   
-                     http_response_code(404); //O recurso solicitado não existe
-                    ProdutoController::feedback_systm('user_invalido',"Usuário não existe"); 
+                    http_response_code(404); // Usuário não encontrado
+                    ProdutoController::feedback_systm('user_invalido', "Usuário não existe"); 
                     return false; 
                 }
-                     else 
-                     {      
-                         $password_hash = $line->senha;
-                         $user_id = $line->id;
-                        
-                          $password_verify = password_verify((string)$this->password, (string)$password_hash); 
-                         
-                         if($password_verify) 
-                         {
-                             http_response_code(200); //requisição foi processada com sucesso
-                             ProdutoController::feedback_systm('autenticado',"Usuário logado com sucesso"); 
-                             $_SESSION['user_adm'] = $user_id;
-                             header("Location: /controler_de_estoque/view/adm/index.php");
-                             die;      
-                         }
-                             else 
-                             {
-                                 http_response_code(401); //error de Auteticação 
-                                 ProdutoController::feedback_systm('user_invalido',"Usuário inválido"); 
-                             }
-                     }
+                else 
+                {      
+                    $password_hash = $line->senha;
+                    $user_id = $line->id;
+                    
+                    // Verifica senha
+                    $password_verify = password_verify((string)$this->password, (string)$password_hash); 
+                    
+                    if($password_verify) 
+                    {
+                        http_response_code(200); // Login bem-sucedido
+                        ProdutoController::feedback_systm('autenticado', "Usuário logado com sucesso"); 
+                        $_SESSION['user_adm'] = $user_id;
+                        header("Location: /controler_de_estoque/view/adm/index.php");
+                        die;      
+                    }
+                    else 
+                    {
+                        http_response_code(401); // Senha incorreta
+                        ProdutoController::feedback_systm('user_invalido', "Usuário inválido"); 
+                    }
+                }
             }
-
         } 
-
         catch (PDOException $error) 
         {
-            throw new Exception("Error:".$error->getMessage());
+            throw new Exception("Error:" . $error->getMessage());
         }
-   }
-
-   public static function logout()
-   {
-      session_start(); 
-      session_unset(); 
-      
-     return session_destroy(); 
-   }
+    }
+    
+    // Realiza o logout do usuário
+    public static function logout()
+    {
+        session_start(); 
+        session_unset(); 
+        return session_destroy(); // Encerra a sessão
+    }
+    
 }

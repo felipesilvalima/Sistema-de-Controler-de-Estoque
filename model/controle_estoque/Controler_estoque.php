@@ -11,6 +11,7 @@ require_once __DIR__.'/../conexao/DB.php';
 class Controler_estoque extends DB
 {
     
+    // Retorna todas as quantidades máximas e mínimas dos produtos
     public static function get_quant_min_max()
     {
         try 
@@ -20,55 +21,45 @@ class Controler_estoque extends DB
             $stm->execute();
 
             $datas = $stm->fetchAll(PDO::FETCH_OBJ);
-            
-            if(!empty($datas))
-            {
-                return $datas;
-            }
-                else
-                {
-                    return null;
-                }
-            
+
+            return !empty($datas) ? $datas : null;
         } 
-            catch (PDOException $error) 
-            {
-                throw new Exception("Error:".$error->getMessage());
-            }
+        catch (PDOException $error) 
+        {
+            throw new Exception("Erro no método get_quant_min_max: ".$error->getMessage());
+        }
     }
 
-
-     public static function update_date_estoque($id,$pd,$pc,$qt,$qt_min,$des,$um,$cat,$for)
+    // Atualiza dados de estoque de um produto
+    public static function update_date_estoque($id, $produto, $preco, $quant_max, $quant_min, $descricao, $unidade_medida, $categoria_id, $fornecedor_id)
     {
         try 
         {
-
-            $sql = "UPDATE produtos SET produto=:pd, preco=:pc, quantidade_max=:qt, quantidade_min=:qt_min, descricao=:descr, unidade_medida=:um, categoria_id=:cat, fornecedor_id=:forn WHERE id = :id";
+            $sql = "UPDATE produtos 
+                    SET produto = :produto, preco = :preco, quantidade_max = :quant_max, quantidade_min = :quant_min, 
+                        descricao = :descricao, unidade_medida = :unidade_medida, categoria_id = :categoria_id, fornecedor_id = :fornecedor_id 
+                    WHERE id = :id";
+            
             $stm = DB::connect()->prepare($sql);
-            $stm->bindParam(':id',$id, PDO::PARAM_INT);
-            $stm->bindParam(':pd',$pd, PDO::PARAM_STR);
-            $stm->bindParam(':pc',$pc, PDO::PARAM_STR);
-            $stm->bindParam(':qt',$qt, PDO::PARAM_INT);
-            $stm->bindParam(':descr',$des, PDO::PARAM_STR);
-            $stm->bindParam(':um',$um, PDO::PARAM_STR);
-            $stm->bindParam(':cat',$cat, PDO::PARAM_INT);
-            $stm->bindParam(':forn',$for, PDO::PARAM_INT);
-            $stm->bindParam(':qt_min',$qt_min, PDO::PARAM_INT);
-            $stm->execute();
-             
-            if($stm)
-            {
-                return true;
-            }
-                else
-                {
-                    throw new Exception("Error: na Atualização do produto no metodo (update_date) ");
-                }
+            $stm->bindParam(':id', $id, PDO::PARAM_INT);
+            $stm->bindParam(':produto', $produto, PDO::PARAM_STR);
+            $stm->bindParam(':preco', $preco, PDO::PARAM_STR);
+            $stm->bindParam(':quant_max', $quant_max, PDO::PARAM_INT);
+            $stm->bindParam(':quant_min', $quant_min, PDO::PARAM_INT);
+            $stm->bindParam(':descricao', $descricao, PDO::PARAM_STR);
+            $stm->bindParam(':unidade_medida', $unidade_medida, PDO::PARAM_STR);
+            $stm->bindParam(':categoria_id', $categoria_id, PDO::PARAM_INT);
+            $stm->bindParam(':fornecedor_id', $fornecedor_id, PDO::PARAM_INT);
 
+            $stm->execute();
+
+            if ($stm) return true;
+
+            throw new Exception("Erro na atualização do produto no método update_date_estoque.");
         } 
-            catch (PDOException $error) 
-            {
-                throw new Exception("error:".$error->getMessage());
-            }
+        catch (PDOException $error) 
+        {
+            throw new Exception("Erro no método update_date_estoque: ".$error->getMessage());
+        }
     }
 }

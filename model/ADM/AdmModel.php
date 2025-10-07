@@ -10,81 +10,52 @@ require_once __DIR__.'/../conexao/DB.php';
 
 class AdmModel extends DB
 {
-   public static function get_date_user($seach)
+    public static function get_date_user(string $search): ?array
     {
-        try
-        {
+        try {
             $sql = "SELECT * FROM user WHERE name LIKE :search ORDER BY id";
             $stm = DB::connect()->prepare($sql);
-            $stm->bindValue(':search', '%'.$seach.'%', PDO::PARAM_STR);
+            $stm->bindValue(':search', '%' . $search . '%', PDO::PARAM_STR);
             $stm->execute();
 
             $dates = $stm->fetchAll(PDO::FETCH_OBJ);
-            $datas_total = $stm->rowCount();
+            return !empty($dates) ? $dates : null;
 
-            if($datas_total > 0)
-            {
-                return $dates;
-            }
-                else
-                {
-                    return null;
-                }
-               
+        } catch (PDOException $error) {
+            throw new Exception("Erro no método get_date_user: " . $error->getMessage());
         }
-            catch(PDOException $error)
-            {
-                throw new Exception("Error:". $error->getMessage());
-            }
     }
 
-   public static function get_date_movimentacao($seach)
+    // Busca movimentações de estoque por data
+    public static function get_date_movimentacao(string $search): ?array
     {
-        try
-        {
+        try {
             $sql = "SELECT * FROM movimentacao_estoque WHERE data LIKE :search ORDER BY id DESC";
             $stm = DB::connect()->prepare($sql);
-            $stm->bindValue(':search', '%'.$seach.'%', PDO::PARAM_STR);
+            $stm->bindValue(':search', '%' . $search . '%', PDO::PARAM_STR);
             $stm->execute();
 
             $dates = $stm->fetchAll(PDO::FETCH_OBJ);
-            $datas_total = $stm->rowCount();
+            return !empty($dates) ? $dates : null;
 
-            if($datas_total > 0)
-            {
-                return $dates;
-            }
-                else
-                {
-                    return null;
-                }
-               
+        } catch (PDOException $error) {
+            throw new Exception("Erro no método get_date_movimentacao: " . $error->getMessage());
         }
-            catch(PDOException $error)
-            {
-                throw new Exception("Error:". $error->getMessage());
-            }
     }
 
-    public static function movimentacao_limpa()
+    // Limpa todas as movimentações de estoque
+    public static function movimentacao_limpa(): bool
     {
-        try
-        {
+        try {
             $sql = "DELETE FROM movimentacao_estoque";
             $stm = DB::connect()->prepare($sql);
             $stm->execute();
 
-            $remove = $stm->rowCount();
+            return $stm->rowCount() > 0;
 
-            if($remove > 0)
-            {
-                return true;
-            }          
+        } catch (PDOException $error) {
+            throw new Exception("Erro no método movimentacao_limpa: " . $error->getMessage());
         }
-            catch(PDOException $error)
-            {
-                throw new Exception("Error:". $error->getMessage());
-            }
     }
  
 }

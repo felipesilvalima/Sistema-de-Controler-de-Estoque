@@ -39,144 +39,69 @@ class ProdutoController
     {
         try 
         {
-
-          $datas =  Produto::get_date($seach); 
+            // Busca produtos por termo de pesquisa
+            $datas = Produto::get_date($seach); 
             
-          if(!empty($datas))  
-          {
-             http_response_code(200);//requisição foi processada com sucesso
-             return $datas; 
-          }
-
+            if(!empty($datas))  
+            {
+                http_response_code(200); // Sucesso na requisição
+                return $datas; 
+            }
             else 
             {
-                http_response_code(404);//O recurso solicitado não existe
-                ProdutoController::feedback_systm('Encontrado',"Produto não encontrado!"); 
+                http_response_code(404); // Produto não encontrado
+                ProdutoController::feedback_systm('Encontrado', "Produto não encontrado!");
                 return $datas; 
             }
         } 
-
-            catch (PDOException $error) 
-            {
-                throw new Exception("Error:".$error->getMessage());
-            }
+        catch (PDOException $error) 
+        {
+            throw new Exception("Error:".$error->getMessage());
+        }
     }
-
+    
     public static function detalhes($id_produto): object
     {
         try
         {
+            // Busca produto pelo ID
             $line = Produto::get_id($id_produto); 
             
             if (!isset($line->id) || empty($id_produto)) 
             {
-                http_response_code(404);//O recurso solicitado não existe
-                ProdutoController::feedback_systm('existe',"Produto não encontrado!"); 
+                http_response_code(404); // Produto não encontrado
+                ProdutoController::feedback_systm('existe', "Produto não encontrado!");
                 header("Location: index.php");
                 die;
             }
-                else 
-                {
-                    http_response_code(200);//requisição foi processada com sucesso
-                    return $line; 
-                }
-
+            else 
+            {
+                http_response_code(200); // Sucesso
+                return $line; 
+            }
         }
-            catch(PDOException $error)
-            {
-                throw new Exception("Error:".$error->getMessage());
-            }
-        
-    }
-
-
-    public function Atulaizar($id,$user_id): bool
-    {
-        try 
+        catch(PDOException $error)
         {
-
-            $details =  ProdutoController::detalhes((int)$id);
-
-
-                if (empty($details))
-                {
-                    header("Location: /controler_de_estoque/view/Produtos/index.php");
-                    die;
-                }
-           
-                    $update = Produto::update_date(
-                        $id,
-                        $this->produto_name,
-                        $this->preco,
-                        $this->quantidade_max,
-                        $this->quantidade_min,
-                        $this->descricao,
-                        $this->unidade_medida,
-                        $this->categoria_id,
-                        $this->fornecedor_id,
-                    ); 
-
-                        if($update)
-                        {
-            
-                            ProdutoController::feedback_systm('update_true',"Atulizado com sucesso");
-                            MovimentacaoController::update_product(
-                                $this->produto_name,
-                                $this->quantidade_max,
-                                $id,
-                                $user_id
-                            );    
-                        }
-
-                            else
-                            {
-                                ProdutoController::feedback_systm('update_false',"Error ao Atulizar Produto");
-                            }
-              
-                                header("Location: index.php");
-                                die;  
- 
-        } 
-            catch (PDOException $error) 
-            {
-              throw new Exception("Error:".$error->getMessage());      
-            }
+            throw new Exception("Error:".$error->getMessage());
+        }
     }
-
-    public function inseir($user_id)
-    {
-
-        try 
-        {
-             $dados = 
-             [
-                'produto' => $this->produto_name,
-                'preco' =>  $this->preco,
-                'quantidade' => $this->quantidade_max,
-                'quantidade_min' => $this->quantidade_min,
-                'descricao' => $this->descricao,
-                'unidade_med' => $this->unidade_medida,
-                'categoria' => $this->categoria_id,
-                'fornecedor' => $this->fornecedor_id
-             ];
-
-
-            $validation_fields = ValidationProduto::validation_inserir_fields($dados);
-
-            if(!$validation_fields)
-            {
-
-                $line = Produto::verificarProduto($this->produto_name);
-            
-                if($line)  
-                {
-                    ProdutoController::feedback_systm('existe',"Produto já existe!"); 
-                    http_response_code(409);//O recurso já existe, tentativa de duplicação
-                    header("Location: index.php");
-                    die; 
-                }
     
-                $inserir = Produto::inserir_produto(
+    public function Atulaizar($id, $user_id): bool
+    {
+        try 
+        {
+            // Recupera detalhes do produto
+            $details = ProdutoController::detalhes((int)$id);
+    
+            if (empty($details))
+            {
+                header("Location: /controler_de_estoque/view/Produtos/index.php");
+                die;
+            }
+    
+            // Atualiza produto no banco
+            $update = Produto::update_date(
+                $id,
                 $this->produto_name,
                 $this->preco,
                 $this->quantidade_max,
@@ -185,63 +110,133 @@ class ProdutoController
                 $this->unidade_medida,
                 $this->categoria_id,
                 $this->fornecedor_id,
-                $user_id
-                ); 
-                
-                if($inserir)
-                {
-                    ProdutoController::feedback_systm('inserido',"Inserido com sucesso");
-                    $data = Produto::last_product();
+            ); 
     
-                    MovimentacaoController::insercao(
+            if($update)
+            {
+                ProdutoController::feedback_systm('update_true', "Atualizado com sucesso");
+                MovimentacaoController::update_product(
                     $this->produto_name,
                     $this->quantidade_max,
-                    $this->id = $data->id,
-                    $user_id);  
-                }
-                    else
-                    {
-                        ProdutoController::feedback_systm('inserir_error'," Error ao Inserir Produto");
-                    }
-    
-                    header("Location: index.php");
-                    die;
-                    
+                    $id,
+                    $user_id
+                );    
             }
-            
-                 
-        }
-            catch (PDOException $error) 
+            else
             {
-                throw new Exception("Error:" .$error->getMessage());
+                ProdutoController::feedback_systm('update_false', "Erro ao Atualizar Produto");
             }
-    }
-
-    public static function remover_id($id,$produto,$user_id)
-    {
     
+            header("Location: index.php");
+            die;  
+    
+        } 
+        catch (PDOException $error) 
+        {
+            throw new Exception("Error:".$error->getMessage());      
+        }
+    }
+    
+    public function inseir($user_id)
+    {
+        try 
+        {
+            // Prepara dados do produto
+            $dados = [
+                'produto' => $this->produto_name,
+                'preco' => $this->preco,
+                'quantidade' => $this->quantidade_max,
+                'quantidade_min' => $this->quantidade_min,
+                'descricao' => $this->descricao,
+                'unidade_med' => $this->unidade_medida,
+                'categoria' => $this->categoria_id,
+                'fornecedor' => $this->fornecedor_id
+            ];
+    
+            // Valida campos obrigatórios
+            $validation_fields = ValidationProduto::validation_inserir_fields($dados);
+    
+            if(!$validation_fields)
+            {
+                // Verifica se o produto já existe
+                $line = Produto::verificarProduto($this->produto_name);
+    
+                if($line)  
+                {
+                    ProdutoController::feedback_systm('existe', "Produto já existe!");
+                    http_response_code(409); // Conflito (duplicação)
+                    header("Location: index.php");
+                    die; 
+                }
+    
+                // Insere produto no banco
+                $inserir = Produto::inserir_produto(
+                    $this->produto_name,
+                    $this->preco,
+                    $this->quantidade_max,
+                    $this->quantidade_min,
+                    $this->descricao,
+                    $this->unidade_medida,
+                    $this->categoria_id,
+                    $this->fornecedor_id,
+                    $user_id
+                ); 
+    
+                if($inserir)
+                {
+                    ProdutoController::feedback_systm('inserido', "Inserido com sucesso");
+                    $data = Produto::last_product();
+    
+                    // Registra movimentação
+                    MovimentacaoController::insercao(
+                        $this->produto_name,
+                        $this->quantidade_max,
+                        $this->id = $data->id,
+                        $user_id
+                    );  
+                }
+                else
+                {
+                    ProdutoController::feedback_systm('inserir_error', "Erro ao Inserir Produto");
+                }
+    
+                header("Location: index.php");
+                die;
+            }
+        }
+        catch (PDOException $error) 
+        {
+            throw new Exception("Error:" .$error->getMessage());
+        }
+    }
+    
+    public static function remover_id($id, $produto, $user_id)
+    {
+        // Remove produto pelo ID
         $remover = Produto::remover($id); 
-
+    
         if($remover) 
         {
-            
-            ProdutoController::feedback_systm('remover',"Removido com sucesso");
-
+            ProdutoController::feedback_systm('remover', "Removido com sucesso");
+    
+            // Registra movimentação de remoção
             MovimentacaoController::remocao(
-            $id,
-            $produto,
-            $user_id
+                $id,
+                $produto,
+                $user_id
             );
-
+    
             header("Location: index.php");
             die; 
         }
     }
-
+    
     public static function feedback_systm(string $name_session, string $messagem): void
     {
-         session_start(); 
-         $_SESSION[$name_session] =  $messagem; 
+        // Cria sessão para mensagens de feedback
+        session_start(); 
+        $_SESSION[$name_session] = $messagem;  
     }
+    
 
 }

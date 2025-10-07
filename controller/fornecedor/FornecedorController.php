@@ -27,114 +27,116 @@ class FornecedorController
         $this->endereco = $dados['endereco'];
     }
 
+    // Insere um novo fornecedor
     public function Inserir_fornecedor()
     {
         try 
         {
-            $dados = 
-            [
+            // Dados do fornecedor
+            $dados = [
                 'fornecedor' => $this->fornecedor,
                 'cpf' => $this->cpf,
                 'telefone' => $this->telefone,
                 'endereco' => $this->endereco
             ];
-
-            $validacao_campos = ValidationFornecedor::validation_fornecedor_fields($dados); // verificar se os campos estão vazios
-
+    
+            // Valida campos obrigatórios
+            $validacao_campos = ValidationFornecedor::validation_fornecedor_fields($dados);
+    
             if(!$validacao_campos)
             {
-                $verificando_fornecedor = FornecedorController::verify_fonecedorController($dados['fornecedor']); // verificando se o fornencedor já existe no BD
-
+                // Verifica se fornecedor já existe
+                $verificando_fornecedor = FornecedorController::verify_fonecedorController($dados['fornecedor']);
                 session_write_close();
-
-                $verificando_cpf = FornecedorController::verify_cpfController($dados['cpf']); // verificando se o cpf já existe no BD
-                $validacao_limit_cpf = ValidationFornecedor::validation_cpf_limit($dados['cpf']); // verificando se o cpf tem 11 digitos
-
-                session_write_close();
-                
-                $validacao_limit_tel = ValidationFornecedor::validation_tel_limit($dados['telefone']); // verificando se o telefone tem 11 digitos
-                 
-                    if($verificando_fornecedor || $verificando_cpf || $validacao_limit_cpf || $validacao_limit_tel) // se não passa pela validação retornar falso
-                    {
-                        return false;
-                        die;
-                    }
-                        
-                        // se passa inserir regristros
-                        $response = Fornecedor::register_fornec(
-                            $this->fornecedor,
-                            $this->cpf,
-                            $this->telefone,
-                            $this->endereco
-                        );
-                
-                        if($response)
-                        {
-                            ProdutoController::feedback_systm('forne',"Fornecedor inserido com sucesso"); 
-                        }
-
-                            else
-                            {
-                                ProdutoController::feedback_systm('forne_error',"Error ao inserir fornecedor");  
-                            }
     
-                            header("Location: lista_de_fornecedor.php");
-                            die;
+                // Verifica CPF e limites de CPF e telefone
+                $verificando_cpf = FornecedorController::verify_cpfController($dados['cpf']);
+                $validacao_limit_cpf = ValidationFornecedor::validation_cpf_limit($dados['cpf']);
+                session_write_close();
+                $validacao_limit_tel = ValidationFornecedor::validation_tel_limit($dados['telefone']);
+    
+                // Se alguma validação falhar, retorna falso
+                if($verificando_fornecedor || $verificando_cpf || $validacao_limit_cpf || $validacao_limit_tel)
+                {
+                    return false;
+                    die;
+                }
+    
+                // Insere fornecedor no banco
+                $response = Fornecedor::register_fornec(
+                    $this->fornecedor,
+                    $this->cpf,
+                    $this->telefone,
+                    $this->endereco
+                );
+    
+                if($response)
+                {
+                    ProdutoController::feedback_systm('forne',"Fornecedor inserido com sucesso"); 
+                }
+                else
+                {
+                    ProdutoController::feedback_systm('forne_error',"Error ao inserir fornecedor");  
+                }
+    
+                header("Location: lista_de_fornecedor.php");
+                die;
             }
     
         } 
-            catch (PDOException $error) 
-            {
-               throw new Exception("Error no metodo (Inserir_fornecedor): ".$error->getMessage());
-            }
+        catch (PDOException $error) 
+        {
+           throw new Exception("Error no metodo (Inserir_fornecedor): ".$error->getMessage());
+        }
     }
-
+    
+    // Verifica se fornecedor já existe
     public static function verify_fonecedorController($fornecedor)
     {
         try 
         {
-
             $response = Fornecedor::verify_fornecedor($fornecedor);
     
             if($response)
             {
-                http_response_code(409);//O recurso já existe, tentativa de duplicação
+                http_response_code(409); // Recurso já existe
                 ProdutoController::feedback_systm('forne_inserir',"Esse Fornecedor já foi inserido");
                 return true;
             }
-
+    
             return false;
              
         } 
-            catch (PDOException $error) 
-            {
-               throw new Exception("Error no metodo (verify_fonecedorController): ".$error->getMessage());
-            }
+        catch (PDOException $error) 
+        {
+           throw new Exception("Error no metodo (verify_fonecedorController): ".$error->getMessage());
+        }
     }
-
+    
+    // Verifica se CPF já existe
     public static function verify_cpfController($cpf)
     {
-
         try 
         {
             $response = Fornecedor::verify_cpf($cpf);
-           
+    
             if($response)
             {
-                http_response_code(409);//O recurso já existe, tentativa de duplicação
+                http_response_code(409); // Recurso já existe
                 ProdutoController::feedback_systm('forne_cpf',"Esse Cpf já foi inserido");
                 return true;
             }
-
-             return false;
+    
+            return false;
              
         } 
-            catch (PDOException $error) 
-            {
-               throw new Exception("Error no metodo (verify_cpfController): ".$error->getMessage());
-            }
+        catch (PDOException $error) 
+        {
+           throw new Exception("Error no metodo (verify_cpfController): ".$error->getMessage());
+        }
     }
-
+    
+    // Lista todos os fornecedores
     public static function list_forneceController()
     {
         try 
@@ -145,53 +147,51 @@ class FornecedorController
             {
                 return $response;
             }
-
-                else
-                {
-                    http_response_code(404);//O recurso solicitado não existe
-                    ProdutoController::feedback_systm('list_fornec',"Fornecedor não encontrado");
-                    return false;
-                }
+            else
+            {
+                http_response_code(404); // Nenhum fornecedor encontrado
+                ProdutoController::feedback_systm('list_fornec',"Fornecedor não encontrado");
+                return false;
+            }
              
         } 
-            catch (PDOException $error) 
-            {
-               throw new Exception("Error no metodo (verify_cpfController): ".$error->getMessage());
-            }
+        catch (PDOException $error) 
+        {
+           throw new Exception("Error no metodo (list_forneceController): ".$error->getMessage());
+        }
     }
-
+    
+    // Retorna fornecedor específico por ID
     public static function get_forneceController($id)
     {
         try 
         {
-
             $response = Fornecedor::get_fornec($id);
-
+    
             if(!isset($response->id) || empty($id)) 
             {
-                http_response_code(404);//O recurso solicitado não existe
+                http_response_code(404); // Fornecedor não encontrado
                 ProdutoController::feedback_systm('existe',"Fornecedor não encontrado!"); 
                 header("Location: lista_de_fornecedor.php");
                 die;
             }
-    
-                else
-                {
-                    return $response;
-                }
+            else
+            {
+                return $response;
+            }
              
         } 
-            catch (PDOException $error) 
-            {
-               throw new Exception("Error no metodo (get_forneceController): ".$error->getMessage());
-            }
+        catch (PDOException $error) 
+        {
+           throw new Exception("Error no metodo (get_forneceController): ".$error->getMessage());
+        }
     }
-
+    
+    // Atualiza fornecedor existente
     public function update_forneceController($id)
     {
         try 
         {
-           
             $response = Fornecedor::update_fornecedor(
                 $id,
                 $this->fornecedor,
@@ -199,67 +199,67 @@ class FornecedorController
                 $this->telefone,
                 $this->endereco  
             );
-
+    
             if($response)
             {
-                http_response_code(204);//Recurso alterado com sucesso
-                ProdutoController::feedback_systm('update_true',"Atulizado com sucesso");
-               
+                http_response_code(204); // Recurso alterado com sucesso
+                ProdutoController::feedback_systm('update_true',"Atualizado com sucesso");
             }  
-                else 
-                {
-                    ProdutoController::feedback_systm('update_false',"error ao Atulizar");
-                }
-                
-                header("Location: lista_de_fornecedor.php");
-                die; 
-        } 
-            catch (PDOException $error) 
+            else 
             {
-               throw new Exception("Error no metodo (update_forneceController): " . $error->getMessage());
+                ProdutoController::feedback_systm('update_false',"Error ao atualizar");
             }
+    
+            header("Location: lista_de_fornecedor.php");
+            die; 
+        } 
+        catch (PDOException $error) 
+        {
+           throw new Exception("Error no metodo (update_forneceController): " . $error->getMessage());
+        }
     }
-
+    
+    // Remove fornecedor por ID
     public static function remover_fornecedor($id)
     {
         try
         {
-
             $remover = Fornecedor::remover_idFornercedor($id); 
     
             if($remover) 
             {
-                http_response_code(204);//Recurso alterado com sucesso.
+                http_response_code(204); // Recurso removido com sucesso
                 ProdutoController::feedback_systm('remover',"Removido com sucesso");
                 header("Location: lista_de_fornecedor.php");
                 die;
             }
         }
-            catch(PDOException $error)
-            {
-                throw new Exception("Error no metodo (remover_fornecedor): " . $error->getMessage());
-            }
+        catch(PDOException $error)
+        {
+            throw new Exception("Error no metodo (remover_fornecedor): " . $error->getMessage());
+        }
     }
-
+    
+    // Busca fornecedor pelo nome
     public static function fornecedores($fornecedor)
     {
         try 
         {
-
-             $data = Fornecedor::fornecedor_get($fornecedor); 
+            $data = Fornecedor::fornecedor_get($fornecedor); 
             
             if($data) 
             {
-                http_response_code(200);//requisição foi processada com sucesso
+                http_response_code(200); // Requisição processada com sucesso
                 return $data; 
             }
-
+    
         } 
-            catch (PDOException $error) 
-            {
-                throw new Exception("Error:".$error->getMessage());
-            }
+        catch (PDOException $error) 
+        {
+            throw new Exception("Error:".$error->getMessage());
+        }
     }
+    
 
     
 }

@@ -4,198 +4,202 @@ namespace controller;
 
 class Feedbacks
 {
+   // Feedback de login (erros e sucesso)
    public static function feedback_login(): void 
    {
-        
-        if(isset($_SESSION['fields_empty']))
-         {
-            echo "<div class='mensagem-empty'>".$_SESSION['fields_empty']."</div>";
-            unset($_SESSION['fields_empty']);
-         }
-
-         elseif(isset($_SESSION['user_invalido']))
-         {
-            echo "<div class='mensagem-erro'>".$_SESSION['user_invalido']."</div>";
-            unset($_SESSION['user_invalido']); 
-         }
-
-         elseif(isset($_SESSION['autenticado']))
-         {
-            echo "<div class='mensagem-sucesso'>".$_SESSION['autenticado']."</div>";
-            unset($_SESSION['autenticado']);
-         }
-
+       if(isset($_SESSION['fields_empty']))
+       {
+           echo "<div class='mensagem-empty'>".$_SESSION['fields_empty']."</div>";
+           unset($_SESSION['fields_empty']);
+       }
+       elseif(isset($_SESSION['user_invalido']))
+       {
+           echo "<div class='mensagem-erro'>".$_SESSION['user_invalido']."</div>";
+           unset($_SESSION['user_invalido']); 
+       }
+       elseif(isset($_SESSION['autenticado']))
+       {
+           echo "<div class='mensagem-sucesso'>".$_SESSION['autenticado']."</div>";
+           unset($_SESSION['autenticado']);
+       }
    }
-
+   
+   // Feedback após inserção
    public static function feedback_inserir(): void 
    {
-        if(isset($_SESSION['inserido']))
-         {
-            echo "<div class='mensagem-sucesso'>".$_SESSION['inserido']."</div>";
-            unset($_SESSION['inserido']);
-         }
-
-         elseif(isset($_SESSION['existe']))
-         {
-            echo "<div class='mensagem-erro'>".$_SESSION['existe']."</div>";
-            unset($_SESSION['existe']);
-         }
-
-         elseif(isset($_SESSION['inserir_error']))
-         {
-            echo "<div class='mensagem-erro'>".$_SESSION['inserir_error']."</div>";
-            unset($_SESSION['inserir_error']);
-         }
+       if(isset($_SESSION['inserido']))
+       {
+           echo "<div class='mensagem-sucesso'>".$_SESSION['inserido']."</div>";
+           unset($_SESSION['inserido']);
+       }
+       elseif(isset($_SESSION['existe']))
+       {
+           echo "<div class='mensagem-erro'>".$_SESSION['existe']."</div>";
+           unset($_SESSION['existe']);
+       }
+       elseif(isset($_SESSION['inserir_error']))
+       {
+           echo "<div class='mensagem-erro'>".$_SESSION['inserir_error']."</div>";
+           unset($_SESSION['inserir_error']);
+       }
    }
-
+   
+   // Feedback na index
    public static function feedback_index(): void 
    {
-        if(isset($_SESSION['Encontrado']))
-        {
-            echo "<div class='Encontrado'>".$_SESSION['Encontrado']."</div>";
-            unset($_SESSION['Encontrado']);
-         }
+       if(isset($_SESSION['Encontrado']))
+       {
+           echo "<div class='Encontrado'>".$_SESSION['Encontrado']."</div>";
+           unset($_SESSION['Encontrado']);
+       }
    }
-
+   
+   // Feedback remoção
    public static function feedback_remover(): void 
    {
-        if(isset($_SESSION['remover']))
-        {
-            echo "<div class='mensagem-erro'>".$_SESSION['remover']."</div>";
-            unset($_SESSION['remover']);
-         }
+       if(isset($_SESSION['remover']))
+       {
+           echo "<div class='mensagem-erro'>".$_SESSION['remover']."</div>";
+           unset($_SESSION['remover']);
+       }
    }
-
+   
+   // Feedback atualização
    public static function feedback_atualizar(): void 
    {
-        if(isset($_SESSION['update_true']))
-        {
-            echo "<div class='mensagem-sucesso'>".$_SESSION['update_true']."</div>";
-            unset($_SESSION['update_true']);
-         }
-
-        elseif(isset($_SESSION['update_false']))
-        {
-            echo "<div class='mensagem-erro'>".$_SESSION['update_false']."</div>";
-            unset($_SESSION['update_false']);
-         }
-         
+       if(isset($_SESSION['update_true']))
+       {
+           echo "<div class='mensagem-sucesso'>".$_SESSION['update_true']."</div>";
+           unset($_SESSION['update_true']);
+       }
+       elseif(isset($_SESSION['update_false']))
+       {
+           echo "<div class='mensagem-erro'>".$_SESSION['update_false']."</div>";
+           unset($_SESSION['update_false']);
+       }
    }
-
+   
+   // Feedback detalhes
    public static function feedback_details(): void 
    {
-     if(isset($_SESSION['existe']))
-         {
-            echo "<div class='mensagem-erro'>".$_SESSION['existe']."</div>";
-            unset($_SESSION['existe']);
-         }
+       if(isset($_SESSION['existe']))
+       {
+           echo "<div class='mensagem-erro'>".$_SESSION['existe']."</div>";
+           unset($_SESSION['existe']);
+       }
    }
-
-   public static function feedback_validation_inserir():void  
+   
+   // Feedback validação de inserção
+   public static function feedback_validation_inserir(): void  
    {
-         if(isset($_SESSION['fields_empty']))
-         {
-            echo "<div class='mensagem-empty-adicionar'>".$_SESSION['fields_empty']."</div>";
-            unset($_SESSION['fields_empty']);
-         }
+       if(isset($_SESSION['fields_empty']))
+       {
+           echo "<div class='mensagem-empty-adicionar'>".$_SESSION['fields_empty']."</div>";
+           unset($_SESSION['fields_empty']);
+       }
    }
-
-   public static function feedback_validation_estoque():void  
+   
+   // Feedback validação estoque
+   public static function feedback_validation_estoque(): void  
    {
-         if(isset($_SESSION['fields_empty_estoque']))
-         {
-            echo "<div class='mensagem-empty-adicionar-estoque'>".$_SESSION['fields_empty_estoque']."</div>";
-            unset($_SESSION['fields_empty_estoque']);
-         }
+       if(isset($_SESSION['fields_empty_estoque']))
+       {
+           echo "<div class='mensagem-empty-adicionar-estoque'>".$_SESSION['fields_empty_estoque']."</div>";
+           unset($_SESSION['fields_empty_estoque']);
+       }
    }
-
-   public static function feedback_validation_form_limit():void  
+   
+   // Feedback limites de campos (CPF e telefone)
+   public static function feedback_validation_form_limit(): void  
    {
-         if(isset($_SESSION['fields_cpf_limit']))
-         {
-            echo "<div class='mensagem-erro'>".$_SESSION['fields_cpf_limit']."</div>";
-            unset($_SESSION['fields_cpf_limit']);
-         }
-
-          if(isset($_SESSION['fields_telefone_limit']))
-         {
-            echo "<div class='mensagem-erro'>".$_SESSION['fields_telefone_limit']."</div>";
-            unset($_SESSION['fields_telefone_limit']);
-         }
+       if(isset($_SESSION['fields_cpf_limit']))
+       {
+           echo "<div class='mensagem-erro'>".$_SESSION['fields_cpf_limit']."</div>";
+           unset($_SESSION['fields_cpf_limit']);
+       }
+   
+       if(isset($_SESSION['fields_telefone_limit']))
+       {
+           echo "<div class='mensagem-erro'>".$_SESSION['fields_telefone_limit']."</div>";
+           unset($_SESSION['fields_telefone_limit']);
+       }
    }
-  
-   public static function feedback_alerta_de_estoque():void 
+   
+   // Alerta de estoque
+   public static function feedback_alerta_de_estoque(): void 
    {
-         if(isset($_SESSION['estoque_alert']))
-         {
-            foreach($_SESSION['estoque_alert'] as $sessao_new)
-            {
+       if(isset($_SESSION['estoque_alert']))
+       {
+           foreach($_SESSION['estoque_alert'] as $sessao_new)
+           {
                echo "<div>".$sessao_new."</div>";
                unset($_SESSION['estoque_alert']);
-            }
-         }
-
-         elseif(isset($_SESSION['estoque_not_alert']))
-         {
-            echo "<div class='mensagem-estoque-not-alert'>".$_SESSION['estoque_not_alert']."</div>";
-            unset($_SESSION['estoque_not_alert']);
-         }
-
-         elseif(isset($_SESSION['estoque_error']))
-         {
-            echo "<div class='mensagem-estoque-alert'>".$_SESSION['estoque_error']."</div>";
-            unset($_SESSION['estoque_error']);
-         }
+           }
+       }
+       elseif(isset($_SESSION['estoque_not_alert']))
+       {
+           echo "<div class='mensagem-estoque-not-alert'>".$_SESSION['estoque_not_alert']."</div>";
+           unset($_SESSION['estoque_not_alert']);
+       }
+       elseif(isset($_SESSION['estoque_error']))
+       {
+           echo "<div class='mensagem-estoque-alert'>".$_SESSION['estoque_error']."</div>";
+           unset($_SESSION['estoque_error']);
+       }
    }
-
-   public static function limpa_fornec():void 
+   
+   // Feedback limpar fornecedor
+   public static function limpa_fornec(): void 
    {
-         if(isset($_SESSION['limpa']))
-         {
-            echo "<div class='mensagem-erro'>".$_SESSION['limpa']."</div>";
-            unset($_SESSION['limpa']);
-         }
+       if(isset($_SESSION['limpa']))
+       {
+           echo "<div class='mensagem-erro'>".$_SESSION['limpa']."</div>";
+           unset($_SESSION['limpa']);
+       }
    }
-
-   public static function fornecedor_inserir():void 
+   
+   // Feedback inserção de fornecedor
+   public static function fornecedor_inserir(): void 
    {
-         if(isset($_SESSION['forne']))
-         {
-            echo "<div class='mensagem-sucesso'>".$_SESSION['forne']."</div>";
-            unset($_SESSION['forne']);
-         }
-
-         if(isset($_SESSION['forne_error']))
-         {
-            echo "<div class='mensagem-erro'>".$_SESSION['forne_error']."</div>";
-            unset($_SESSION['forne_error']);
-         }
+       if(isset($_SESSION['forne']))
+       {
+           echo "<div class='mensagem-sucesso'>".$_SESSION['forne']."</div>";
+           unset($_SESSION['forne']);
+       }
+   
+       if(isset($_SESSION['forne_error']))
+       {
+           echo "<div class='mensagem-erro'>".$_SESSION['forne_error']."</div>";
+           unset($_SESSION['forne_error']);
+       }
    }
-
-   public static function fornecedor_inserir_verify():void 
+   
+   // Feedback verificação de fornecedor (CPF ou duplicado)
+   public static function fornecedor_inserir_verify(): void 
    {
-         if(isset($_SESSION['forne_inserir']))
-         {
-            echo "<div class='mensagem-erro'>".$_SESSION['forne_inserir']."</div>";
-            unset($_SESSION['forne_inserir']);
-         }
-
-         if(isset($_SESSION['forne_cpf']))
-         {
-            echo "<div class='mensagem-erro'>".$_SESSION['forne_cpf']."</div>";
-            unset($_SESSION['forne_cpf']);
-         }
+       if(isset($_SESSION['forne_inserir']))
+       {
+           echo "<div class='mensagem-erro'>".$_SESSION['forne_inserir']."</div>";
+           unset($_SESSION['forne_inserir']);
+       }
+   
+       if(isset($_SESSION['forne_cpf']))
+       {
+           echo "<div class='mensagem-erro'>".$_SESSION['forne_cpf']."</div>";
+           unset($_SESSION['forne_cpf']);
+       }
    }
-
-   public static function fornecedor_list():void 
+   
+   // Feedback lista de fornecedores
+   public static function fornecedor_list(): void 
    {
-         if(isset($_SESSION['list_fornec']))
-         {
-            echo "<div class='mensagem-erro'>".$_SESSION['list_fornec']."</div>";
-            unset($_SESSION['list_fornec']);
-         }
-
+       if(isset($_SESSION['list_fornec']))
+       {
+           echo "<div class='mensagem-erro'>".$_SESSION['list_fornec']."</div>";
+           unset($_SESSION['list_fornec']);
+       }
    }
+   
 
 
 }
