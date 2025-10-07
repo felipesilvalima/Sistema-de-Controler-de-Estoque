@@ -57,10 +57,11 @@ Modularização e organização em classes e métodos.
 
 📷 Demonstração
 
+## Painel de Login
 ![Tela de Login](view/css/img_projeto/login_user.png)
 
-
-![Painel principal](view/css/img_projeto/controle_de_estoque.png)
+## Painel Principal
+![Painel Principal](view/css/img_projeto/controle_de_estoque.png)
 
 
 ▶️ Como executar
