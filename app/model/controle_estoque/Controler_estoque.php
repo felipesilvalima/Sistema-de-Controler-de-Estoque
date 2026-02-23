@@ -2,13 +2,14 @@
 
 namespace model;
 
+use config\Database;
 use Exception;
 use PDO;
 use PDOException;
 
-require_once __DIR__.'/../conexao/DB.php';
+require_once __DIR__.'/../../../config/Database.php';
 
-class Controler_estoque extends DB
+class Controler_estoque
 {
     
     // Retorna todas as quantidades máximas e mínimas dos produtos
@@ -17,7 +18,7 @@ class Controler_estoque extends DB
         try 
         {
             $sql = "SELECT quantidade_max, quantidade_min, produto FROM produtos ORDER BY id";
-            $stm = DB::connect()->prepare($sql);
+            $stm = Database::connect()->prepare($sql);
             $stm->execute();
 
             $datas = $stm->fetchAll(PDO::FETCH_OBJ);
@@ -40,7 +41,7 @@ class Controler_estoque extends DB
                         descricao = :descricao, unidade_medida = :unidade_medida, categoria_id = :categoria_id, fornecedor_id = :fornecedor_id 
                     WHERE id = :id";
             
-            $stm = DB::connect()->prepare($sql);
+            $stm = Database::connect()->prepare($sql);
             $stm->bindParam(':id', $id, PDO::PARAM_INT);
             $stm->bindParam(':produto', $produto, PDO::PARAM_STR);
             $stm->bindParam(':preco', $preco, PDO::PARAM_STR);

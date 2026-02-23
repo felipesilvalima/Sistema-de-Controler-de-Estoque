@@ -2,19 +2,20 @@
 
 namespace model;
 
+use config\Database;
 use Exception;
 use PDO;
 use PDOException;
 
-require_once __DIR__.'/../conexao/DB.php';
+require_once __DIR__.'/../../../config/Database.php';
 
-class AdmModel extends DB
+class AdmModel
 {
     public static function get_date_user(string $search): ?array
     {
         try {
             $sql = "SELECT * FROM user WHERE name LIKE :search ORDER BY id";
-            $stm = DB::connect()->prepare($sql);
+            $stm = Database::connect()->prepare($sql);
             $stm->bindValue(':search', '%' . $search . '%', PDO::PARAM_STR);
             $stm->execute();
 
@@ -31,7 +32,7 @@ class AdmModel extends DB
     {
         try {
             $sql = "SELECT * FROM movimentacao_estoque WHERE data LIKE :search ORDER BY id DESC";
-            $stm = DB::connect()->prepare($sql);
+            $stm = Database::connect()->prepare($sql);
             $stm->bindValue(':search', '%' . $search . '%', PDO::PARAM_STR);
             $stm->execute();
 
@@ -48,7 +49,7 @@ class AdmModel extends DB
     {
         try {
             $sql = "DELETE FROM movimentacao_estoque";
-            $stm = DB::connect()->prepare($sql);
+            $stm = Database::connect()->prepare($sql);
             $stm->execute();
 
             return $stm->rowCount() > 0;

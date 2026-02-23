@@ -2,12 +2,13 @@
 
 namespace model;
 
+use config\Database;
 use Exception;
 use PDO;
 use PDOException;
-require_once __DIR__.'/../conexao/DB.php';
+require_once __DIR__.'/../../../config/Database.php';
 
-class Login extends DB
+class Login
 {
   // Busca um usuário pelo e-mail para login
   public static function login($user)
@@ -16,7 +17,7 @@ class Login extends DB
       {
           // Preparando query para buscar usuário na tabela 'user'
           $sql = "SELECT * FROM user WHERE email = :email";
-          $stm = DB::connect()->prepare($sql);
+          $stm = Database::connect()->prepare($sql);
           $stm->bindParam(':email', $user, PDO::PARAM_STR); // vincula o e-mail à query
           $stm->execute();
   

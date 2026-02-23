@@ -2,13 +2,14 @@
 
 namespace model;
 
+use config\Database;
 use Exception;
 use PDO;
 use PDOException;
 
-require_once __DIR__.'/../conexao/DB.php';
+require_once __DIR__.'/../../../config/Database.php';
 
-class Fornecedor extends DB
+class Fornecedor
 {
    // Inserir um novo fornecedor
     public static function register_fornec($fornecedor, $cpf, $tel, $endereco)
@@ -16,7 +17,7 @@ class Fornecedor extends DB
         try 
         {
             $sql = "INSERT INTO fornecedor (fornecedor, cpf, telefone, endereco) VALUES (:fornecedor, :cpf, :telefone, :endereco)";
-            $stm = DB::connect()->prepare($sql);
+            $stm = Database::connect()->prepare($sql);
             $stm->bindParam(':fornecedor', $fornecedor, PDO::PARAM_STR);
             $stm->bindParam(':cpf', $cpf, PDO::PARAM_INT);
             $stm->bindParam(':telefone', $tel, PDO::PARAM_INT);
@@ -37,7 +38,7 @@ class Fornecedor extends DB
         try 
         {
             $sql = "SELECT fornecedor FROM fornecedor WHERE fornecedor = :fornecedor";
-            $stm = DB::connect()->prepare($sql);
+            $stm = Database::connect()->prepare($sql);
             $stm->bindParam(':fornecedor', $fornecedor, PDO::PARAM_STR);
             $stm->execute();
 
@@ -55,7 +56,7 @@ class Fornecedor extends DB
         try 
         {
             $sql = "SELECT cpf FROM fornecedor WHERE cpf = :cpf";
-            $stm = DB::connect()->prepare($sql);
+            $stm = Database::connect()->prepare($sql);
             $stm->bindParam(':cpf', $cpf, PDO::PARAM_STR);
             $stm->execute();
 
@@ -73,7 +74,7 @@ class Fornecedor extends DB
         try 
         {
             $sql = "SELECT * FROM fornecedor ORDER BY id";
-            $stm = DB::connect()->prepare($sql);
+            $stm = Database::connect()->prepare($sql);
             $stm->execute();
 
             return ($stm && $stm->rowCount() > 0) ? $stm->fetchAll(PDO::FETCH_OBJ) : false;
@@ -90,7 +91,7 @@ class Fornecedor extends DB
         try 
         {
             $sql = "SELECT * FROM fornecedor WHERE id = :id";
-            $stm = DB::connect()->prepare($sql);
+            $stm = Database::connect()->prepare($sql);
             $stm->bindParam(':id', $id, PDO::PARAM_INT);
             $stm->execute();
 
@@ -108,7 +109,7 @@ class Fornecedor extends DB
         try 
         {
             $sql = "UPDATE fornecedor SET fornecedor = :fornecedor, cpf = :cpf, telefone = :telefone, endereco = :endereco WHERE id = :id";
-            $stm = DB::connect()->prepare($sql);
+            $stm = Database::connect()->prepare($sql);
             $stm->bindParam(':id', $id, PDO::PARAM_INT);
             $stm->bindParam(':fornecedor', $fornecedor, PDO::PARAM_STR);
             $stm->bindParam(':cpf', $cpf, PDO::PARAM_INT);
@@ -130,7 +131,7 @@ class Fornecedor extends DB
         try 
         {
             $sql = "DELETE FROM fornecedor WHERE id = :id";
-            $stm = DB::connect()->prepare($sql);
+            $stm = Database::connect()->prepare($sql);
             $stm->bindParam(':id', $id, PDO::PARAM_INT);
             $stm->execute();
 
@@ -148,7 +149,7 @@ class Fornecedor extends DB
         try 
         {
             $sql = "SELECT id, fornecedor FROM fornecedor WHERE fornecedor != :fornecedor";
-            $stm = DB::connect()->prepare($sql);
+            $stm = Database::connect()->prepare($sql);
             $stm->bindParam(':fornecedor', $fornecedor, PDO::PARAM_STR);
             $stm->execute();
 

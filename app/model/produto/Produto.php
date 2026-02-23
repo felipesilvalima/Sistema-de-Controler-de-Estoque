@@ -2,13 +2,14 @@
 
 namespace model;
 
-require_once __DIR__.'/../conexao/DB.php';
+require_once __DIR__.'/../../../config/Database.php';
 
+use config\Database;
 use Exception;
 use PDO;
 use PDOException;
 
-class Produto extends DB
+class Produto
 {
     // Busca produtos pelo termo de pesquisa
     public static function get_date($seach)
@@ -16,7 +17,7 @@ class Produto extends DB
         try
         {
             $sql = "SELECT * FROM produtos WHERE produto LIKE :search ORDER BY id";
-            $stm = DB::connect()->prepare($sql);
+            $stm = Database::connect()->prepare($sql);
             $stm->bindValue(':search', '%'.$seach.'%', PDO::PARAM_STR);
             $stm->execute();
     
@@ -47,7 +48,7 @@ class Produto extends DB
                     INNER JOIN categoria ON produtos.categoria_id = categoria.id
                     INNER JOIN fornecedor ON produtos.fornecedor_id = fornecedor.id
                     WHERE produtos.id = :id";
-            $stm = DB::connect()->prepare($sql);
+            $stm = Database::connect()->prepare($sql);
             $stm->bindParam(':id', $id, PDO::PARAM_STR);
             $stm->execute();
     
@@ -74,7 +75,7 @@ class Produto extends DB
         try 
         {
             $sql = "UPDATE produtos SET produto=:produto, preco=:preco, quantidade_max=:quantidade, quantidade_min=:quantidade_min, descricao=:descricao, unidade_medida=:unidade_medida, categoria_id=:categoria_id, fornecedor_id=:fornecedor_id WHERE id = :id";
-            $stm = DB::connect()->prepare($sql);
+            $stm = Database::connect()->prepare($sql);
             $stm->bindParam(':id',$id, PDO::PARAM_INT);
             $stm->bindParam(':produto',$produto, PDO::PARAM_STR);
             $stm->bindParam(':preco',$preco, PDO::PARAM_STR);
@@ -108,7 +109,7 @@ class Produto extends DB
         {
             $sql = "INSERT INTO produtos (produto, preco, quantidade_max, quantidade_min, descricao, unidade_medida, categoria_id, fornecedor_id, usuario_id)
                     VALUES(:pd, :pc, :qt, :qt_min, :descr, :um, :ct, :fc, :user)";
-            $stm = DB::connect()->prepare($sql);
+            $stm = Database::connect()->prepare($sql);
             $stm->bindParam(':pd', $produto_name, PDO::PARAM_STR);
             $stm->bindParam(':pc', $preco_pd, PDO::PARAM_STR);
             $stm->bindParam(':qt', $quant_pd, PDO::PARAM_INT);
@@ -141,7 +142,7 @@ class Produto extends DB
         try 
         {
             $sql = "SELECT produto FROM produtos WHERE produto = :prod_name";
-            $stm = DB::connect()->prepare($sql);
+            $stm = Database::connect()->prepare($sql);
             $stm->bindParam(':prod_name', $produto_name, PDO::PARAM_STR);
             $stm->execute();
     
@@ -166,7 +167,7 @@ class Produto extends DB
         try 
         {
             $sql = "DELETE FROM produtos WHERE id = :id";
-            $stm = DB::connect()->prepare($sql);
+            $stm = Database::connect()->prepare($sql);
             $stm->bindParam(':id', $id, PDO::PARAM_INT);
             $stm->execute();
     
@@ -191,7 +192,7 @@ class Produto extends DB
         try 
         {
             $sql = "SELECT id FROM produtos ORDER BY id DESC";
-            $stm = DB::connect()->prepare($sql);
+            $stm = Database::connect()->prepare($sql);
             $stm->execute();
     
             $data = $stm->fetch(PDO::FETCH_OBJ);

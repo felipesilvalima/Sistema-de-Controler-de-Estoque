@@ -2,11 +2,12 @@
 
 namespace model;
 
+use config\Database;
 use Exception;
 use PDO;
 use PDOException;
-require_once __DIR__.'/../conexao/DB.php';
-class LoginAdm extends DB
+require_once __DIR__.'/../../../config/Database.php';
+class LoginAdm
 {
  // Busca um administrador pelo CPF para login
  public static function login($cpf)
@@ -15,7 +16,7 @@ class LoginAdm extends DB
      {       
          // Preparando query para buscar administrador na tabela 'adm'
          $sql = "SELECT * FROM adm WHERE cpf = :cpf";
-         $stm = DB::connect()->prepare($sql);
+         $stm = Database::connect()->prepare($sql);
          $stm->bindParam(':cpf', $cpf, PDO::PARAM_STR); // vincula o CPF à query
          $stm->execute();
  

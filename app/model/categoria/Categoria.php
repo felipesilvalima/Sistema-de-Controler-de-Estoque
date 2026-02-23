@@ -2,12 +2,13 @@
 
 namespace model;
 
+use config\Database;
 use Exception;
 use PDO;
 use PDOException;
 
-require_once __DIR__.'/../conexao/DB.php';
-class Categoria extends DB
+require_once __DIR__.'/../../../config/Database.php';
+class Categoria 
 {
     // Retorna todas as categorias, exceto a informada
     public static function categoria_list(int $categoria): array
@@ -15,7 +16,7 @@ class Categoria extends DB
         try 
         {
             $sql = "SELECT id, categoria, descricao FROM categoria WHERE id != :categoria";
-            $stm = DB::connect()->prepare($sql);
+            $stm = Database::connect()->prepare($sql);
             $stm->bindValue(':categoria', $categoria, PDO::PARAM_INT);
             $stm->execute();
 
@@ -39,7 +40,7 @@ class Categoria extends DB
         try 
         {
             $sql = "SELECT id, categoria, descricao FROM categoria WHERE id = :id";
-            $stm = DB::connect()->prepare($sql);
+            $stm = Database::connect()->prepare($sql);
             $stm->bindValue(':id', $id, PDO::PARAM_INT);
             $stm->execute();
 
