@@ -15,20 +15,9 @@ if (!isset($_SESSION['user'])) {
     die;
 }
 
+$titulo = 'Produtos';
+require __DIR__ . '/../partials/head.php';
 ?>
-
-
-<!DOCTYPE html>
-<html lang="pt-BR">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Controler de estoque</title>
-    <link rel="stylesheet" href="../css/styles.css">
-</head>
-
-<body id="background-index">
     <nav>
         <div class="menu">
             <ul>
@@ -72,35 +61,35 @@ if (!isset($_SESSION['user'])) {
 
         echo "<div class='table'>
                         <table>
+                        <thead>
                         <tr>
                             <th>ID</th>
                             <th>Produto</th>
                             <th>Preço</th>
                             <th>Quantidade</th>
                             <th>Ações</th>
-                        </tr>";
+                        </tr>
+                        </thead>
+                        <tbody>";
         foreach ($dados as $date) {
             echo "<tr>";
-                echo "<td>" . (int)$date->id . "</td>";
-                echo "<td>" . (string)$date->produto . "</td>";
-                echo "<td> R$ " . number_format((float)$date->preco, 2, ',', '.') . "</td>";
-                echo "<td>" . (int)$date->quantidade_max . "</td>";
-                echo "<td>
-                        <a href='ver.php?id=$date->id' class='btn-relatorio ver'>Relatório</a> 
-                        <a href='/controler_de_estoque/view/estoque_controle/entrada_estoque.php?id=$date->id' class='btn-entrada'>Entrada de Estoque</a> 
-                        <a href='/controler_de_estoque/view/estoque_controle/saida_estoque.php?id=$date->id' class='btn-baixa'>Saida de Estoque</a> 
-                        <a href='atualizar.php?id=$date->id' class='btn-atualizar'>Editar Produto</a> 
+                echo "<td data-label='ID'>" . (int)$date->id . "</td>";
+                echo "<td data-label='Produto'>" . (string)$date->produto . "</td>";
+                echo "<td data-label='Preço'> R$ " . number_format((float)$date->preco, 2, ',', '.') . "</td>";
+                echo "<td data-label='Quantidade'>" . (int)$date->quantidade_max . "</td>";
+                echo "<td data-label='Ações' class='acoes'>
+                        <div class='buttons'>
+                        <a href='ver.php?id=$date->id' class='btn-relatorio ver'>Relatório</a>
+                        <a href='/controler_de_estoque/view/estoque_controle/entrada_estoque.php?id=$date->id' class='btn-entrada'>Entrada de Estoque</a>
+                        <a href='/controler_de_estoque/view/estoque_controle/saida_estoque.php?id=$date->id' class='btn-baixa'>Saida de Estoque</a>
+                        <a href='atualizar.php?id=$date->id' class='btn-atualizar'>Editar Produto</a>
                         <a href='remover.php?id=$date->id&pd=$date->produto' class='btn-remover' onclick='return confirm(\"Tem certezar que deseja Remover ?\")'>Remover Produto</a>
+                        </div>
                      </td>";
             echo "</tr>";
         }
+        echo "</tbody></table></div>";
     }
     ?>
 
-
-    </table>
-    </div>
-
-</body>
-
-</html>
+<?php require __DIR__ . '/../partials/footer.php'; ?>

@@ -51,9 +51,9 @@ if(isset($_REQUEST['btn']))
     
 }
  
+$titulo = 'Atualizar Produto';
+require __DIR__.'/../partials/head.php';
 ?>
-<link rel="stylesheet" href="../css/styles.css">
-<body id="background-index">
     <div class="form-adicionar">
         <h1 class="titulo-adicionar">Atualizar Produto</h1>
         <form action="atualizar.php" method="post">
@@ -115,7 +115,7 @@ if(isset($_REQUEST['btn']))
              </div>
         </form>
     </div>
-</body>
+<?php require __DIR__.'/../partials/footer.php'; ?>
 
 
 

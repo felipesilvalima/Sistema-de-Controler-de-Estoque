@@ -15,7 +15,9 @@ class CategoriaController
    {
        try 
        {  
-           $data = Categoria::categoria_list($categoria); // busca categorias
+           // cast explícito: as views passam "" para listar todas (id != 0)
+           // ou o id da categoria atual para excluí-la da lista
+           $data = Categoria::categoria_list((int)$categoria); // busca categorias
    
            if(empty($data)) // não encontrou
            {

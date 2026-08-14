@@ -22,11 +22,10 @@ if (isset($btn)) {
     }
 }
 
+$titulo  = 'Login do Administrador';
+$body_id = 'background';
+require __DIR__ . '/../partials/head.php';
 ?>
-
-<link rel="stylesheet" href="../css/styles.css">
-
-<body id="background">
     <div class="form-login">
         <h1 id="titulo_adm">Administrador</h1>
         <form action="login.php" method="post">
@@ -43,5 +42,5 @@ if (isset($btn)) {
         </form>
         <a class="button-acessar" href="/controler_de_estoque/view/login/login.php">Acessar como Usuário</a>
     </div>
-    <img id="img-estoque" src="../../view/css/img/login_adm.png.png" alt="estoque" width="48%">
-</body>
+    <img id="img-estoque" src="../../view/css/img/login_adm.png.png" alt="Ilustração de administração">
+<?php require __DIR__ . '/../partials/footer.php'; ?>

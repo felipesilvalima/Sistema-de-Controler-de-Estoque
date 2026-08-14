@@ -23,11 +23,10 @@ if (isset($btn)) {
 }
 
 
+$titulo  = 'Login';
+$body_id = 'background';
+require __DIR__ . '/../partials/head.php';
 ?>
-
-<link rel="stylesheet" href="../css/styles.css">
-
-<body id="background">
 
     <div class="form-login">
         <h1 id="titulo_login">Login</h1>
@@ -43,7 +42,7 @@ if (isset($btn)) {
 
             <input class="input-button" type="submit" value="Entrar" name="btn" class="btn entrar">
         </form>
-        <a class="button-acessar" href="/controler_de_estoque/view/loginadm/login.php">Acessar como Administrador</a>
+        <a class="button-acessar" href="/controler_de_estoque/view/loginAdm/login.php">Acessar como Administrador</a>
     </div>
-    <img id="img-estoque" src="../../view/css/img/estoque.png" alt="estoque" width="48%">
-</body>
+    <img id="img-estoque" src="../../view/css/img/estoque.png" alt="Ilustração de estoque">
+<?php require __DIR__ . '/../partials/footer.php'; ?>

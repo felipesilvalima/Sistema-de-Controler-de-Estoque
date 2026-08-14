@@ -5,10 +5,6 @@ session_start();
 use controller\ProdutoController;
 require_once __DIR__.'/../../controller/produto/ProdutoController.php';
 
-?>
-<link rel="stylesheet" href="../css/styles.css">
-<?php
-
 if(!isset($_SESSION['user']))
 {
     header("Location: /controler_de_estoque/view/login/login.php");
@@ -17,6 +13,10 @@ if(!isset($_SESSION['user']))
 
  $id_produto = $_REQUEST['id'] ?? 0;
  $date = ProdutoController::detalhes((int)$id_produto);
+
+ // o HTML só começa aqui: qualquer saída antes disso quebraria o header() acima
+ $titulo = 'Relatório do Produto';
+ require __DIR__.'/../partials/head.php';
  
   
       echo "<div class='detalhes-produto'>
@@ -35,6 +35,8 @@ if(!isset($_SESSION['user']))
         <p><strong>Fornecedor:</strong> ". $date->fornecedor ." </p>
         <a href='index.php' class='btn voltar'>Voltar</a>
       </div>";
+
+require __DIR__.'/../partials/footer.php';
 
     
        

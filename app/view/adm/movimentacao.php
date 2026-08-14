@@ -12,21 +12,13 @@ require_once __DIR__.'/../../controller/feedbacks/Feedbacks.php';
 
 if(!isset($_SESSION['user_adm']))
 {
-    header("Location: /controler_de_estoque/view/loginadm/logout.php");
+    header("Location: /controler_de_estoque/view/loginAdm/logout.php");
     die;
 }
 
- ?>
-
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Controler de estoque</title>
-    <link rel="stylesheet" href="../css/styles.css">
-</head>
-<body>
+$titulo = 'Movimentação';
+require __DIR__.'/../partials/head.php';
+?>
     <div class="titulo">
         <h1>Tabela de Movimentação</h1>
          <a href="index.php" class="btn search">Voltar</a>
@@ -37,7 +29,6 @@ if(!isset($_SESSION['user_adm']))
         <input type="search" name="pesquisar" placeholder="Buscar Movimentações...">
         <button type="submit" class="btn search">Procurar</button>
         <button type="submit" class="btn all">Ver todos as Movimentações</button>
-        <a href="remove.php">Limpar tudo</a>
     </form>
     </div><br>
 
@@ -63,7 +54,8 @@ if(!isset($_SESSION['user_adm']))
                     {
 
                         echo"<div class='table'>
-                        <table border='1'>
+                        <table>
+                        <thead>
                         <tr>
                             <th>ID</th>
                             <th>Tipo</th>
@@ -71,25 +63,24 @@ if(!isset($_SESSION['user_adm']))
                             <th>Quantidade</th>
                             <th>Produto</th>
                             <th>Usuário</th>
-                        </tr>";
+                        </tr>
+                        </thead>
+                        <tbody>";
                         foreach($dados as $date)
                         { 
                             echo "<tr>"; 
 
-                            echo "<td>".(int)$date->id."</td>";
-                            echo "<td>".(string)$date->tipo."</td>";
-                            echo "<td>".(string)$date->data."</td>";
-                            echo "<td>".(int)$date->quantidade."</td>";
-                            echo "<td>".(int)$date->produto_id."</td>";
-                            echo "<td>".(int)$date->usuario_responsavel_id."</td>";
+                            echo "<td data-label='ID'>".(int)$date->id."</td>";
+                            echo "<td data-label='Tipo'>".(string)$date->tipo."</td>";
+                            echo "<td data-label='Data'>".(string)$date->data."</td>";
+                            echo "<td data-label='Quantidade'>".(int)$date->quantidade."</td>";
+                            echo "<td data-label='Produto'>".(int)$date->produto_id."</td>";
+                            echo "<td data-label='Usuário'>".(int)$date->usuario_responsavel_id."</td>";
 
                             echo "</tr>";
-                        }      
-                    } 
-                    ?>     
+                        }
+                        echo "</tbody></table></div>";
+                    }
+                    ?>
 
-        </table>
-    </div>
-
-</body>
-</html>
+<?php require __DIR__.'/../partials/footer.php'; ?>

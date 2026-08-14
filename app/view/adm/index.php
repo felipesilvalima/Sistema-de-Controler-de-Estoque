@@ -10,26 +10,19 @@ require_once __DIR__.'/../../controller/produto/ProdutoController.php';
 require_once __DIR__.'/../../controller/ADM/AdmController.php';
 require_once __DIR__.'/../../controller/feedbacks/Feedbacks.php';
 
+
 if(!isset($_SESSION['user_adm']))
 {
-    header("Location: /controler_de_estoque/view/loginadm/logout.php");
+    header("Location: /controler_de_estoque/view/loginAdm/logout.php");
     die;
 }
 
- ?>
-
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Controler de estoque</title>
-    <link rel="stylesheet" href="../css/styles.css">
-</head>
-<body id="background-index">
+$titulo = 'Usuários';
+require __DIR__.'/../partials/head.php';
+?>
     <div class="titulo">
         <h1>Tabela de Usuários</h1>
-        <a href="/controler_de_estoque/view/loginadm/login.php" class="btn sair">Sair</a>
+        <a href="/controler_de_estoque/view/loginAdm/login.php" class="btn sair">Sair</a>
     </div>
 
     <div class="form">
@@ -37,6 +30,9 @@ if(!isset($_SESSION['user_adm']))
         <input type="search" name="pesquisar" placeholder="Buscar Usuário...">
         <button type="submit" class="btn search">Procurar</button>
         <button type="submit" class="btn all">Ver todos os usuários</button>
+        <a href='movimentacao.php' class='btn add'>Movimentação do sistema</a> 
+        <a href=/controler_de_estoque/view/fornecedor/lista_de_fornecedor.php class='btn add'>Fornecedores</a> 
+        <a href=/controler_de_estoque/view/Categoria/lista_de_categoria.php class='btn add'>Categorias</a> 
     </form>
     </div><br>
 
@@ -61,42 +57,38 @@ if(!isset($_SESSION['user_adm']))
                     {
 
                         echo"<div class='table'>
-                        <table border='1'>
+                        <table>
+                        <thead>
                         <tr>
                             <th>ID</th>
                             <th>Nome</th>
                             <th>Email</th>
                             <th>Senha</th>
                             <th>Ações</th>
-                        </tr>";
+                        </tr>
+                        </thead>
+                        <tbody>";
                         foreach($dados as $date)
                         { 
                             echo "<tr>"; 
-
-                            echo "<td>".(int)$date->id."</td>";
-                            echo "<td>".(string)$date->name."</td>";
-                            echo "<td>".(string)$date->email."</td>";
-                            echo "<td><details>
-                            <summary>Ver senha</summary>
-                             ".(string)$date->password."
-                            </details></td>";
-                            echo "<td>
+                            echo "<td data-label='ID'>".(int)$date->id."</td>";
+                            echo "<td data-label='Nome'>".(string)$date->name."</td>";
+                            echo "<td data-label='Email'>".(string)$date->email."</td>";
+                            echo "<td data-label='Ações' class='acoes'>
                             <div class='buttons'>
-                            <a href=adicionar.php class='btn add'>Inserir novo Usuário</a> |
-                            <a href='atualizar.php?id=$date->id' class='btn atualizar'>Editar Usuário</a> |
-                            <a href='movimentacao.php' class='btn add'>Movimentação do sistema</a> |
-                             <a href=/controler_de_estoque/view/fornecedor/lista_de_fornecedor.php class='btn add'>Fornecedores</a> |
-                             <a href=/controler_de_estoque/view/Categoria/lista_de_categoria.php class='btn add'>Categorias</a> |
-                            <a href='remover.php?id=$date->id&pd=$date->name' class='btn remover'>Remover Usuário</a>
+                            <a href=adicionar.php class='btn add'>Inserir novo Usuário</a> 
+                            <a href='atualizar.php?id=$date->id' class='btn atualizar'>Editar Usuário</a> 
+                            <a href='remover.php?id=$date->id&pd=$date->name' onclick='mensagemAlerta()' class='btn remover'>Remover Usuário</a>
                             </div></td>";
-
                             echo "</tr>";
-                        }      
-                    } 
-                    ?>     
+                        }
+                        echo "</tbody></table></div>";
+                    }
+                    ?>
 
-        </table>
-    </div>
-
-</body>
-</html>
+<?php require __DIR__.'/../partials/footer.php'; ?>
+<script>
+    function mensagemAlerta(){
+        alert('Tem certeza que deseja exlcuir ?')
+    }
+</script>

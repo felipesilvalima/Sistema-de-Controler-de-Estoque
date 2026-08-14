@@ -58,8 +58,9 @@ if(isset($btn))
     
 }
 
+$titulo = 'Saída de Estoque';
+require __DIR__.'/../partials/head.php';
 ?>
- <link rel="stylesheet" href="../css/styles.css">
  <?= Feedbacks::feedback_validation_estoque(); ?>
  <div class="estoque-alert">
     <h1 class="titulo-adicionar">Remover Quantidade</h1>
@@ -76,4 +77,4 @@ if(isset($btn))
                 <a href="/controler_de_estoque/view/Produtos/index.php" class="voltar">Voltar</a>
         </div>
     </form>
-</div>
+</div><?php require __DIR__."/../partials/footer.php"; ?>

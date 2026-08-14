@@ -51,10 +51,9 @@ if(isset($btn))
     
 }
 
+$titulo = 'Adicionar Produto';
+require __DIR__.'/../partials/head.php';
 ?>
-
-<link rel="stylesheet" href="../css/styles.css">
-<body id="background-index">
     <?= Feedbacks::feedback_validation_inserir(); ?>
     <div class="form-adicionar">
         <h1 class="titulo-adicionar">Adicionar Produto</h1>
@@ -110,5 +109,5 @@ if(isset($btn))
                 </div>
         </form>
     </div>
-</body>
+<?php require __DIR__.'/../partials/footer.php'; ?>
 

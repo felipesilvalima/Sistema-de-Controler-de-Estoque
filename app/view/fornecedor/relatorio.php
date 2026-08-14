@@ -15,6 +15,9 @@ session_write_close();
 
 $relatorio = FornecedorController::get_forneceController((int)$id);
 
+$titulo = 'Relatório do Fornecedor';
+require __DIR__.'/../partials/head.php';
+
         echo "<div class='detalhes-produto'>
         <h1>Relátorio do Fornecedor</h1>
         <p><strong>ID:</strong> ". $relatorio->id ."</p>
@@ -27,4 +30,6 @@ $relatorio = FornecedorController::get_forneceController((int)$id);
         </details> <br>
         <a href='lista_de_fornecedor.php' class='btn voltar'>Voltar</a>
       </div>";
+
+require __DIR__.'/../partials/footer.php';
     

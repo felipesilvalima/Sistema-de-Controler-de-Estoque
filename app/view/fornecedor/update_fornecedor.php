@@ -45,29 +45,32 @@ if(isset($btn))
     } 
 }
 
+$titulo = 'Atualizar Fornecedor';
+require __DIR__.'/../partials/head.php';
 ?>
-
-
 
 <div class="form-update">
     <h1>Atualizar Fornecedor</h1>
     <form action="update_fornecedor.php" method="post">
         <label for="id">ID:</label>
-        <input type="number" name="id" value="<?=$details->id ?>" readonly> <br><br>
+        <input type="number" name="id" value="<?=$details->id ?>" readonly>
 
         <label for="for">Fornecedor:</label>
-        <input type="text" name="for" value="<?=$details->fornecedor ?>"> <br><br>
-        
-        <label for="cpf">Cpf:</label>
-        <input type="number" name="cpf" value="<?= $details->cpf ?>"> <br><br>
-         
-        <label for="tel">Telefone:</label>
-        <input type="number" name="tel" value="<?=$details->telefone?>"> <br><br>
-        
-        <label for="endereco">Endereço:</label>
-        <textarea name="endereco"  cols="50" rows="5"><?=$details->endereco?></textarea> <br><br>
+        <input type="text" name="for" value="<?=$details->fornecedor ?>">
 
-        <input type="submit" value="Atualizar" name="btn" class="btn atualizar">
+        <label for="cpf">Cpf:</label>
+        <input type="number" name="cpf" value="<?= $details->cpf ?>">
+
+        <label for="tel">Telefone:</label>
+        <input type="number" name="tel" value="<?=$details->telefone?>">
+
+        <label for="endereco">Endereço:</label>
+        <textarea name="endereco" rows="5"><?=$details->endereco?></textarea>
+
+        <div class="button-adicionar">
+            <input type="submit" value="Atualizar" name="btn" class="btn-inserir">
+            <a href="lista_de_fornecedor.php" class="voltar">Voltar</a>
+        </div>
     </form>
-    <a href="lista_de_fornecedor.php" class="btn voltar">Voltar</a>
 </div>
+<?php require __DIR__.'/../partials/footer.php'; ?>

@@ -50,18 +50,30 @@ if(isset($_REQUEST['btn']))
 }
 
 
+$titulo = 'Cadastrar Fornecedor';
+require __DIR__.'/../partials/head.php';
 ?>
 
-<form action="cadastrar_fornecedor.php" method="post">
-    <label for="fornec">Fornecedor</label>
-    <input type="text" name="fornec" placeholder="Insirar um Fornecedor"> <br><br>
-    <label for="cpf">Cpf</label>
-    <input type="number" name="cpf" placeholder="Insirar o Cpf"> <br><br>
-    <label for="number">Telefone</label>
-    <input type="number" name="tel" placeholder="Insirar o Telefone"> <br><br>
-    <label for="ender">Endereço</label>
-    <textarea name="ender" rows="5" cols="30"></textarea> <br><br>
-    <input type="submit" value="Inserir" name="btn"> <br><br>
-    <input type="reset" value="Limpar">
-</form>
-<a href="lista_de_fornecedor.php">Voltar</a>
+<div class="form-update">
+    <h1>Cadastrar Fornecedor</h1>
+    <form action="cadastrar_fornecedor.php" method="post">
+        <label for="fornec">Fornecedor</label>
+        <input type="text" name="fornec" placeholder="Insira um Fornecedor">
+
+        <label for="cpf">Cpf</label>
+        <input type="number" name="cpf" placeholder="11 dígitos, sem pontos">
+
+        <label for="tel">Telefone</label>
+        <input type="number" name="tel" placeholder="11 dígitos, com DDD">
+
+        <label for="ender">Endereço</label>
+        <textarea name="ender" rows="5" placeholder="Endereço do fornecedor"></textarea>
+
+        <div class="button-adicionar">
+            <input type="submit" value="Inserir" name="btn" class="btn-inserir">
+            <input type="reset" value="Limpar" class="btn-limpar">
+            <a href="lista_de_fornecedor.php" class="voltar">Voltar</a>
+        </div>
+    </form>
+</div>
+<?php require __DIR__.'/../partials/footer.php'; ?>
